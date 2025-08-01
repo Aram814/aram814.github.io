@@ -8,113 +8,63 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom Tailwind Colors */
+        /* Define color variables for dark mode (default) */
         :root {
-            --color-retro-red: #E74C3C;
-            --color-retro-blue: #3498DB;
-            --color-retro-yellow: #F1C40F;
-            --color-retro-green: #2ECC71; /* Added for rainbow effect */
-            --color-retro-magenta: #9B59B6; /* Added for rainbow effect */
-            --color-dark-black: #1A1A1A;
-            --color-dark-grey: #333333;
-            --color-light-grey: #BBBBBB;
-            --color-pure-white: #FFFFFF;
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #333333;
+            --text-primary: #BBBBBB;
+            --text-contrast: #FFFFFF;
+            --border-default: #333333;
+            --glitch-red-shadow: #E74C3C;
+            --glitch-blue-shadow: #3498DB;
+            --glitch-yellow-main: #F1C40F;
         }
 
-        .bg-retro-red { background-color: var(--color-retro-red); }
-        .text-retro-red { color: var(--color-retro-red); }
-        .border-retro-red { border-color: var(--color-retro-red); }
-
-        .bg-retro-blue { background-color: var(--color-retro-blue); }
-        .text-retro-blue { color: var(--color-retro-blue); }
-        .border-retro-blue { border-color: var(--color-retro-blue); }
-
-        .bg-retro-yellow { background-color: var(--color-retro-yellow); }
-        .text-retro-yellow { color: var(--color-retro-yellow); }
-        .border-retro-yellow { border-color: var(--color-retro-yellow); }
-
-        .bg-dark-black { background-color: var(--color-dark-black); }
-        .text-dark-black { color: var(--color-dark-black); }
-
-        .bg-dark-grey { background-color: var(--color-dark-grey); }
-        .text-dark-grey { color: var(--color-dark-grey); }
-
-        .bg-light-grey { background-color: var(--color-light-grey); }
-        .text-light-grey { color: var(--color-light-grey); }
-
-        .bg-pure-white { background-color: var(--color-pure-white); }
-        .text-pure-white { color: var(--color-pure-white); }
+        /* Define color variables for light mode */
+        body.light-mode {
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #E5E7EB;
+            --text-primary: #4B5563;
+            --text-contrast: #1F2937;
+            --border-default: #D1D5DB;
+            --glitch-red-shadow: #B91C1C;
+            --glitch-blue-shadow: #1D4ED8;
+            --glitch-yellow-main: #F59E0B;
+        }
 
         /* Font Family */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--color-dark-black);
-            color: var(--color-light-grey);
-            /* Removed overflow-x: hidden from body to allow full scroll control */
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
         }
 
         /* Glitch Effect Keyframes */
         @keyframes glitch-skew {
-            0% {
-                transform: skewX(0deg);
-            }
-            2% {
-                transform: skewX(-5deg);
-            }
-            4% {
-                transform: skewX(5deg);
-            }
-            6% {
-                transform: skewX(-5deg);
-            }
-            8% {
-                transform: skewX(5deg);
-            }
-            10% {
-                transform: skewX(0deg);
-            }
-            100% {
-                transform: skewX(0deg);
-            }
+            0% { transform: skewX(0deg); }
+            2% { transform: skewX(-5deg); }
+            4% { transform: skewX(5deg); }
+            6% { transform: skewX(-5deg); }
+            8% { transform: skewX(5deg); }
+            10% { transform: skewX(0deg); }
+            100% { transform: skewX(0deg); }
         }
 
         @keyframes glitch-translate {
-            0% {
-                transform: translate(0, 0);
-            }
-            2% {
-                transform: translate(-2px, 2px);
-            }
-            4% {
-                transform: translate(2px, -2px);
-            }
-            6% {
-                transform: translate(-2px, 2px);
-            }
-            8% {
-                transform: translate(2px, -2px);
-            }
-            10% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(0, 0);
-            }
-        }
-
-        @keyframes glitch-flicker {
-            0% { opacity: 1; }
-            5% { opacity: 0.8; }
-            10% { opacity: 1; }
-            15% { opacity: 0.7; }
-            20% { opacity: 1; }
-            100% { opacity: 1; }
+            0% { transform: translate(0, 0); }
+            2% { transform: translate(-2px, 2px); }
+            4% { transform: translate(2px, -2px); }
+            6% { transform: translate(-2px, 2px); }
+            8% { transform: translate(2px, -2px); }
+            10% { transform: translate(0, 0); }
+            100% { transform: translate(0, 0); }
         }
 
         .glitch-text {
             position: relative;
             animation: glitch-skew 8s infinite linear alternate, glitch-translate 5s infinite linear alternate;
-            z-index: 20; /* Ensure text is above background effects */
+            z-index: 20;
+            color: var(--glitch-yellow-main); /* Changed to yellow for better readability in dark mode */
         }
 
         .glitch-text::before,
@@ -125,18 +75,19 @@
             left: 0;
             width: 100%;
             height: 100%;
+            color: var(--glitch-yellow-main);
         }
 
         .glitch-text::before {
             left: 2px;
-            text-shadow: -2px 0 var(--color-retro-red);
+            text-shadow: -2px 0 var(--glitch-red-shadow);
             clip-path: inset(60% 0 0 0);
             animation: glitch-translate 3s infinite linear alternate-reverse;
         }
 
         .glitch-text::after {
             left: -2px;
-            text-shadow: -2px 0 var(--color-retro-blue);
+            text-shadow: -2px 0 var(--glitch-blue-shadow);
             clip-path: inset(0 0 60% 0);
             animation: glitch-translate 4s infinite linear alternate;
         }
@@ -159,7 +110,7 @@
             opacity: 0.1;
             pointer-events: none;
             animation: static-noise 0.2s infinite alternate;
-            z-index: -1; /* Behind content */
+            z-index: -1;
         }
 
         @keyframes static-noise {
@@ -169,43 +120,37 @@
 
         /* New Rainbow Glitch Overlay - applied to a dedicated div */
         .rainbow-glitch-overlay {
-            position: fixed; /* Use fixed to cover viewport */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: repeating-linear-gradient(
                 90deg,
-                var(--color-retro-red) 0%,
-                var(--color-retro-red) 5%,
-                var(--color-retro-yellow) 5%,
-                var(--color-retro-yellow) 10%,
-                var(--color-retro-green) 10%,
-                var(--color-retro-green) 15%,
-                var(--color-retro-blue) 15%,
-                var(--color-retro-blue) 20%,
-                var(--color-retro-magenta) 20%,
-                var(--color-retro-magenta) 25%
+                #E74C3C 0%, #E74C3C 5%,
+                #F1C40F 5%, #F1C40F 10%,
+                #2ECC71 10%, #2ECC71 15%,
+                #3498DB 15%, #3498DB 20%,
+                #9B59B6 20%, #9B59B6 25%
             );
-            background-size: 200% 100%; /* Make it wider than screen to animate */
-            opacity: 0.05; /* Subtle opacity */
-            pointer-events: none; /* Allow clicks/interactions underneath */
+            background-size: 200% 100%;
+            opacity: 0.05;
+            pointer-events: none;
             animation: rainbow-glitch 5s infinite linear alternate;
-            z-index: 10; /* Below content, above body background */
+            z-index: 10;
         }
 
         @keyframes rainbow-glitch {
             0% { background-position: 0 0; }
-            100% { background-position: -100% 0; } /* Animate horizontally */
+            100% { background-position: -100% 0; }
         }
-
 
         /* Button Glitch Effect */
         .glitch-button {
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
-            z-index: 20; /* Ensure buttons are above glitch overlays */
+            z-index: 20;
         }
 
         .glitch-button::before,
@@ -222,12 +167,12 @@
         }
 
         .glitch-button::before {
-            background-color: var(--color-retro-red);
+            background-color: var(--glitch-red-shadow);
             transform: translateX(-100%);
         }
 
         .glitch-button::after {
-            background-color: var(--color-retro-blue);
+            background-color: var(--glitch-blue-shadow);
             transform: translateX(100%);
         }
 
@@ -240,70 +185,73 @@
         }
 
         .glitch-button:hover {
-            color: var(--color-pure-white);
-            box-shadow: 0 0 15px var(--color-retro-yellow);
+            color: var(--text-contrast);
+            box-shadow: 0 0 15px var(--glitch-yellow-main);
         }
 
         /* Scroll to top button */
         #scrollToTopBtn {
-            display: none; /* Hidden by default */
-            position: fixed; /* Fixed/sticky position */
-            bottom: 20px; /* Place the button at the bottom of the page */
-            right: 30px; /* Place the button at the right */
-            z-index: 99; /* Make sure it does not overlap */
-            border: none; /* Remove borders */
-            outline: none; /* Remove outline */
-            background-color: var(--color-retro-yellow); /* Set a background color */
-            color: var(--color-dark-black); /* Text color */
-            cursor: pointer; /* Add a mouse pointer on hover */
-            padding: 15px; /* Some padding */
-            border-radius: 10px; /* Rounded corners */
-            font-size: 18px; /* Increase font size */
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--glitch-yellow-main);
+            color: var(--bg-primary);
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         #scrollToTopBtn:hover {
-            background-color: var(--color-retro-red);
+            background-color: var(--glitch-red-shadow);
             transform: translateY(-5px);
         }
 
         /* Project Card Hover Effect */
         .project-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            z-index: 20; /* Ensure cards are above glitch overlays */
+            z-index: 20;
+            background-color: var(--bg-primary);
+            border-color: var(--border-default);
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--color-retro-blue);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--glitch-blue-shadow);
         }
 
         /* Modal Styling */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 100; /* Sit on top */
+            display: none;
+            position: fixed;
+            z-index: 100;
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-            backdrop-filter: blur(5px); /* Frosted glass effect */
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            background-color: var(--color-dark-grey);
-            margin: 5% auto; /* 5% from the top and centered */
+            background-color: var(--bg-secondary);
+            margin: 5% auto;
             padding: 40px;
-            border: 2px solid var(--color-retro-yellow);
-            width: 80%; /* Could be more or less, depending on screen size */
+            border: 2px solid var(--glitch-yellow-main);
+            width: 80%;
             max-width: 800px;
             border-radius: 15px;
             position: relative;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.7);
             animation: fadeIn 0.3s ease-out;
+            color: var(--text-primary);
         }
 
         @keyframes fadeIn {
@@ -312,7 +260,7 @@
         }
 
         .close-button {
-            color: var(--color-light-grey);
+            color: var(--text-primary);
             position: absolute;
             top: 20px;
             right: 30px;
@@ -323,13 +271,13 @@
 
         .close-button:hover,
         .close-button:focus {
-            color: var(--color-retro-red);
+            color: var(--glitch-red-shadow);
             text-decoration: none;
             cursor: pointer;
         }
     </style>
 </head>
-<body>
+<body class="bg-[var(--bg-primary)] text-[var(--text-primary)]">
     <!-- New Rainbow Glitch Overlay Element -->
     <div class="rainbow-glitch-overlay"></div>
 
@@ -337,50 +285,79 @@
     <button id="scrollToTopBtn" title="Go to top">▲</button>
 
     <!-- Header -->
-    <header class="bg-dark-black text-pure-white py-6 shadow-lg fixed w-full z-50 rounded-b-xl">
+    <header class="bg-[var(--bg-primary)] text-[var(--text-contrast)] py-6 shadow-lg fixed w-full z-50 rounded-b-xl">
         <div class="container mx-auto flex justify-between items-center px-6 md:px-12">
-            <a href="#home" class="text-3xl font-bold text-retro-yellow glitch-text" data-text="Amanda Ramirez">
+            <a href="#home" class="text-3xl font-bold text-[var(--glitch-yellow-main)] glitch-text" data-text="Amanda Ramirez">
                 Amanda Ramirez
             </a>
-            <nav>
-                <ul class="flex space-x-6">
-                    <li><a href="#about" class="text-light-grey hover:text-retro-blue transition duration-300 text-lg">About</a></li>
-                    <li><a href="#projects" class="text-light-grey hover:text-retro-blue transition duration-300 text-lg">Projects</a></li>
-                    <li><a href="#contact" class="text-light-grey hover:text-retro-blue transition duration-300 text-lg">Contact</a></li>
-                    <li><a href="https://docs.google.com/document/d/1B7j-gC1w1k_q9x8p8y6f5z5t6v7y8z9x0/export?format=pdf" target="_blank" download="Amanda Ramirez Resume.pdf" class="text-light-grey hover:text-retro-yellow transition duration-300 text-lg">Resume</a></li>
-                </ul>
-            </nav>
+            <!-- Desktop Navigation and Theme Toggle -->
+            <div class="flex items-center space-x-6">
+                <nav class="hidden md:flex">
+                    <ul class="flex space-x-6">
+                        <li><a href="#about" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">About</a></li>
+                        <li><a href="uploaded:Amanda Ramirez Resume.docx" target="_blank" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Resume</a></li>
+                        <li><a href="#projects" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Projects</a></li>
+                        <li><a href="#contact" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Contact</a></li>
+                    </ul>
+                </nav>
+                <!-- Theme Toggle Button (Desktop & Mobile) -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-[var(--bg-secondary)] transition-colors duration-300 focus:outline-none">
+                    <!-- Moon Icon (for dark mode) -->
+                    <svg id="moon-icon" class="w-6 h-6 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                    <!-- Sun Icon (for light mode, hidden by default) -->
+                    <svg id="sun-icon" class="w-6 h-6 text-[var(--text-primary)] hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                </button>
+                <!-- Hamburger Menu Icon for Mobile -->
+                <button id="mobile-menu-button" class="md:hidden text-[var(--text-primary)] focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-[var(--bg-primary)]/90 pt-4 pb-2 mt-4 rounded-b-xl border-t border-[var(--border-default)]">
+            <ul class="flex flex-col items-center space-y-4">
+                <li><a href="#about" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">About</a></li>
+                <li><a href="uploaded:Amanda Ramirez Resume.docx" target="_blank" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Resume</a></li>
+                <li><a href="#projects" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Projects</a></li>
+                <li><a href="#contact" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="h-screen flex items-center justify-center text-center bg-dark-grey static-section pt-24">
+    <section id="home" class="h-screen flex items-center justify-center text-center bg-[var(--bg-secondary)] static-section pt-24">
         <div class="container mx-auto px-6 md:px-12">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-pure-white mb-4 leading-tight glitch-text" data-text="Crafting Digital Experiences">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-[var(--text-contrast)] mb-4 leading-tight glitch-text" data-text="Crafting Digital Experiences">
                 Crafting Digital Experiences
             </h1>
-            <p class="text-xl md:text-2xl text-light-grey mb-8">
+            <p class="text-xl md:text-2xl text-[var(--text-primary)] mb-8">
                 UX Designer passionate about intuitive interfaces and impactful user journeys.
             </p>
-            <a href="#projects" class="inline-block bg-retro-yellow text-dark-black font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-retro-yellow hover:border-retro-red">
+            <a href="#projects" class="inline-block bg-[var(--glitch-yellow-main)] text-[var(--bg-primary)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--glitch-yellow-main)] hover:border-[var(--glitch-red-shadow)]">
                 View My Work
             </a>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-dark-black static-section rounded-t-xl">
+    <section id="about" class="py-20 bg-[var(--bg-primary)] static-section rounded-t-xl">
         <div class="container mx-auto px-6 md:px-12">
-            <h2 class="text-4xl font-bold text-retro-yellow mb-12 text-center glitch-text" data-text="About Me">
+            <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="About Me">
                 About Me
             </h2>
             <!-- Combined content block for wrapping -->
             <div class="text-lg leading-relaxed">
                 <div class="relative flex items-center justify-center float-left md:mr-8 mb-4 mx-auto md:mx-0" style="width: 200px; height: 200px;">
                     <!-- Square image background -->
-                    <img src="https://i.pinimg.com/originals/94/8e/31/948e31d8046c8b13f52afe071c19b756.gif" alt="Album Cover Background" class="absolute w-full h-full object-cover rounded-xl border-4 border-retro-yellow shadow-2xl z-0">
+                    <img src="https://i.pinimg.com/originals/94/8e/31/948e31d8046c8b13f52afe071c19b756.gif" alt="Album Cover Background" class="absolute w-full h-full object-cover rounded-xl border-4 border-[var(--glitch-yellow-main)] shadow-2xl z-0">
                     <!-- Circular profile picture on top -->
-                    <img src="https://lh3.googleusercontent.com/a/ACg8ocLYUprETb4a-em0nsjuw9oDcXEHjRud63IMYTChVOgnd4U0GTks=s576-c-no" alt="Amanda Ramirez Photo" class="relative w-4/5 h-4/5 object-cover rounded-full border-4 border-retro-blue shadow-lg z-10">
+                    <img src="https://lh3.googleusercontent.com/a/ACg8ocLYUprETb4a-em0nsjuw9oDcXEHjRud63IMYTChVOgnd4U0GTks=s576-c-no" alt="Amanda Ramirez Photo" class="relative w-4/5 h-4/5 object-cover rounded-full border-4 border-[var(--glitch-blue-shadow)] shadow-lg z-10">
                 </div>
                 <p class="mb-4">
                     Hi, I’m Amanda (she/her) — a UX designer who brings creativity, curiosity, and care to everything I build.
@@ -403,39 +380,39 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-dark-grey static-section rounded-t-xl">
+    <section id="projects" class="py-20 bg-[var(--bg-secondary)] static-section rounded-t-xl">
         <div class="container mx-auto px-6 md:px-12">
-            <h2 class="text-4xl font-bold text-retro-yellow mb-12 text-center glitch-text" data-text="My Projects">
+            <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="My Projects">
                 My Projects
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <!-- Project Card 1: Arcade High Score Tracking App -->
-                <div class="bg-dark-black rounded-xl shadow-xl overflow-hidden border-2 border-dark-grey project-card cursor-pointer" onclick="openModal('project1')">
-                    <img src="https://github.com/Aram814/Assets/blob/main/scorecade.png?raw=true" alt="Arcade High Score Tracking App" class="w-full h-48 object-cover border-b-2 border-retro-red">
+                <div class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project1')">
+                    <img src="https://raw.githubusercontent.com/Aram814/Portfolio/refs/heads/main/scorecade.png" alt="Arcade High Score Tracking App" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-red-shadow)]">
                     <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-pure-white mb-2">Arcade High Score Tracking App</h3>
-                        <p class="text-light-grey text-sm mb-4">UX Research, Credibility, Real-time Verification</p>
-                        <p class="text-light-grey">A case study on improving the user experience of tracking high scores across arcade games, focusing on credibility and real-time verification.</p>
+                        <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">Arcade High Score Tracking App</h3>
+                        <p class="text-[var(--text-primary)] text-sm mb-4">UX Research, Credibility, Real-time Verification</p>
+                        <p class="text-[var(--text-primary)]">A case study on improving the user experience of tracking high scores across arcade games, focusing on credibility and real-time verification.</p>
                     </div>
                 </div>
 
                 <!-- Project Card 2: QueerSafeSpace App -->
-                <div class="bg-dark-black rounded-xl shadow-xl overflow-hidden border-2 border-dark-grey project-card cursor-pointer" onclick="openModal('project2')">
-                    <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="QueerSafeSpace App" class="w-full h-48 object-contain border-b-2 border-retro-blue">
+                <div class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project2')">
+                    <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="QueerSafeSpace App" class="w-full h-48 object-contain border-b-2 border-[var(--glitch-blue-shadow)]">
                     <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-pure-white mb-2">QueerSafeSpace App</h3>
-                        <p class="text-light-grey text-sm mb-4">Safety, Community, Anonymous Updates</p>
-                        <p class="text-light-grey">An app developed to aid in the safety of the LGBTQ+ community by allowing anonymous updates to locations to mark with safety ratings, tags, and additional details.</p>
+                        <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">QueerSafeSpace App</h3>
+                        <p class="text-[var(--text-primary)] text-sm mb-4">Safety, Community, Anonymous Updates</p>
+                        <p class="text-[var(--text-primary)]">An app developed to aid in the safety of the LGBTQ+ community by allowing anonymous updates to locations to mark with safety ratings, tags, and additional details.</p>
                     </div>
                 </div>
 
                 <!-- Project Card 3: Death Doula Webpage -->
-                <div class="bg-dark-black rounded-xl shadow-xl overflow-hidden border-2 border-dark-grey project-card cursor-pointer" onclick="openModal('project3')">
-                    <img src="https://github.com/Aram814/Assets/blob/main/Snedmeonmyway.png?raw=true" alt="Death Doula Webpage" class="w-full h-48 object-cover border-b-2 border-retro-yellow">
+                <div class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project3')">
+                    <img src="https://raw.githubusercontent.com/Aram814/Portfolio/refs/heads/main/Snedmeonmyway.png" alt="Death Doula Webpage" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-yellow-main)]">
                     <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-pure-white mb-2">Death Doula Webpage</h3>
-                        <p class="text-light-grey text-sm mb-4">Web Design, Business Services, Testimonials, Blog</p>
-                        <p class="text-light-grey">Full construct and design of a personal/private business for local Death Doula services. Requirements were for both desktop and mobile compatibility, ability to book consulting, read testimonies, view services, and add a feature "blog."</p>
+                        <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">Death Doula Webpage</h3>
+                        <p class="text-[var(--text-primary)] text-sm mb-4">Web Design, Business Services, Testimonials, Blog</p>
+                        <p class="text-[var(--text-primary)]">Full construct and design of a personal/private business for local Death Doula services. Requirements were for both desktop and mobile compatibility, ability to book consulting, read testimonies, view services, and add a feature "blog."</p>
                     </div>
                 </div>
 
@@ -445,19 +422,19 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-dark-black static-section rounded-t-xl">
+    <section id="contact" class="py-20 bg-[var(--bg-primary)] static-section rounded-t-xl">
         <div class="container mx-auto px-6 md:px-12 text-center">
-            <h2 class="text-4xl font-bold text-retro-yellow mb-12 glitch-text" data-text="Get In Touch">
+            <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 glitch-text" data-text="Get In Touch">
                 Get In Touch
             </h2>
-            <p class="text-xl text-light-grey mb-8 max-w-2xl mx-auto">
+            <p class="text-xl text-[var(--text-primary)] mb-8 max-w-2xl mx-auto">
                 Have a project in mind or just want to chat about UX? Feel free to reach out!
             </p>
             <div class="flex flex-col items-center space-y-6">
-                <a href="mailto:amandarita0814@gmail.com" class="inline-block bg-retro-blue text-dark-black font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-retro-blue hover:border-retro-yellow">
+                <a href="mailto:amandarita0814@gmail.com" class="inline-block bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
                     Email Me
                 </a>
-                <a href="https://www.linkedin.com/in/amanda-r-ramirez" target="_blank" class="inline-block bg-dark-grey text-pure-white font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-dark-grey hover:border-retro-red">
+                <a href="https://www.linkedin.com/in/amanda-r-ramirez" target="_blank" class="inline-block bg-[var(--bg-secondary)] text-[var(--text-contrast)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--border-default)] hover:border-[var(--glitch-red-shadow)]">
                     Connect on LinkedIn
                 </a>
                 <!-- Add more social links if desired -->
@@ -466,7 +443,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-grey text-light-grey py-8 text-center rounded-t-xl">
+    <footer class="bg-[var(--bg-secondary)] text-[var(--text-primary)] py-8 text-center rounded-t-xl">
         <div class="container mx-auto px-6 md:px-12">
             <p>&copy; 2025 Amanda Ramirez. All rights reserved.</p>
         </div>
@@ -476,19 +453,19 @@
     <div id="project1Modal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('project1')">&times;</span>
-            <h3 class="text-3xl font-bold text-retro-yellow mb-4">Arcade High Score Tracking App</h3>
-            <img src="https://github.com/Aram814/Assets/blob/main/scorecade.png?raw=true" alt="Arcade High Score Tracking App Detail" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-retro-red">
-            <p class="text-light-grey mb-4">
+            <h3 class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">Arcade High Score Tracking App</h3>
+            <img src="https://raw.githubusercontent.com/Aram814/Portfolio/refs/heads/main/scorecade.png" alt="Arcade High Score Tracking App Detail" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-red-shadow)]">
+            <p class="text-[var(--text-primary)] mb-4">
                 This project was instrumental in deepening my understanding of creating dynamic, user-friendly applications, and the challenges involved in ensuring a seamless and engaging user journey within a complex system.
             </p>
-            <p class="text-light-grey mb-4">
+            <p class="text-[var(--text-primary)] mb-4">
                 <strong>My Role:</strong> UX Designer <br>
                 <strong>Methodologies:</strong> User Research, Credibility Assessment, Real-time Verification Flows, Wireframing, Prototyping.
             </p>
-            <p class="text-light-grey">
+            <p class="text-[var(--text-primary)]">
                 <strong>Key Outcomes:</strong> This project was instrumental in deepening my understanding of creating dynamic, user-friendly applications, and the challenges involved in ensuring a seamless and engaging user journey within a complex system.
             </p>
-            <a href="CaseStudy1.html" class="inline-block mt-6 bg-retro-blue text-dark-black font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-retro-blue hover:border-retro-yellow">
+            <a href="CaseStudy1.html" class="inline-block mt-6 bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
                 View Full Case Study
             </a>
         </div>
@@ -497,20 +474,20 @@
     <div id="project2Modal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('project2')">&times;</span>
-            <h3 class="text-3xl font-bold text-retro-yellow mb-4">QueerSafeSpace App</h3>
-            <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="QueerSafeSpace App Detail" class="w-full h-auto object-contain mb-6 rounded-lg border-2 border-retro-blue">
-            <p class="text-light-grey mb-4">
+            <h3 class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">QueerSafeSpace App</h3>
+            <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="QueerSafeSpace App Detail" class="w-full h-auto object-contain mb-6 rounded-lg border-2 border-[var(--glitch-blue-shadow)]">
+            <p class="text-[var(--text-primary)] mb-4">
                 The QueerSafeSpace App was developed to aid in the safety of the LGBTQ+ community. It allows users to anonymously update locations, marking them with safety ratings, tags, and additional details to foster a safer environment.
             </p>
-            <p class="text-light-grey mb-4">
+            <p class="text-[var(--text-primary)] mb-4">
                 <strong>My Role:</strong> UX Designer, Concept Developer <br>
                 <strong>Methodologies:</strong> Inclusive Design Principles, User Research (Community-focused), Anonymous Reporting Systems, Location-based Services UX, Prototyping.
             </p>
-            <p class="text-light-grey">
+            <p class="text-[var(--text-primary)]">
                 <strong>Key Outcomes:</strong> This project significantly enhanced my understanding of inclusive design principles, the importance of trust in community platforms, and the complexities of creating a truly safe and engaging digital environment.
             </p>
-            <a href="CaseStudy2.html" class="inline-block mt-6 bg-retro-blue text-dark-black font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-retro-blue hover:border-retro-yellow">
-                View Full Case Study
+            <a href="#" class="inline-block mt-6 bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
+                View Full Case Study (Coming Soon)
             </a>
         </div>
     </div>
@@ -518,19 +495,19 @@
     <div id="project3Modal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closeModal('project3')">&times;</span>
-            <h3 class="text-3xl font-bold text-retro-yellow mb-4">Death Doula Webpage</h3>
-            <img src="https://github.com/Aram814/Assets/blob/main/Snedmeonmyway.png?raw=true" alt="Death Doula Webpage Detail" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-retro-yellow">
-            <p class="text-light-grey mb-4">
+            <h3 class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">Death Doula Webpage</h3>
+            <img src="https://raw.githubusercontent.com/Aram814/Portfolio/refs/heads/main/Snedmeonmyway.png" alt="Death Doula Webpage Detail" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-yellow-main)]">
+            <p class="text-[var(--text-primary)] mb-4">
                 This project involved the full construct and design of a personal/private business website for local Death Doula services. Requirements were for both desktop and mobile compatibility, ability to book consulting, read testimonies, view services, and add a feature "blog."
             </p>
-            <p class="text-light-grey mb-4">
+            <p class="text-[var(--text-primary)] mb-4">
                 <strong>My Role:</strong> Web Designer, UX Strategist <br>
                 <strong>Methodologies:</strong> Information Architecture, Content Strategy, Booking System Integration, Testimonial Display, Responsive Web Design, Blog Integration.
             </p>
-            <p class="text-light-grey">
+            <p class="text-[var(--text-primary)]">
                 <strong>Key Outcomes:</strong> [Add specific outcomes like increased client bookings, improved online presence, etc.]
             </p>
-            <a href="#" class="inline-block mt-6 bg-retro-blue text-dark-black font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-retro-blue hover:border-retro-yellow">
+            <a href="#" class="inline-block mt-6 bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
                 View Full Case Study (Coming Soon)
             </a>
         </div>
@@ -542,10 +519,23 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                // Close the mobile menu after clicking a link
+                document.getElementById('mobile-menu').classList.add('hidden');
             });
+        });
+
+        // Toggle mobile menu visibility
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
         });
 
         // Scroll to top button functionality
@@ -582,6 +572,36 @@
                 }
             });
         }
+
+        // Theme toggle functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const moonIcon = document.getElementById('moon-icon');
+        const sunIcon = document.getElementById('sun-icon');
+        const body = document.body;
+
+        // Check for saved theme preference on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.add('light-mode');
+            moonIcon.classList.add('hidden');
+            sunIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                // Switch to dark mode
+                body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            } else {
+                // Switch to light mode
+                body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            }
+        });
     </script>
 </body>
 </html>
