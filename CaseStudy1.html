@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixelated Scorecade – Case Study</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+  <style>
+    :root {
+      --bg-color: #0d0d0d;
+      --text-color: #a6e22e;
+      --link-color: #66d9ef;
+      --border-color: #66d9ef;
+      --focus-outline: 3px dashed #ffd866;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'VT323', monospace;
+      font-size: 1.25rem;
+      line-height: 1.75;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: underline;
+    }
+
+    a:focus, button:focus {
+      outline: var(--focus-outline);
+      outline-offset: 4px;
+    }
+
+    h1, h2, h3 {
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.3rem;
+      margin-top: 2rem;
+    }
+
+    nav, main, footer {
+      display: block;
+    }
+
+    nav a {
+      margin-right: 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .button-link {
+      display: inline-block;
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      background-color: transparent;
+      color: var(--link-color);
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .button-link:hover,
+    .button-link:focus {
+      background-color: rgba(102, 217, 239, 0.15);
+    }
+
+    figure {
+      display: block;
+      margin: 1.5rem auto;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+
+    figure img {
+      width: 100%;
+      height: auto;
+      border: 2px solid var(--border-color);
+    }
+
+    figcaption {
+      font-size: 1rem;
+      color: #cccccc;
+      margin-top: 0.5rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    hr {
+      border-color: var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <header role="banner">
+    <div class="container">
+      <nav role="navigation" aria-label="Main navigation">
+        <a href="index.html" aria-label="Return to main portfolio page">&larr; Back to Portfolio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main role="main">
+    <div class="container">
+      <h1>Pixelated Scorecade</h1>
+      <p>
+        <strong>Role:</strong> UX Designer + Researcher<br>
+        <strong>Tools:</strong> Figma, Google Forms, React<br>
+        <strong>Timeline:</strong> 4 weeks (2024)<br>
+        <strong>Context:</strong> Created for a UX Design Certification project prompt
+      </p>
+
+      <section aria-labelledby="overview">
+        <h2 id="overview">🔍 Overview</h2>
+        <p>
+          Pixelated Scorecade is a retro-style mobile app that brings back the joy of tracking arcade high scores—
+          with a modern UX twist. It was created as part of a UX Design Certificate program, following a complete 
+          UX process from research through to prototyping. Designed for arcade enthusiasts, it enables players to 
+          save and share their scores across multiple machines and venues.
+        </p>
+      </section>
+
+      <section aria-labelledby="problem">
+        <h2 id="problem">🎯 Problem</h2>
+        <p>
+          Most arcades wipe scores when machines are powered down. Players have no easy way to track or compare 
+          their progress over time or across venues.
+        </p>
+      </section>
+
+      <section aria-labelledby="research">
+        <h2 id="research">🧪 Research</h2>
+        <p>
+          Conducted user interviews and surveys with 12 arcade goers. Key insights included:
+        </p>
+        <ul>
+          <li>Desire for digital high score tracking.</li>
+          <li>Preference for simple UI over complex social features.</li>
+          <li>Love of 8-bit, nostalgic design language.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="features">
+        <h2 id="features">🧠 Key Features</h2>
+        <ul>
+          <li>Add scores manually or scan a QR code.</li>
+          <li>Location-specific leaderboards.</li>
+          <li>Pixel art visual theme and interface.</li>
+        </ul>
+        <figure>
+          <img 
+            src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/highscore.png" 
+            alt="Screenshot of the Pixelated Scorecade app showing the high score entry screen"
+          >
+          <figcaption>Screenshot of Score Detection Screen from Figma.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="prototype">
+        <h2 id="prototype">📱 Prototype</h2>
+        <p>
+          The prototype includes onboarding, score submission, and leaderboard browsing—built and tested in Figma.
+        </p>
+        <a class="button-link" 
+           href="https://www.figma.com/proto/rRgYJm0GHxoA1oJYZysk50/Amanda-Ramirez?node-id=12-3&t=0kz6QACbv2F8ZajU-1&starting-point-node-id=12%3A3"
+           target="_blank" 
+           rel="noopener noreferrer"
+        >
+          View Live Prototype
+        </a>
+      </section>
+
+      <section aria-labelledby="lessons">
+        <h2 id="lessons">💡 Lessons Learned</h2>
+        <p>
+          Balancing nostalgia with usability was key. Retro charm is fun, but clarity and accessibility always come first.
+        </p>
+      </section>
+
+      <section aria-labelledby="next">
+        <h2 id="next">📦 Next Steps</h2>
+        <ul>
+          <li>Implement backend with Supabase or Firebase.</li>
+          <li>Add social sharing and friend challenges.</li>
+          <li>Test live in arcade settings with real users.</li>
+        </ul>
+      </section>
+
+      <hr aria-hidden="true">
+
+      <footer role="contentinfo">
+        <a class="button-link" href="index.html" aria-label="Back to main portfolio page">&larr; Back to Portfolio</a>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
