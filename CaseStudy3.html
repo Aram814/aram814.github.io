@@ -18,11 +18,13 @@
     [data-theme="light"] {
       --bg-color: var(--bg-light);
       --text-color: var(--text-light);
+      --texture: url('https://www.transparenttextures.com/patterns/groovepaper.png');
     }
 
     [data-theme="dark"] {
       --bg-color: var(--bg-dark);
       --text-color: var(--text-dark);
+      --texture: url('https://www.transparenttextures.com/patterns/groovepaper.png');
     }
 
     body {
@@ -32,6 +34,7 @@
       color: var(--text-color);
       transition: background-color 0.3s, color 0.3s;
       padding: 1rem;
+      background-image: var(--texture);
     }
 
     header {
