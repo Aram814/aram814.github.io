@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QueerSafeSpace Case Study – Amanda Ramirez</title>
+  <style>
+    :root {
+      --background: #f7f8fa;
+      --primary: #6a1b9a;
+      --accent: #ff4081;
+      --text-dark: #1c1c1c;
+      --text-light: #ffffff;
+    }
+
+    [data-theme="dark"] {
+      --background: #121212;
+      --text-dark: #f0f0f0;
+      --primary: #bb86fc;
+      --accent: #ff79b0;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", sans-serif;
+      background: var(--background);
+      color: var(--text-dark);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: var(--text-light);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 2rem auto;
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+    }
+
+    figcaption {
+      text-align: center;
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-top: -1rem;
+      color: #555;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .toggle-theme {
+      margin: 1rem auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      background: var(--primary);
+      color: var(--text-light);
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    footer {
+      margin: 3rem 0 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>QueerSafeSpace</h1>
+  <p>Community-Sourced Safety App for LGBTQ+ People</p>
+</header>
+
+<div class="toggle-theme">
+  <button onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+</div>
+
+<main>
+  <section>
+    <h2>Overview</h2>
+    <p><strong>QueerSafeSpace</strong> is a community-powered map that allows LGBTQ+ users to identify, rate, and share safe or unsafe locations based on lived experience. The app's goal is to empower marginalized communities through collective insight and visibility.</p>
+  </section>
+
+  <section>
+    <h2>Project Context</h2>
+    <p>This case study was completed as part of my UX Design Certificate coursework. The app concept is original and reflects both my technical skills and my values as a queer designer seeking to serve underrepresented communities.</p>
+  </section>
+
+  <section>
+    <h2>My Role</h2>
+    <p>I led end-to-end UX design including competitive analysis, user research, persona creation, journey mapping, wireframing, prototyping, and usability testing. I also created a live prototype in Figma.</p>
+  </section>
+
+  <section>
+    <h2>Screenshot</h2>
+    <figure>
+      <img src="https://github.com/Aram814/Assets/blob/main/QSS_Screenshot.png?raw=true" alt="Screenshot of QueerSafeSpace app showing the interactive map interface" />
+      <figcaption>Screenshot of Score Detection Screen from Figma</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Key Features</h2>
+    <ul>
+      <li>Interactive community-sourced map</li>
+      <li>Safety-level tagging system (Friendly / Mixed / Unsafe / Unknown)</li>
+      <li>Anonymous, descriptive submissions</li>
+      <li>Crisis Mode for urgent help</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>View Prototype</h2>
+    <a class="button" href="https://www.figma.com/proto/rRgYJm0GHxoA1oJYZysk50/Amanda-Ramirez?node-id=255-281&t=a5tP8jUEWEp5Sf7U-1" target="_blank" rel="noopener">
+      Launch Figma Prototype
+    </a>
+  </section>
+
+  <section>
+    <h2>Back to Portfolio</h2>
+    <a class="button" href="https://aram814.github.io/Portfolio/index.html">
+      Return to Portfolio
+    </a>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Amanda Ramirez. All rights reserved.
+</footer>
+
+<script>
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    document.documentElement.setAttribute(
+      "data-theme",
+      currentTheme === "dark" ? "light" : "dark"
+    );
+  }
+</script>
+
+</body>
+</html>
