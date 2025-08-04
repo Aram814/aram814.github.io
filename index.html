@@ -278,6 +278,9 @@
     </style>
 </head>
 <body class="bg-[var(--bg-primary)] text-[var(--text-primary)]">
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only absolute top-0 left-0 bg-retro-yellow text-dark-black p-3 rounded-br-lg z-[1000]">Skip to main content</a>
+
     <!-- New Rainbow Glitch Overlay Element -->
     <div class="rainbow-glitch-overlay"></div>
 
@@ -292,7 +295,7 @@
             </a>
             <!-- Desktop Navigation and Theme Toggle -->
             <div class="flex items-center space-x-6">
-                <nav class="hidden md:flex">
+                <nav class="hidden md:flex" role="navigation" aria-label="Main Navigation">
                     <ul class="flex space-x-6">
                         <li><a href="#about" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">About</a></li>
                         <li><a href="uploaded:Amanda Ramirez Resume.docx" target="_blank" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Resume</a></li>
@@ -301,7 +304,7 @@
                     </ul>
                 </nav>
                 <!-- Theme Toggle Button (Desktop & Mobile) -->
-                <button id="theme-toggle" class="p-2 rounded-full hover:bg-[var(--bg-secondary)] transition-colors duration-300 focus:outline-none">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-[var(--bg-secondary)] transition-colors duration-300 focus:outline-none" aria-label="Toggle light and dark mode">
                     <!-- Moon Icon (for dark mode) -->
                     <svg id="moon-icon" class="w-6 h-6 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
@@ -312,7 +315,7 @@
                     </svg>
                 </button>
                 <!-- Hamburger Menu Icon for Mobile -->
-                <button id="mobile-menu-button" class="md:hidden text-[var(--text-primary)] focus:outline-none">
+                <button id="mobile-menu-button" class="md:hidden text-[var(--text-primary)] focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open mobile navigation menu">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -320,7 +323,7 @@
             </div>
         </div>
         <!-- Mobile Navigation Menu -->
-        <nav id="mobile-menu" class="hidden md:hidden bg-[var(--bg-primary)]/90 pt-4 pb-2 mt-4 rounded-b-xl border-t border-[var(--border-default)]">
+        <nav id="mobile-menu" class="hidden md:hidden bg-[var(--bg-primary)]/90 pt-4 pb-2 mt-4 rounded-b-xl border-t border-[var(--border-default)]" role="navigation" aria-label="Mobile Navigation">
             <ul class="flex flex-col items-center space-y-4">
                 <li><a href="#about" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">About</a></li>
                 <li><a href="uploaded:Amanda Ramirez Resume.docx" target="_blank" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Resume</a></li>
@@ -330,117 +333,120 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="h-screen flex items-center justify-center text-center bg-[var(--bg-secondary)] static-section pt-24">
-        <div class="container mx-auto px-6 md:px-12">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-[var(--text-contrast)] mb-4 leading-tight glitch-text" data-text="Crafting Digital Experiences">
-                Crafting Digital Experiences
-            </h1>
-            <p class="text-xl md:text-2xl text-[var(--text-primary)] mb-8">
-                UX Designer passionate about intuitive interfaces and impactful user journeys.
-            </p>
-            <a href="#projects" class="inline-block bg-[var(--glitch-yellow-main)] text-[var(--bg-primary)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--glitch-yellow-main)] hover:border-[var(--glitch-red-shadow)]">
-                View My Work
-            </a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-[var(--bg-primary)] static-section rounded-t-xl">
-        <div class="container mx-auto px-6 md:px-12">
-            <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="About Me">
-                About Me
-            </h2>
-            <!-- Combined content block for wrapping -->
-            <div class="text-lg leading-relaxed">
-                <div class="relative flex items-center justify-center float-left md:mr-8 mb-4 mx-auto md:mx-0" style="width: 200px; height: 200px;">
-                    <!-- Square image background -->
-                    <img src="https://i.pinimg.com/originals/94/8e/31/948e31d8046c8b13f52afe071c19b756.gif" alt="Album Cover Background" class="absolute w-full h-full object-cover rounded-xl border-4 border-[var(--glitch-yellow-main)] shadow-2xl z-0">
-                    <!-- Circular profile picture on top -->
-                    <img src="https://lh3.googleusercontent.com/a/ACg8ocLYUprETb4a-em0nsjuw9oDcXEHjRud63IMYTChVOgnd4U0GTks=s576-c-no" alt="Amanda Ramirez Photo" class="relative w-4/5 h-4/5 object-cover rounded-full border-4 border-[var(--glitch-blue-shadow)] shadow-lg z-10">
-                </div>
-                <p class="mb-4">
-                    Hi, I’m Amanda (she/her) — a UX designer who brings creativity, curiosity, and care to everything I build.
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="h-screen flex items-center justify-center text-center bg-[var(--bg-secondary)] static-section pt-24">
+            <div class="container mx-auto px-6 md:px-12">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-[var(--text-contrast)] mb-4 leading-tight glitch-text" data-text="Crafting Digital Experiences">
+                    Crafting Digital Experiences
+                </h1>
+                <p class="text-xl md:text-2xl text-[var(--text-primary)] mb-8">
+                    UX Designer passionate about intuitive interfaces and impactful user journeys.
                 </p>
-                <p class="mb-4">
-                    I design digital experiences that to tackle complex problems into user-centric solutions for real people — especially those often left out of traditional systems. I enjoy focusing on inclusive, intuitive solutions grounded in research and empathy that can genuinely improve lives.
-                </p>
-                <p class="mb-4">
-                    I specialize in user research, wireframing, prototyping, and usability testing. My style is bold but thoughtful - little retro - always human. I love working on projects where the details matter — from microinteractions to the way a user feels when they hit “submit."
-                </p>
-                <p>
-                    When I'm not designing, I enjoy traveling, being in the outdoors, vibing to either emo-punk or classical strings, or simply sinking into a good book.
-                </p>
-                <p>
-                    Let’s connect and build something that makes a difference to people!
-                </p>
-                <div class="clear-both"></div> <!-- Clear float for subsequent content -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-[var(--bg-secondary)] static-section rounded-t-xl">
-        <div class="container mx-auto px-6 md:px-12">
-            <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="My Projects">
-                My Projects
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Project Card 1: Arcade High Score Tracking App -->
-                <div class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project1')">
-                    <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/scorecade.png" alt="Arcade High Score Tracking App" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-red-shadow)]">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">Arcade High Score Tracking App</h3>
-                        <p class="text-[var(--text-primary)] text-sm mb-4">UX Research, Credibility, Real-time Verification</p>
-                        <p class="text-[var(--text-primary)]">A case study on improving the user experience of tracking high scores across arcade games, focusing on credibility and real-time verification.</p>
-                    </div>
-                </div>
-
-                <!-- Project Card 2: QueerSafeSpace App -->
-                <div class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project2')">
-                    <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="QueerSafeSpace App" class="w-full h-48 object-contain border-b-2 border-[var(--glitch-blue-shadow)]">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">QueerSafeSpace App</h3>
-                        <p class="text-[var(--text-primary)] text-sm mb-4">Safety, Community, Anonymous Updates</p>
-                        <p class="text-[var(--text-primary)]">An app developed to aid in the safety of the LGBTQ+ community by allowing anonymous updates to locations to mark with safety ratings, tags, and additional details.</p>
-                    </div>
-                </div>
-
-                <!-- Project Card 3: Death Doula Webpage -->
-                <div class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project3')">
-                    <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/Snedmeonmyway.png" alt="Death Doula Webpage" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-yellow-main)]">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">Death Doula Webpage</h3>
-                        <p class="text-[var(--text-primary)] text-sm mb-4">Web Design, Business Services, Testimonials, Blog</p>
-                        <p class="text-[var(--text-primary)]">Full construct and design of a personal/private business for local Death Doula services. Requirements were for both desktop and mobile compatibility, ability to book consulting, read testimonies, view services, and add a feature "blog."</p>
-                    </div>
-                </div>
-
-                <!-- Add more project cards as needed -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-[var(--bg-primary)] static-section rounded-t-xl">
-        <div class="container mx-auto px-6 md:px-12 text-center">
-            <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 glitch-text" data-text="Get In Touch">
-                Get In Touch
-            </h2>
-            <p class="text-xl text-[var(--text-primary)] mb-8 max-w-2xl mx-auto">
-                Have a project in mind or just want to chat about UX? Feel free to reach out!
-            </p>
-            <div class="flex flex-col items-center space-y-6">
-                <a href="mailto:amandarita0814@gmail.com" class="inline-block bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
-                    Email Me
+                <a href="#projects" class="inline-block bg-[var(--glitch-yellow-main)] text-[var(--bg-primary)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--glitch-yellow-main)] hover:border-[var(--glitch-red-shadow)]">
+                    View My Work
                 </a>
-                <a href="https://www.linkedin.com/in/amanda-r-ramirez" target="_blank" class="inline-block bg-[var(--bg-secondary)] text-[var(--text-contrast)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--border-default)] hover:border-[var(--glitch-red-shadow)]">
-                    Connect on LinkedIn
-                </a>
-                <!-- Add more social links if desired -->
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-[var(--bg-primary)] static-section rounded-t-xl">
+            <div class="container mx-auto px-6 md:px-12">
+                <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="About Me">
+                    About Me
+                </h2>
+                <!-- Combined content block for wrapping -->
+                <div class="text-lg leading-relaxed">
+                    <div class="relative flex items-center justify-center float-left md:mr-8 mb-4 mx-auto md:mx-0" style="width: 200px; height: 200px;">
+                        <!-- Square image background -->
+                        <img src="https://previews.123rf.com/images/midonovatamara/midonovatamara1703/midonovatamara170300021/75248031-tv-test-card-with-rainbow-multi-color-bars-geometric-signals-retro-hardware-1980s-glitch-art-show.jpg" alt="TV test card with rainbow multi-color bars and geometric signals" class="absolute w-full h-full object-cover rounded-xl border-4 border-[var(--glitch-yellow-main)] shadow-2xl z-0">
+                        <!-- Circular profile picture on top -->
+                        <img src="https://lh3.googleusercontent.com/a/ACg8ocLYUprETb4a-em0nsjuw9oDcXEHjRud63IMYTChVOgnd4U0GTks=s576-c-no" alt="Amanda Ramirez profile picture" class="relative w-4/5 h-4/5 object-cover rounded-full border-4 border-[var(--glitch-blue-shadow)] shadow-lg z-10">
+                    </div>
+                    <p class="mb-4">
+                        Hi, I’m Amanda (she/her) — a UX designer who brings creativity, curiosity, and care to everything I build.
+                    </p>
+                    <p class="mb-4">
+                        I design digital experiences that to tackle complex problems into user-centric solutions for real people — especially those often left out of traditional systems. I enjoy focusing on inclusive, intuitive solutions grounded in research and empathy that can genuinely improve lives.
+                    </p>
+                    <p class="mb-4">
+                        I specialize in user research, wireframing, prototyping, and usability testing. My style is bold but thoughtful - little retro - always human. I love working on projects where the details matter — from microinteractions to the way a user feels when they hit “submit."
+                    </p>
+                    <p>
+                        When I'm not designing, I enjoy traveling, being in the outdoors, vibing to either emo-punk or classical strings, or simply sinking into a good book.
+                    </p>
+                    <p>
+                        Let’s connect and build something that makes a difference to people!
+                    </p>
+                    <div class="clear-both"></div> <!-- Clear float for subsequent content -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 bg-[var(--bg-secondary)] static-section rounded-t-xl">
+            <div class="container mx-auto px-6 md:px-12">
+                <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="My Projects">
+                    My Projects
+                </h2>
+                <!-- Semantic List for Projects -->
+                <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Project Card 1: Arcade High Score Tracking App -->
+                    <li class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project1')">
+                        <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/scorecade.png" alt="Screenshot of Scorecade app interface showing high score list" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-red-shadow)]">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">Arcade High Score Tracking App</h3>
+                            <p class="text-[var(--text-primary)] text-sm mb-4">UX Research, Credibility, Real-time Verification</p>
+                            <p class="text-[var(--text-primary)]">A case study on improving the user experience of tracking high scores across arcade games, focusing on credibility and real-time verification.</p>
+                        </div>
+                    </li>
+
+                    <!-- Project Card 2: QueerSafeSpace App -->
+                    <li class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project2')">
+                        <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="Screenshot of QueerSafeSpace app interface with map and location pins" class="w-full h-48 object-contain border-b-2 border-[var(--glitch-blue-shadow)]">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">QueerSafeSpace App</h3>
+                            <p class="text-[var(--text-primary)] text-sm mb-4">Safety, Community, Anonymous Updates</p>
+                            <p class="text-[var(--text-primary)]">An app developed to aid in the safety of the LGBTQ+ community by allowing anonymous updates to locations to mark with safety ratings, tags, and additional details.</p>
+                        </div>
+                    </li>
+
+                    <!-- Project Card 3: Death Doula Webpage -->
+                    <li class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project3')">
+                        <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/Snedmeonmyway.png" alt="Screenshot of Death Doula webpage homepage" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-yellow-main)]">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">Death Doula Webpage</h3>
+                            <p class="text-[var(--text-primary)] text-sm mb-4">Web Design, Business Services, Testimonials, Blog</p>
+                            <p class="text-[var(--text-primary)]">Full construct and design of a personal/private business for local Death Doula services. Requirements were for both desktop and mobile compatibility, ability to book consulting, read testimonies, view services, and add a feature "blog."</p>
+                        </div>
+                    </li>
+
+                    <!-- Add more project cards as needed -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-[var(--bg-primary)] static-section rounded-t-xl">
+            <div class="container mx-auto px-6 md:px-12 text-center">
+                <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 glitch-text" data-text="Get In Touch">
+                    Get In Touch
+                </h2>
+                <p class="text-xl text-[var(--text-primary)] mb-8 max-w-2xl mx-auto">
+                    Have a project in mind or just want to chat about UX? Feel free to reach out!
+                </p>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="mailto:amandarita0814@gmail.com" class="inline-block bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
+                        Email Me
+                    </a>
+                    <a href="https://www.linkedin.com/in/amanda-r-ramirez" target="_blank" class="inline-block bg-[var(--bg-secondary)] text-[var(--text-contrast)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--border-default)] hover:border-[var(--glitch-red-shadow)]">
+                        Connect on LinkedIn
+                    </a>
+                    <!-- Add more social links if desired -->
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="bg-[var(--bg-secondary)] text-[var(--text-primary)] py-8 text-center rounded-t-xl">
@@ -450,11 +456,11 @@
     </footer>
 
     <!-- Modals for Project Details -->
-    <div id="project1Modal" class="modal">
+    <div id="project1Modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="project1ModalTitle">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal('project1')">&times;</span>
-            <h3 class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">Arcade High Score Tracking App</h3>
-            <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/highscore.png" alt="Arcade High Score Tracking App Detail" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-red-shadow)]">
+            <span class="close-button" onclick="closeModal('project1')" aria-label="Close">&times;</span>
+            <h3 id="project1ModalTitle" class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">Arcade High Score Tracking App</h3>
+            <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/highscore.png" alt="Screenshot of Scorecade app interface showing high score list" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-red-shadow)]">
             <p class="text-[var(--text-primary)] mb-4">
                 This project was instrumental in deepening my understanding of creating dynamic, user-friendly applications, and the challenges involved in ensuring a seamless and engaging user journey within a complex system.
             </p>
@@ -471,11 +477,11 @@
         </div>
     </div>
 
-    <div id="project2Modal" class="modal">
+    <div id="project2Modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="project2ModalTitle">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal('project2')">&times;</span>
-            <h3 class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">QueerSafeSpace App</h3>
-            <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="QueerSafeSpace App Detail" class="w-full h-auto object-contain mb-6 rounded-lg border-2 border-[var(--glitch-blue-shadow)]">
+            <span class="close-button" onclick="closeModal('project2')" aria-label="Close">&times;</span>
+            <h3 id="project2ModalTitle" class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">QueerSafeSpace App</h3>
+            <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="Screenshot of QueerSafeSpace app interface with map and location pins" class="w-full h-auto object-contain mb-6 rounded-lg border-2 border-[var(--glitch-blue-shadow)]">
             <p class="text-[var(--text-primary)] mb-4">
                 The QueerSafeSpace App was developed to aid in the safety of the LGBTQ+ community. It allows users to anonymously update locations, marking them with safety ratings, tags, and additional details to foster a safer environment.
             </p>
@@ -492,11 +498,11 @@
         </div>
     </div>
 
-    <div id="project3Modal" class="modal">
+    <div id="project3Modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="project3ModalTitle">
         <div class="modal-content">
-            <span class="close-button" onclick="closeModal('project3')">&times;</span>
-            <h3 class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">Death Doula Webpage</h3>
-            <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/Snedmeonmyway.png" alt="Death Doula Webpage Detail" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-yellow-main)]">
+            <span class="close-button" onclick="closeModal('project3')" aria-label="Close">&times;</span>
+            <h3 id="project3ModalTitle" class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">Death Doula Webpage</h3>
+            <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/Snedmeonmyway.png" alt="Screenshot of Death Doula webpage homepage" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-yellow-main)]">
             <p class="text-[var(--text-primary)] mb-4">
                 This project involved the full construct and design of a personal/private business website for local Death Doula services. Requirements were for both desktop and mobile compatibility, ability to book consulting, read testimonies, view services, and add a feature "blog."
             </p>
@@ -527,6 +533,8 @@
                 }
                 // Close the mobile menu after clicking a link
                 document.getElementById('mobile-menu').classList.add('hidden');
+                // Ensure aria-expanded is updated when menu is closed
+                document.getElementById('mobile-menu-button').setAttribute('aria-expanded', 'false');
             });
         });
 
@@ -535,6 +543,8 @@
         const mobileMenu = document.getElementById('mobile-menu');
 
         mobileMenuButton.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
             mobileMenu.classList.toggle('hidden');
         });
 
@@ -554,13 +564,36 @@
             document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         });
 
+        // Store reference to the element that opened the modal
+        let lastFocusedElement = null;
+
         // Modal functionality
         function openModal(projectId) {
-            document.getElementById(projectId + 'Modal').style.display = 'block';
+            const modal = document.getElementById(projectId + 'Modal');
+            lastFocusedElement = document.activeElement; // Save the currently focused element
+            modal.style.display = 'block';
+            // Focus the first focusable element inside the modal (e.g., the close button)
+            const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            const firstFocusableElement = focusableElements[0];
+            if (firstFocusableElement) {
+                firstFocusableElement.focus();
+            }
+
+            // Add event listener for keyboard trapping and Escape key
+            modal.addEventListener('keydown', trapTabKey);
+            modal.addEventListener('keydown', handleEscapeKey);
         }
 
         function closeModal(projectId) {
-            document.getElementById(projectId + 'Modal').style.display = 'none';
+            const modal = document.getElementById(projectId + 'Modal');
+            modal.style.display = 'none';
+            // Return focus to the element that opened the modal
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
+            // Remove event listeners for keyboard trapping and Escape key
+            modal.removeEventListener('keydown', trapTabKey);
+            modal.removeEventListener('keydown', handleEscapeKey);
         }
 
         // Close modal when clicking outside of the modal content
@@ -568,10 +601,41 @@
             const modals = document.querySelectorAll('.modal');
             modals.forEach(modal => {
                 if (event.target == modal) {
-                    modal.style.display = "none";
+                    closeModal(modal.id.replace('Modal', '')); // Extract projectId from modal ID
                 }
             });
         }
+
+        // Function to trap tab key within modal
+        function trapTabKey(e) {
+            if (e.key === 'Tab') {
+                const modal = e.currentTarget;
+                const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                const firstFocusableElement = focusableElements[0];
+                const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+                if (e.shiftKey) { // Shift + Tab
+                    if (document.activeElement === firstFocusableElement) {
+                        lastFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                } else { // Tab
+                    if (document.activeElement === lastFocusableElement) {
+                        firstFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                }
+            }
+        }
+
+        // Function to handle Escape key for modals
+        function handleEscapeKey(e) {
+            if (e.key === 'Escape') {
+                const modal = e.currentTarget;
+                closeModal(modal.id.replace('Modal', ''));
+            }
+        }
+
 
         // Theme toggle functionality
         const themeToggleBtn = document.getElementById('theme-toggle');
