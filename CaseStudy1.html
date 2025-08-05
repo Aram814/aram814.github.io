@@ -73,7 +73,7 @@
     figure {
       display: block;
       margin: 1.5rem auto;
-      max-width: 500px;
+      max-width: 100%;
       width: 100%;
       text-align: center;
     }
@@ -84,10 +84,49 @@
       border: 2px solid var(--border-color);
     }
 
-    figcaption {
-      font-size: 1rem;
-      color: #cccccc;
-      margin-top: 0.5rem;
+    .rotate270 {
+      transform: rotate(270deg);
+      max-width: 100%;
+      height: auto;
+      border: 2px solid var(--border-color);
+    }
+
+    .side-by-side-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .side-by-side-container figure {
+      flex: 1 1 300px;
+      max-width: 300px;
+      margin: 0;
+    }
+
+    .screenshot-img {
+      width: 70%;
+      max-width: 400px;
+      height: auto;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      border: 2px solid var(--border-color);
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 0;
     }
 
     ul {
@@ -109,8 +148,8 @@
     .switch {
       position: relative;
       display: inline-block;
-      width: 48px;
-      height: 24px;
+      width: 56px;
+      height: 32px;
     }
 
     .switch input {
@@ -123,7 +162,7 @@
       position: absolute;
       cursor: pointer;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #ccc;
+      background-color: #888;
       transition: 0.4s;
       border-radius: 24px;
     }
@@ -131,10 +170,10 @@
     .slider:before {
       position: absolute;
       content: "";
-      height: 18px;
-      width: 18px;
-      left: 3px;
-      bottom: 3px;
+      height: 24px;
+      width: 24px;
+      left: 4px;
+      bottom: 4px;
       background-color: white;
       transition: 0.4s;
       border-radius: 50%;
@@ -154,14 +193,26 @@
         justify-content: flex-start;
         margin-bottom: 1rem;
       }
+      .side-by-side-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .side-by-side-container figure {
+        max-width: 100%;
+      }
+      .screenshot-img {
+        width: 90%;
+        max-width: 90vw;
+      }
     }
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <header role="banner">
     <div class="container">
       <nav role="navigation" aria-label="Main navigation">
-        <a href="https://aram814.github.io/Portfolio/index.html" aria-label="Return to portfolio">&larr; Back to Portfolio</a>
+        <a href="https://aram814.github.io/Portfolio/index.html" aria-current="page" aria-label="Return to portfolio">&larr; Back to Portfolio</a>
         <div class="theme-toggle-container">
           <label for="themeSwitch">Dark/Light Mode</label>
           <label class="switch">
@@ -173,7 +224,7 @@
     </div>
   </header>
 
-  <main role="main">
+  <main id="main-content" role="main">
     <div class="container">
       <h1>Pixelated Scorecade</h1>
       <p>
@@ -204,6 +255,20 @@
         <li>Preference for simple UI.</li>
       </ul>
 
+      <div class="side-by-side-container">
+        <figure>
+          <img src="https://github.com/Aram814/Assets/blob/main/IMG_9730.png?raw=true" 
+               alt="Hand-drawn UX design storyboard sketch showing user flow for high score app" class="rotate270" />
+          <figcaption>UX Design Storyboard</figcaption>
+        </figure>
+
+        <figure>
+          <img src="https://github.com/Aram814/Assets/blob/main/IMG_9731.jpg?raw=true" 
+               alt="Wireframe sketch for layout of Pixelated Scorecade app interface" />
+          <figcaption>Wireframe Sketch</figcaption>
+        </figure>
+      </div>
+
       <h2>🧠 Key Features</h2>
       <ul>
         <li>Manual or QR score input</li>
@@ -213,7 +278,8 @@
 
       <figure>
         <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/highscore.png" 
-             alt="Screenshot of the Pixelated Scorecade app showing the high score entry screen">
+             alt="Screenshot of the Pixelated Scorecade app showing the high score entry screen"
+             class="screenshot-img">
         <figcaption>Screenshot of Score Detection Screen from Figma.</figcaption>
       </figure>
 
@@ -237,7 +303,7 @@
 
       <hr>
 
-      <footer>
+      <footer role="contentinfo">
         <a class="button-link" href="https://aram814.github.io/Portfolio/index.html">&larr; Back to Portfolio</a>
       </footer>
     </div>
@@ -247,7 +313,6 @@
     const toggle = document.getElementById('themeSwitch');
     const root = document.documentElement;
 
-    // Load saved preference
     if (localStorage.getItem('theme') === 'light') {
       root.setAttribute('data-theme', 'light');
       toggle.checked = true;
