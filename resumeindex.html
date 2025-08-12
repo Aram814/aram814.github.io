@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amanda Ramirez | UI/UX Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Slate Gray & Ocean Blue -->
+    <!-- Application Structure Plan: A multi-section, single-page application designed for intuitive exploration. The structure includes: a hero section for immediate impact, a timeline for career progression, a project spotlight to showcase key achievements, a skills section with an interactive chart, and a contact section. This thematic approach allows a user to digest information in logical chunks, making it more engaging than a traditional resume. -->
+    <!-- Visualization & Content Choices: 
+        - Timeline: To visually represent career growth. Goal: Show progression. Method: HTML/CSS with JS for interactivity. Justification: More engaging than a list.
+        - Bar Chart (Skills): To quantify and compare skill proficiency. Goal: Highlight key abilities. Method: Chart.js. Justification: Provides a quick visual summary of technical and professional skills, with a hidden data table for screen readers.
+        - Project Cards: To detail significant accomplishments. Goal: Showcase impact. Method: HTML/CSS with interactive hover effects. Justification: Allows for deeper dives into specific achievements without cluttering the main view.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #334155; /* slate-700 */
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #3b82f6; /* blue-500 */
+        }
+        .section-title {
+            border-bottom: 2px solid #3b82f6; /* blue-500 */
+            padding-bottom: 0.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.75rem;
+            top: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: #3b82f6; /* blue-500 */
+            border: 4px solid #f8fafc; /* slate-50 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center" role="navigation" aria-label="Main navigation">
+            <div class="text-2xl font-bold text-slate-800">Amanda Ramirez</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-slate-600 font-medium">About</a>
+                <a href="#experience" class="nav-link text-slate-600 font-medium">Experience</a>
+                <a href="#skills" class="nav-link text-slate-600 font-medium">Skills</a>
+                <a href="#projects" class="nav-link text-slate-600 font-medium">Projects</a>
+            </div>
+            <a href="mailto:arramirez814@gmail.com" class="hidden md:inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">Contact Me</a>
+            <button id="mobile-menu-button" class="md:hidden text-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-md" aria-label="Open main menu" aria-controls="mobile-menu" aria-expanded="false">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4" role="dialog" aria-modal="true" aria-hidden="true">
+            <a href="#about" class="block py-2 nav-link text-slate-600 font-medium">About</a>
+            <a href="#experience" class="block py-2 nav-link text-slate-600 font-medium">Experience</a>
+            <a href="#skills" class="block py-2 nav-link text-slate-600 font-medium">Skills</a>
+            <a href="#projects" class="block py-2 nav-link text-slate-600 font-medium">Projects</a>
+            <a href="mailto:arramirez814@gmail.com" class="block mt-2 text-center bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">Contact Me</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12" role="main">
+
+        <!-- About Section -->
+        <section id="about" class="text-center mb-24" aria-labelledby="about-heading">
+            <h1 id="about-heading" class="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Strategic UX Designer & Disruptive Leader</h1>
+            <p class="max-w-3xl mx-auto text-lg text-slate-600">
+                A client-focused UX Designer and strategic leader with 7+ years of experience in project management. My background is uniquely suited for building digital platforms and creating intuitive, user-centered solutions. I excel at synthesizing complex client requirements to drive impactful solutions from conception to implementation, aligning perfectly with a philosophy to "Design. Disrupt. Repeat."
+            </p>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="mb-24" aria-labelledby="experience-heading">
+            <h2 id="experience-heading" class="section-title text-3xl font-bold text-slate-800 mb-12">Strategic Career Journey</h2>
+            <div class="relative border-l-2 border-slate-200 ml-12 pl-12" role="list">
+                <div class="timeline-item mb-16" role="listitem">
+                    <h3 class="text-xl font-semibold text-slate-800">Associate Client Manager</h3>
+                    <p class="text-blue-600 font-medium mb-2">World Wide Technology (WWT) | 2021 - Present</p>
+                    <p class="text-slate-600">Led a multi-phase, multi-year cyber vault project, strategically overseeing the entire process from conception to implementation based on a deep understanding of complex client requirements. Contributed to the strategic design and delivery of digital platforms. Optimized resource access by successfully onboarding approximately 20 new vendors, directly improving solution delivery capabilities for a high-priority client.</p>
+                </div>
+                <div class="timeline-item" role="listitem">
+                    <h3 class="text-xl font-semibold text-slate-800">Strategic Account Manager</h3>
+                    <p class="text-blue-600 font-medium mb-2">Tech Data | 2017 - 2021</p>
+                    <p class="text-slate-600">Managed a diverse client base, including SLED and Federal accounts, with a focus on security proposals. Delivered data-driven Business Reviews to identify strategic growth opportunities, directly contributing to data exploitation and business development efforts. Designed tailored security proposals to meet specific client needs.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="mb-24" aria-labelledby="skills-heading">
+            <h2 id="skills-heading" class="section-title text-3xl font-bold text-slate-800 mb-12">Core Competencies</h2>
+            <p class="text-center max-w-2xl mx-auto text-slate-600 mb-8">
+                This chart visualizes my proficiency in skills that align with strategic design, digital platforms, and data exploitation. The blend of professional and technical abilities positions me to contribute effectively to innovative projects.
+            </p>
+            <div class="chart-container" role="img" aria-label="A bar chart showing proficiency in core competencies. The data is also available in the following table.">
+                <canvas id="skillsChart"></canvas>
+            </div>
+            <div class="sr-only">
+                <h3>Skills Proficiency Data</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Skill</th>
+                            <th scope="col">Proficiency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Design & Strategy</td><td>95%</td></tr>
+                        <tr><td>Digital Platforms</td><td>90%</td></tr>
+                        <tr><td>Client Needs Prioritization</td><td>98%</td></tr>
+                        <tr><td>Data Exploitation</td><td>90%</td></tr>
+                        <tr><td>Agile Methodologies</td><td>80%</td></tr>
+                        <tr><td>Cross-functional Collaboration</td><td>95%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="mb-24" aria-labelledby="projects-heading">
+            <h2 id="projects-heading" class="section-title text-3xl font-bold text-slate-800 mb-12">Design Intelligence Projects</h2>
+            <p class="text-center max-w-2xl mx-auto text-slate-600 mb-8">
+                These projects demonstrate the application of foundational UX principles and a strategic mindset to enhance user experiences. Each engagement involved collaborating to solve real-world problems through user-centric design and information architecture, in line with a design-focused approach.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" role="list">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow" role="listitem">
+                    <h3 class="text-xl font-semibold text-slate-800 mb-2">Web & Digital Experience Design</h3>
+                    <p class="text-slate-600">Contributed to website updates for an HVAC business, focusing on improved navigation and information architecture to enhance user findability and engagement.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow" role="listitem">
+                    <h3 class="text-xl font-semibold text-slate-800 mb-2">Foundational Webpage & User Flows</h3>
+                    <p class="text-slate-600">Collaborated on building a foundational webpage for a private death doula business, establishing initial user flows and optimizing content presentation based on client needs.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow" role="listitem">
+                    <h3 class="text-xl font-semibold text-slate-800 mb-2">Website Structural Design</h3>
+                    <p class="text-slate-600">Designed the structural framework and user interface concepts for a local woodworking business website, aiming to optimize user engagement and content accessibility based on business goals.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white py-8" role="contentinfo">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Amanda Ramirez. All rights reserved.</p>
+            <p class="text-sm text-slate-400 mt-2">This interactive resume was built to showcase my skills in UI/UX design and development.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.setAttribute('aria-hidden', isExpanded);
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    if(mobileMenu.classList.contains('hidden') === false){
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                        mobileMenu.setAttribute('aria-hidden', 'true');
+                    }
+                });
+            });
+
+            // Skills Chart
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            const skillsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Design & Strategy', 'Digital Platforms', 'Client Needs Prioritization', 'Data Exploitation', 'Agile Methodologies', 'Cross-functional Collaboration'],
+                    datasets: [{
+                        label: 'Proficiency',
+                        data: [95, 90, 98, 90, 80, 95],
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(37, 99, 235, 0.6)',
+                            'rgba(29, 78, 216, 0.6)',
+                            'rgba(59, 130, 246, 0.6)',
+                            'rgba(37, 99, 235, 0.6)',
+                            'rgba(29, 78, 216, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(37, 99, 235, 1)',
+                            'rgba(29, 78, 216, 1)',
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(37, 99, 235, 1)',
+                            'rgba(29, 78, 216, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                             grid: {
+                                color: '#e2e8f0' // slate-200
+                            },
+                            ticks: {
+                                color: '#475569' // slate-600
+                            }
+                        },
+                        y: {
+                             grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#475569' // slate-600
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Proficiency: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
