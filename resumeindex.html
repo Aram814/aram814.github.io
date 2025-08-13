@@ -1,327 +1,505 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amanda Ramirez | UX/UI Designer Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Application Structure Plan: A multi-section, single-page application designed for intuitive exploration. The structure includes: a hero section for immediate impact, a timeline for career progression, a project spotlight to showcase key achievements, a skills section with an interactive chart, and a contact section. This thematic approach allows a user to digest information in logical chunks, making it more engaging than a traditional resume. -->
-    <!-- Visualization & Content Choices: 
-        - Timeline: To visually represent career growth. Goal: Show progression. Method: HTML/CSS with JS for interactivity. Justification: More engaging than a list.
-        - Bar Chart (Skills): To quantify and compare skill proficiency. Goal: Highlight key abilities. Method: Chart.js. Justification: Provides a quick visual summary of technical and professional skills, with a hidden data table for screen readers.
-        - Project Cards: To detail significant accomplishments. Goal: Showcase impact. Method: HTML/CSS with interactive hover effects. Justification: Allows for deeper dives into specific achievements without cluttering the main view.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #1e293b; /* Dark theme: slate-800 */
-            color: #e2e8f0; /* Dark theme: slate-200 */
-        }
-        .nav-link {
-            transition: color 0.3s ease;
-        }
-        .nav-link:hover, .nav-link.active {
-            color: #3b82f6; /* blue-500 */
-        }
-        .section-title {
-            border-bottom: 2px solid #3b82f6; /* blue-500 */
-            padding-bottom: 0.5rem;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.75rem;
-            top: 0;
-            width: 1.5rem;
-            height: 1.5rem;
-            border-radius: 50%;
-            background-color: #3b82f6; /* blue-500 */
-            border: 4px solid #1e293b; /* Dark theme: slate-800 background for circle border */
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 400px;
-            max-height: 50vh;
-        }
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Amanda Ramirez | UX/UI Designer Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fafafa;
+      color: #1e293b;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    header {
+      background-color: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    /* Name on the left */
+    .header-name {
+      color: #e2e8f0; /* light slate */
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+
+    /* Nav links in center */
+    .nav-links {
+      display: flex;
+      gap: 1.25rem;
+      flex-grow: 1;
+      justify-content: center;
+    }
+    .nav-link {
+      color: #cbd5e1;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover,
+    .nav-link:focus {
+      color: #3b82f6; /* blue-500 */
+      outline: none;
+    }
+
+    /* Toggle button on right */
+    #mode-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #e2e8f0;
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.3s ease;
+    }
+    #mode-toggle:hover,
+    #mode-toggle:focus {
+      color: #e2e8f0;
+      outline: none;
+    }
+    #mode-toggle svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Section Titles - aligned left */
+    .section-title {
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+      font-weight: 700;
+      font-size: 1.875rem;
+      color: #3b82f6;
+      text-align: left;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* About Section */
+    #about-heading {
+      color: #3b82f6; /* bright blue */
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-align: center;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #about p {
+      color: #111111; /* near black */
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.125rem;
+      line-height: 1.6;
+    }
+
+    /* Timeline styles for experience & education */
+    .timeline {
+      border-left: 3px solid #3b82f6;
+      margin-left: 1rem;
+      padding-left: 1.5rem;
+      max-width: 700px;
+      margin-right: auto;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.55rem;
+      top: 0.4rem;
+      width: 1rem;
+      height: 1rem;
+      background-color: #3b82f6;
+      border-radius: 50%;
+      border: 3px solid #fafafa;
+    }
+    .timeline-item h3 {
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #001F54;
+      margin-bottom: 0.25rem;
+    }
+    /* Job & education titles color updated to light slate #e2e8f0 */
+    .timeline-item .job-title,
+    .timeline-item .school-title {
+      color: #065ac7;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-item p {
+      color: #111111;
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
+    }
+
+    /* Projects Section text colors */
+    #projects .project-text {
+      color: #e2e8f0; /* light slate */
+    }
+    #projects .project-year {
+      color: #3b82f6; /* bright blue */
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    #projects-heading {
+      color: #3b82f6; /* bright blue */
+    }
+
+    /* Chart container */
+    .chart-container {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto 3rem auto;
+      height: 400px;
+    }
+
+    /* Projects cards */
+    #projects .project-card {
+      background-color: #1e293b;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+    #projects .project-card:hover {
+      box-shadow: 0 6px 12px rgb(0 0 0 / 0.3);
+    }
+
+    /* Dark mode overrides */
+    body.dark {
+      background-color: #0f172a;
+      color: #cbd5e1;
+    }
+    body.dark header {
+      background-color: rgba(15, 23, 42, 0.8);
+    }
+    body.dark .nav-link {
+      color: #cbd5e1;
+    }
+    body.dark .nav-link:hover,
+    body.dark .nav-link:focus {
+      color: #3b82f6;
+    }
+
+    /* Dark mode text color fixes */
+    body.dark #about-heading {
+      color: #3b82f6; /* bright blue */
+    }
+    body.dark #about p {
+      color: #e2e8f0; /* light slate */
+    }
+
+    body.dark #experience-heading,
+    body.dark #education-heading,
+    body.dark #skills-heading {
+      color: #3b82f6;
+    }
+    /* Dark mode job and education titles to light slate too */
+    body.dark .timeline-item .job-title,
+    body.dark .timeline-item .school-title {
+      color: #3b82f6;
+    }
+    body.dark .timeline-item h3 {
+      color: #cbd5e1;
+    }
+    body.dark .timeline-item p {
+      color: #e2e8f0; /* light slate */
+    }
+    body.dark #projects-heading {
+      color: #3b82f6;
+    }
+    body.dark #projects .project-year {
+      color: #3b82f6;
+    }
+    body.dark #projects .project-text {
+      color: #e2e8f0;
+    }
+  </style>
 </head>
-<body class="antialiased">
+<body>
+  <!-- Header with name, nav, and toggle on right -->
+  <header>
+    <nav role="navigation" aria-label="Main navigation">
+      <div class="header-name" aria-label="Site title">
+        Amanda Ramirez
+      </div>
 
-    <!-- Header & Navigation -->
-    <header class="bg-slate-900/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center" role="navigation" aria-label="Main navigation">
-            <div class="text-2xl font-bold text-white">Amanda Ramirez</div>
-            <div class="flex items-center space-x-8 md:space-x-12">
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="nav-link text-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">About</a>
-                    <a href="#experience" class="nav-link text-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">Experience</a>
-                    <a href="#education" class="nav-link text-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">Education</a>
-                    <a href="#skills" class="nav-link text-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">Skills</a>
-                    <a href="#projects" class="nav-link text-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">Projects</a>
-                </div>
-                <a href="mailto:arramirez814@gmail.com" class="hidden md:inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Contact Me</a>
-            </div>
-            <button id="mobile-menu-button" class="md:hidden text-slate-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-md" aria-label="Open main menu" aria-controls="mobile-menu" aria-expanded="false">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 bg-slate-900" role="dialog" aria-modal="true" aria-hidden="true">
-            <a href="#about" class="block py-2 nav-link text-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">About</a>
-            <a href="#experience" class="block py-2 nav-link text-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">Experience</a>
-            <a href="#education" class="block py-2 nav-link text-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">Education</a>
-            <a href="#skills" class="block py-2 nav-link text-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">Skills</a>
-            <a href="#projects" class="block py-2 nav-link text-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">Projects</a>
-            <a href="mailto:arramirez814@gmail.com" class="block mt-2 text-center bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Contact Me</a>
+      <div class="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+      </div>
+
+      <button
+        id="mode-toggle"
+        aria-label="Toggle light and dark mode"
+        title="Toggle light and dark mode"
+      >
+        <!-- Sun icon for light mode by default -->
+        <svg
+          id="mode-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="5" />
+          <path
+            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42
+               M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+          />
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main class="container mx-auto px-6 py-12" role="main">
+    <!-- About Section -->
+    <section id="about" aria-labelledby="about-heading" class="mb-24 text-center">
+      <h1 id="about-heading">UX Designer</h1>
+      <p>
+        Human-centered UI/UX Designer with a Google UX Design Professional Certificate and
+        7+ years delivering complex, multi-phase projects for government and enterprise
+        clients. Experienced in user research, wireframing, prototyping, usability
+        testing, and accessibility (WCAG/508). Adept at synthesizing complex
+        requirements into clear, intuitive designs that meet mission needs. Skilled in
+        Agile environments, collaborating with cross-functional teams, and
+        communicating effectively with both technical and non-technical stakeholders.
+      </p>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" aria-labelledby="experience-heading" class="mb-24 max-w-3xl mx-auto">
+      <h2 id="experience-heading" class="section-title">Strategic Career Journey</h2>
+      <div class="timeline" role="list">
+        <div class="timeline-item" role="listitem">
+          <h3>Associate Client Manager</h3>
+          <p class="job-title">World Wide Technology (WWT) | Remote | 2021–Present</p>
+          <p>
+            Led design and implementation of a multi-phase cyber vault solution for a federal client, translating technical requirements into usable workflows and user interfaces.
+          </p>
         </div>
-    </header>
-
-    <main class="container mx-auto px-6 py-12" role="main">
-
-        <!-- About Section -->
-        <section id="about" class="text-center mb-24" aria-labelledby="about-heading">
-            <h1 id="about-heading" class="text-4xl md:text-5xl font-bold text-white mb-4">UX Designer</h1>
-            <p class="max-w-3xl mx-auto text-lg text-slate-300">
-                Human-centered UI/UX Designer with a Google UX Design Professional Certificate and 7+ years delivering complex, multi-phase projects for government and enterprise clients. Experienced in user research, wireframing, prototyping, usability testing, and accessibility (WCAG/508). Adept at synthesizing complex requirements into clear, intuitive designs that meet mission needs. Skilled in Agile environments, collaborating with cross-functional teams, and communicating effectively with both technical and non-technical stakeholders.
-            </p>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="mb-24" aria-labelledby="experience-heading">
-            <h2 id="experience-heading" class="section-title text-3xl font-bold text-white mb-12">Strategic Career Journey</h2>
-            <div class="relative border-l-2 border-slate-700 ml-12 pl-12" role="list">
-                <div class="timeline-item mb-16" role="listitem">
-                    <h3 class="text-xl font-semibold text-white">Associate Client Manager & UX Contributor</h3>
-                    <p class="text-blue-600 font-medium mb-2">World Wide Technology (WWT) | Remote | 2021-Present</p>
-                    <p class="text-slate-300">Led design and implementation of a multi-phase cyber vault solution for a federal client, translating technical requirements into usable workflows and user interfaces.</p>
-                </div>
-                <div class="timeline-item" role="listitem">
-                    <h3 class="text-xl font-semibold text-white">Strategic Account Manager</h3>
-                    <p class="text-blue-600 font-medium mb-2">Tech Data | Clearwater, FL | 2017–2021</p>
-                    <p class="text-slate-300">Managed diverse SLED and Federal accounts, delivering tailored technology solutions aligned with mission-critical requirements.</p>
-                    <p class="text-slate-300">Designed and proposed solutions incorporating usability and accessibility best practices.</p>
-                    <p class="text-slate-300">Produced data-driven business reviews that informed strategic decisions for government and enterprise partners.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Education Section -->
-        <section id="education" class="mb-24" aria-labelledby="education-heading">
-            <h2 id="education-heading" class="section-title text-3xl font-bold text-white mb-12">Education</h2>
-            <div class="relative border-l-2 border-slate-700 ml-12 pl-12" role="list">
-                <div class="timeline-item mb-16" role="listitem">
-                    <h3 class="text-xl font-semibold text-white">Google UX Design Professional Certificate</h3>
-                    <p class="text-blue-600 font-medium mb-2">Coursera | 2025</p>
-                    <p class="text-slate-300">Completed a comprehensive curriculum covering the UX design process from end to end, including ideation, wireframing, prototyping, user research, and usability testing. This certification signifies a deep understanding of human-centered design principles.</p>
-                </div>
-                <div class="timeline-item" role="listitem">
-                    <h3 class="text-xl font-semibold text-white">Associate of Science, Emergency Medical Services</h3>
-                    <p class="text-blue-600 font-medium mb-2">Pasco-Hernando State College (PHSC) | 2012</p>
-                    <p class="text-slate-300">Developed strong skills in critical thinking, adaptability, and performance under pressure, demonstrating the ability to solve complex problems in high-stakes, time-sensitive environments.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="mb-24" aria-labelledby="skills-heading">
-            <h2 id="skills-heading" class="section-title text-3xl font-bold text-white mb-12">Core Competencies</h2>
-            <p class="text-center max-w-2xl mx-auto text-slate-300 mb-8">
-                This chart visualizes my proficiency in skills that align with strategic design and development. The blend of professional and technical abilities positions me to contribute effectively to innovative projects.
-            </p>
-            <div class="chart-container" role="img" aria-label="A bar chart showing proficiency in core competencies. The data is also available in the following table.">
-                <canvas id="skillsChart"></canvas>
-            </div>
-            <div class="sr-only">
-                <h3>Skills Proficiency Data</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope="col">Skill</th>
-                            <th scope="col">Proficiency</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>UX/UI Design & Human-Centered Design</td><td>95%</td></tr>
-                        <tr><td>Wireframing, Prototyping & User Flows</td><td>90%</td></tr>
-                        <tr><td>User Research & Usability Testing</td><td>92%</td></tr>
-                        <tr><td>Accessibility (WCAG/508 Compliance)</td><td>95%</td></tr>
-                        <tr><td>Information Architecture & Data Visualization</td><td>88%</td></tr>
-                        <tr><td>Agile / Scrum Methodologies</td><td>85%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="mb-24" aria-labelledby="projects-heading">
-            <h2 id="projects-heading" class="section-title text-3xl font-bold text-white mb-12">Selected UX & Design Projects</h2>
-            <p class="text-center max-w-2xl mx-auto text-slate-300 mb-8">
-                These projects showcase my application of UX principles and strategic thinking to enhance user experiences. Each was an opportunity to solve real-world problems.
-            </p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" role="list">
-                <div class="bg-slate-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow" role="listitem">
-                    <h3 class="text-xl font-semibold text-white mb-2">QueerSafeSpace</h3>
-                    <p class="text-blue-600 font-medium mb-2">2025</p>
-                    <p class="text-slate-300">Designed a mobile app MVP for a community-sourced LGBTQ+ safe space map, leading UX research, wireframing, and interactive prototyping from conception to a working prototype.</p>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow" role="listitem">
-                    <h3 class="text-xl font-semibold text-white mb-2">Pixelated Scorecade</h3>
-                    <p class="text-blue-600 font-medium mb-2">2025</p>
-                    <p class="text-slate-300">Created a retro-style arcade score-tracking app, conducting user research, developing user personas, and crafting interactive prototypes to optimize the user journey.</p>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow" role="listitem">
-                    <h3 class="text-xl font-semibold text-white mb-2">Send Me On My Way</h3>
-                    <p class="text-blue-600 font-medium mb-2">2024</p>
-                    <p class="text-slate-300">Developed the site structure, wireframes, and UI concepts for a death doula business, with a strong focus on accessibility and emotional design to create a supportive user experience.</p>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="bg-slate-800 text-white py-8" role="contentinfo">
-        <div class="container mx-auto px-6 text-center flex flex-col items-center">
-            <p>&copy; 2025 Amanda Ramirez. All rights reserved.</p>
-            <div class="mt-4 flex space-x-4">
-                <a href="https://linkedin.com/in/amanda-r-ramirez" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">
-                    <span class="font-medium">LinkedIn</span>
-                </a>
-                <a href="https://aram814.github.io/Portfolio/index.html" target="_blank" class="text-blue-400 hover:text-blue-300 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded">
-                    <span class="font-medium">Portfolio</span>
-                </a>
-            </div>
+        <div class="timeline-item" role="listitem">
+          <h3>Strategic Account Manager</h3>
+          <p class="job-title">Tech Data | Clearwater, FL | 2017–2021</p>
+          <p>Managed diverse SLED and Federal accounts, delivering tailored technology solutions aligned with mission-critical requirements.</p>
+          <p>Designed and proposed solutions incorporating usability and accessibility best practices.</p>
+          <p>Produced data-driven business reviews that informed strategic decisions for government and enterprise partners.</p>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            mobileMenuButton.addEventListener('click', () => {
-                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
-                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-                mobileMenu.classList.toggle('hidden');
-                mobileMenu.setAttribute('aria-hidden', isExpanded);
-            });
+    <!-- Education Section -->
+    <section id="education" aria-labelledby="education-heading" class="mb-24 max-w-3xl mx-auto">
+      <h2 id="education-heading" class="section-title">Education</h2>
+      <div class="timeline" role="list">
+        <div class="timeline-item" role="listitem">
+          <h3>Google UX Design Professional Certificate</h3>
+          <p class="school-title">Coursera | 2025</p>
+          <p>
+            Completed a comprehensive curriculum covering the UX design process from end to end, including ideation, wireframing, prototyping, user research, and usability testing. This certification signifies a deep understanding of human-centered design principles.
+          </p>
+        </div>
+        <div class="timeline-item" role="listitem">
+          <h3>Associate of Science, Emergency Medical Services</h3>
+          <p class="school-title">Pasco-Hernando State College (PHSC) | 2012</p>
+          <p>
+            Developed strong skills in critical thinking, adaptability, and performance under pressure, demonstrating the ability to solve complex problems in high-stakes, time-sensitive environments.
+          </p>
+        </div>
+      </div>
+    </section>
 
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    if(mobileMenu.classList.contains('hidden') === false){
-                        mobileMenu.classList.add('hidden');
-                        mobileMenuButton.setAttribute('aria-expanded', 'false');
-                        mobileMenu.setAttribute('aria-hidden', 'true');
-                    }
-                });
-            });
+    <!-- Core Competencies Section -->
+    <section id="skills" aria-labelledby="skills-heading" class="mb-24">
+      <h2 id="skills-heading" class="section-title">Core Competencies</h2>
+      <p class="text-center max-w-2xl mx-auto mb-8">
+        This chart visualizes my proficiency in skills that align with strategic design and development. The blend of professional and technical abilities positions me to contribute effectively to innovative projects.
+      </p>
+      <div class="chart-container" role="img" aria-label="Horizontal bar chart showing proficiency in core competencies">
+        <canvas id="skillsChart"></canvas>
+      </div>
+    </section>
 
-            // Skills Chart
-            const ctx = document.getElementById('skillsChart').getContext('2d');
-            let skillsChart;
+    <!-- Selected UX & Design Projects -->
+    <section id="projects" aria-labelledby="projects-heading" class="mb-24 max-w-7xl mx-auto">
+      <h2 id="projects-heading" class="section-title">Selected UX & Design Projects</h2>
+      <p class="text-center max-w-2xl mx-auto mb-8">
+        These projects showcase my application of UX principles and strategic thinking to enhance user experiences. Each was an opportunity to solve real-world problems.
+      </p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div class="project-card" role="listitem">
+          <div class="project-year">2025</div>
+          <h3 class="project-text text-xl font-semibold mb-2">QueerSafeSpace</h3>
+          <p class="project-text">
+            Designed a mobile app MVP for a community-sourced LGBTQ+ safe space map, leading UX research, wireframing, and interactive prototyping from conception to a working prototype.
+          </p>
+        </div>
+        <div class="project-card" role="listitem">
+          <div class="project-year">2024</div>
+          <h3 class="project-text text-xl font-semibold mb-2">Pixelated Scorecade</h3>
+          <p class="project-text">
+            Developed a retro-styled mobile app for arcade high-score tracking, integrating research insights and iterative design with a distinct visual style and React prototype.
+          </p>
+        </div>
+        <div class="project-card" role="listitem">
+          <div class="project-year">2025</div>
+          <h3 class="project-text text-xl font-semibold mb-2">Send Me On My Way</h3>
+          <p class="project-text">
+            Crafted a serene and approachable website for a death doula practice, focusing on accessible navigation and compassionate, nature-inspired design.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-            function renderChart() {
-                // Since this is now a dark-only application, we can hardcode the colors
-                const textColor = '#e2e8f0'; // slate-200
-                const gridColor = '#475569'; // slate-600
-                
-                if (skillsChart) {
-                    skillsChart.destroy();
-                }
+  <script>
+    // Chart.js config
+    const ctx = document.getElementById('skillsChart').getContext('2d');
+    const barColors = [
+      '#334E68', // Slate blue
+      '#1E3A8A', // Navy
+      '#0F3057', // Deep sea
+      '#1E40AF', // Indigo blue
+      '#172554', // Dark navy
+      '#254E70'  // Deep slate
+    ];
 
-                skillsChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['UX/UI Design & Human-Centered Design', 'Wireframing, Prototyping & User Flows', 'User Research & Usability Testing', 'Accessibility (WCAG/508 Compliance)', 'Information Architecture & Data Visualization', 'Agile / Scrum Methodologies'],
-                        datasets: [{
-                            label: 'Proficiency',
-                            data: [95, 90, 92, 95, 88, 85],
-                            backgroundColor: [
-                                'rgba(59, 130, 246, 0.6)',
-                                'rgba(37, 99, 235, 0.6)',
-                                'rgba(29, 78, 216, 0.6)',
-                                'rgba(59, 130, 246, 0.6)',
-                                'rgba(37, 99, 235, 0.6)',
-                                'rgba(29, 78, 216, 0.6)'
-                            ],
-                            borderColor: [
-                                'rgba(59, 130, 246, 1)',
-                                'rgba(37, 99, 235, 1)',
-                                'rgba(29, 78, 216, 1)',
-                                'rgba(59, 130, 246, 1)',
-                                'rgba(37, 99, 235, 1)',
-                                'rgba(29, 78, 216, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        indexAxis: 'y',
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                                max: 100,
-                                 grid: {
-                                    color: gridColor
-                                },
-                                ticks: {
-                                    color: textColor
-                                }
-                            },
-                            y: {
-                                 grid: {
-                                    display: false
-                                },
-                                ticks: {
-                                    color: textColor
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        return `Proficiency: ${context.raw}%`;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
+    const skillsChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+          'UX/UI Design & Human-Centered Design',
+          'Wireframing, Prototyping & User Flows',
+          'User Research & Usability Testing',
+          'Accessibility (WCAG/508 Compliance)',
+          'Information Architecture & Data Visualization',
+          'Agile / Scrum Methodologies'
+        ],
+        datasets: [{
+          label: 'Proficiency (%)',
+          data: [95, 90, 92, 95, 88, 85],
+          backgroundColor: barColors,
+          borderRadius: 6
+        }]
+      },
+      options: {
+        indexAxis: 'y', // Horizontal bars
+        responsive: true,
+        scales: {
+          x: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              stepSize: 10,
+              color: '#1e293b'
+            },
+            grid: {
+              color: '#cbd5e1'
             }
+          },
+          y: {
+            ticks: {
+              color: '#3b82f6',  // competency titles color
+              font: {
+                size: 13
+              }
+            },
+            grid: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true,
+            backgroundColor: '#334E68',
+            titleColor: '#e2e8f0',
+            bodyColor: '#e2e8f0',
+            callbacks: {
+              label: context => `Proficiency: ${context.raw}%`
+            }
+          }
+        }
+      }
+    });
 
-            renderChart();
-        });
-    </script>
+    // Light/Dark mode toggle logic (simplified)
+    const modeToggle = document.getElementById('mode-toggle');
+    const modeIcon = document.getElementById('mode-icon');
+    let darkMode = false;
 
+    function setDarkMode(isDark) {
+      darkMode = isDark;
+      if (darkMode) {
+        document.body.classList.add('dark');
+        modeIcon.innerHTML = `
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 12.79A9 9 0 0112.21 3 7 7 0 0021 12.79z"/>
+        `;
+      } else {
+        document.body.classList.remove('dark');
+        modeIcon.innerHTML = `
+          <circle cx="12" cy="12" r="5" />
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42
+              M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        `;
+      }
+    }
+
+    // Initialize mode based on system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+
+    modeToggle.addEventListener('click', () => {
+      setDarkMode(!darkMode);
+    });
+  </script>
 </body>
 </html>
