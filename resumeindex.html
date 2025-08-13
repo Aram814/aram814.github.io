@@ -18,7 +18,7 @@
       background-color: #fafafa;
       color: #1e293b;
       transition: background-color 0.3s ease, color 0.3s ease;
-      min-height: 100vh;
+      min-height: 10vh;
       margin: 0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -196,12 +196,12 @@
       transition: box-shadow 0.3s ease;
     }
     #projects .project-card:hover {
-      box-shadow: 0 6px 12px rgb(0 0 0 / 0.3);
+      box-shadow: 6px 12px rgb(0 0 0 / 0.3);
     }
 
     /* Dark mode overrides */
     body.dark {
-      background-color: #0f172a;
+      background-color: #1e293b;
       color: #cbd5e1;
     }
     body.dark header {
@@ -247,6 +247,18 @@
     }
     body.dark #projects .project-text {
       color: #e2e8f0;
+    }
+
+    /* New styles for dark mode project cards and timeline dot */
+    body.dark #projects .project-card {
+      background-color: #011024;
+      box-shadow: 0 4px 6px rgb(0 0 0 / 0.3);
+    }
+    body.dark #projects .project-text {
+      color: #e2e8f0;
+    }
+    body.dark .timeline-item::before {
+      border-color: #1e293b;
     }
   </style>
 </head>
@@ -395,110 +407,146 @@
   <script>
     // Chart.js config
     const ctx = document.getElementById('skillsChart').getContext('2d');
-    const barColors = [
-      '#334E68', // Slate blue
-      '#1E3A8A', // Navy
-      '#0F3057', // Deep sea
-      '#1E40AF', // Indigo blue
-      '#172554', // Dark navy
-      '#254E70'  // Deep slate
-    ];
+    let skillsChart; // Declare chart variable to be accessible globally
 
-    const skillsChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: [
-          'UX/UI Design & Human-Centered Design',
-          'Wireframing, Prototyping & User Flows',
-          'User Research & Usability Testing',
-          'Accessibility (WCAG/508 Compliance)',
-          'Information Architecture & Data Visualization',
-          'Agile / Scrum Methodologies'
-        ],
-        datasets: [{
-          label: 'Proficiency (%)',
-          data: [95, 90, 92, 95, 88, 85],
-          backgroundColor: barColors,
-          borderRadius: 6
-        }]
-      },
-      options: {
-        indexAxis: 'y', // Horizontal bars
-        responsive: true,
-        scales: {
-          x: {
-            beginAtZero: true,
-            max: 100,
-            ticks: {
-              stepSize: 10,
-              color: '#1e293b'
-            },
-            grid: {
-              color: '#cbd5e1'
-            }
-          },
-          y: {
-            ticks: {
-              color: '#3b82f6',  // competency titles color
-              font: {
-                size: 13
+    // Function to update the chart's colors
+    function updateChartColors(isDark) {
+      if (!skillsChart) return;
+
+      const xTickColor = isDark ? '#e2e8f0' : '#1e293b';
+      const xGridColor = isDark ? '#334E68' : '#cbd5e1';
+
+      skillsChart.options.scales.x.ticks.color = xTickColor;
+      skillsChart.options.scales.x.grid.color = xGridColor;
+      skillsChart.update();
+    }
+
+    // Immediately create the chart when the script loads
+    window.onload = function() {
+      const barColors = [
+        '#334E68', // Slate blue
+        '#1E3A8A', // Navy
+        '#0F3057', // Deep sea
+        '#1E40AF', // Indigo blue
+        '#172554', // Dark navy
+        '#254E70'  // Deep slate
+      ];
+
+      skillsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: [
+            'UX/UI Design & Human-Centered Design',
+            'Wireframing, Prototyping & User Flows',
+            'User Research & Usability Testing',
+            'Accessibility (WCAG/508 Compliance)',
+            'Information Architecture & Data Visualization',
+            'Agile / Scrum Methodologies'
+          ],
+          datasets: [{
+            label: 'Proficiency (%)',
+            data: [95, 90, 92, 95, 88, 85],
+            backgroundColor: barColors,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          indexAxis: 'y', // Horizontal bars
+          responsive: true,
+          scales: {
+            x: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                stepSize: 10,
+                color: '#1e293b' // Placeholder, will be updated
+              },
+              grid: {
+                color: '#cbd5e1' // Placeholder, will be updated
               }
             },
-            grid: {
-              display: false
+            y: {
+              ticks: {
+                color: '#3b82f6',  // competency titles color
+                font: {
+                  size: 13
+                }
+              },
+              grid: {
+                display: false
+              }
             }
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
           },
-          tooltip: {
-            enabled: true,
-            backgroundColor: '#334E68',
-            titleColor: '#e2e8f0',
-            bodyColor: '#e2e8f0',
-            callbacks: {
-              label: context => `Proficiency: ${context.raw}%`
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              enabled: true,
+              backgroundColor: '#334E68',
+              titleColor: '#e2e8f0',
+              bodyColor: '#e2e8f0',
+              callbacks: {
+                label: context => `Proficiency: ${context.raw}%`
+              }
             }
           }
         }
-      }
-    });
+      });
+      
+      // Call updateChartColors on page load
+      const savedThemeOnLoad = localStorage.getItem('theme');
+      updateChartColors(savedThemeOnLoad === 'dark');
+    };
 
-    // Light/Dark mode toggle logic (simplified)
+    // Dark Mode Toggle Logic
     const modeToggle = document.getElementById('mode-toggle');
+    const body = document.body;
     const modeIcon = document.getElementById('mode-icon');
-    let darkMode = false;
+    
+    // Define the SVG paths for the sun and moon icons
+    const sunPath = "M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42 M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42";
+    const moonPath = "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z";
 
-    function setDarkMode(isDark) {
-      darkMode = isDark;
-      if (darkMode) {
-        document.body.classList.add('dark');
-        modeIcon.innerHTML = `
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M21 12.79A9 9 0 0112.21 3 7 7 0 0021 12.79z"/>
-        `;
+    function applyTheme(theme) {
+      const isDark = theme === 'dark';
+      // Find the specific circle and path elements inside the SVG
+      const circle = modeIcon.querySelector('circle');
+      const path = modeIcon.querySelector('path');
+
+      if (isDark) {
+        body.classList.add('dark');
+        // This is the fix: hide the circle element that is part of the sun icon.
+        circle.style.display = 'none';
+        path.setAttribute('d', moonPath);
+        modeToggle.setAttribute('aria-label', 'Toggle light mode');
+        modeToggle.setAttribute('title', 'Toggle light mode');
       } else {
-        document.body.classList.remove('dark');
-        modeIcon.innerHTML = `
-          <circle cx="12" cy="12" r="5" />
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42
-              M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-        `;
+        body.classList.remove('dark');
+        // Show the circle again for the sun icon.
+        circle.style.display = 'block';
+        path.setAttribute('d', sunPath);
+        modeToggle.setAttribute('aria-label', 'Toggle dark mode');
+        modeToggle.setAttribute('title', 'Toggle dark mode');
       }
+      updateChartColors(isDark);
     }
 
-    // Initialize mode based on system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setDarkMode(true);
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
     } else {
-      setDarkMode(false);
+      applyTheme('light');
     }
 
     modeToggle.addEventListener('click', () => {
-      setDarkMode(!darkMode);
+      if (body.classList.contains('dark')) {
+        applyTheme('light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        applyTheme('dark');
+        localStorage.setItem('theme', 'dark');
+      }
     });
   </script>
 </body>
