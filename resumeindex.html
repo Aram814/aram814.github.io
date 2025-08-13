@@ -56,8 +56,9 @@
       flex-grow: 1;
       justify-content: center;
     }
+    /* Adjusted nav link color for better contrast in light mode */
     .nav-link {
-      color: #cbd5e1;
+      color: #e2e8f0;
       font-weight: 500;
       text-decoration: none;
       transition: color 0.3s ease;
@@ -130,6 +131,8 @@
       padding-left: 1.5rem;
       max-width: 700px;
       margin-right: auto;
+      list-style: none; /* Remove default list bullets */
+      padding-left: 0;
     }
     .timeline-item {
       position: relative;
@@ -152,7 +155,7 @@
       color: #001F54;
       margin-bottom: 0.25rem;
     }
-    /* Job & education titles color updated to light slate #e2e8f0 */
+    /* Job & education titles color updated for better contrast in light mode */
     .timeline-item .job-title,
     .timeline-item .school-title {
       color: #065ac7;
@@ -210,9 +213,10 @@
     body.dark .nav-link {
       color: #cbd5e1;
     }
+    /* Adjusted nav link hover color for better contrast in dark mode */
     body.dark .nav-link:hover,
     body.dark .nav-link:focus {
-      color: #3b82f6;
+      color: #60a5fa;
     }
 
     /* Dark mode text color fixes */
@@ -228,10 +232,10 @@
     body.dark #skills-heading {
       color: #3b82f6;
     }
-    /* Dark mode job and education titles to light slate too */
+    /* Adjusted dark mode job and education titles color for better contrast */
     body.dark .timeline-item .job-title,
     body.dark .timeline-item .school-title {
-      color: #3b82f6;
+      color: #d1e5ff;
     }
     body.dark .timeline-item h3 {
       color: #cbd5e1;
@@ -322,43 +326,45 @@
     <!-- Experience Section -->
     <section id="experience" aria-labelledby="experience-heading" class="mb-24 max-w-3xl mx-auto">
       <h2 id="experience-heading" class="section-title">Strategic Career Journey</h2>
-      <div class="timeline" role="list">
-        <div class="timeline-item" role="listitem">
+      <!-- Replaced div with ul and li for improved accessibility -->
+      <ul class="timeline">
+        <li class="timeline-item">
           <h3>Associate Client Manager</h3>
           <p class="job-title">World Wide Technology (WWT) | Remote | 2021–Present</p>
           <p>
             Led design and implementation of a multi-phase cyber vault solution for a federal client, translating technical requirements into usable workflows and user interfaces.
           </p>
-        </div>
-        <div class="timeline-item" role="listitem">
+        </li>
+        <li class="timeline-item">
           <h3>Strategic Account Manager</h3>
           <p class="job-title">Tech Data | Clearwater, FL | 2017–2021</p>
           <p>Managed diverse SLED and Federal accounts, delivering tailored technology solutions aligned with mission-critical requirements.</p>
           <p>Designed and proposed solutions incorporating usability and accessibility best practices.</p>
           <p>Produced data-driven business reviews that informed strategic decisions for government and enterprise partners.</p>
-        </div>
-      </div>
+        </li>
+      </ul>
     </section>
 
     <!-- Education Section -->
     <section id="education" aria-labelledby="education-heading" class="mb-24 max-w-3xl mx-auto">
       <h2 id="education-heading" class="section-title">Education</h2>
-      <div class="timeline" role="list">
-        <div class="timeline-item" role="listitem">
+      <!-- Replaced div with ul and li for improved accessibility -->
+      <ul class="timeline">
+        <li class="timeline-item">
           <h3>Google UX Design Professional Certificate</h3>
           <p class="school-title">Coursera | 2025</p>
           <p>
             Completed a comprehensive curriculum covering the UX design process from end to end, including ideation, wireframing, prototyping, user research, and usability testing. This certification signifies a deep understanding of human-centered design principles.
           </p>
-        </div>
-        <div class="timeline-item" role="listitem">
+        </li>
+        <li class="timeline-item">
           <h3>Associate of Science, Emergency Medical Services</h3>
           <p class="school-title">Pasco-Hernando State College (PHSC) | 2012</p>
           <p>
             Developed strong skills in critical thinking, adaptability, and performance under pressure, demonstrating the ability to solve complex problems in high-stakes, time-sensitive environments.
           </p>
-        </div>
-      </div>
+        </li>
+      </ul>
     </section>
 
     <!-- Core Competencies Section -->
@@ -415,9 +421,11 @@
 
       const xTickColor = isDark ? '#e2e8f0' : '#1e293b';
       const xGridColor = isDark ? '#334E68' : '#cbd5e1';
-
+      const yTickColor = isDark ? '#60a5fa' : '#3b82f6';
+      
       skillsChart.options.scales.x.ticks.color = xTickColor;
       skillsChart.options.scales.x.grid.color = xGridColor;
+      skillsChart.options.scales.y.ticks.color = yTickColor;
       skillsChart.update();
     }
 
