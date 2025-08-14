@@ -1,282 +1,490 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Amanda Ramirez | UX/UI Designer Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #fafafa;
-      color: #1e293b;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      margin: 0;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #3b82f6;
-      color: white;
-      padding: 8px;
-      z-index: 100;
-      transition: top 0.3s;
-    }
-    .skip-link:focus { top: 0; }
-
-    a:focus, button:focus {
-      outline: 3px solid #3b82f6;
-      outline-offset: 2px;
-    }
-
-    header {
-      background-color: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
-    nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-    .header-name { color: #e2e8f0; font-size: 1.75rem; font-weight: 700; }
-    .nav-links { display: flex; gap: 1.25rem; flex-grow: 1; justify-content: center; }
-    .nav-link { color: #e2e8f0; font-weight: 500; text-decoration: none; transition: color 0.3s ease; }
-    .nav-link:hover, .nav-link:focus { color: #3b82f6; outline: none; }
-    #mode-toggle {
-      background: none; border: none; cursor: pointer; color: #e2e8f0;
-      padding: 0.25rem; display: flex; align-items: center; justify-content: center;
-      transition: color 0.3s ease;
-    }
-    #mode-toggle:hover, #mode-toggle:focus { color: #e2e8f0; outline: none; }
-    #mode-toggle svg { width: 28px; height: 28px; }
-
-    .section-title { border-bottom: 2px solid #3b82f6; padding-bottom: 0.5rem;
-      margin-bottom: 2rem; font-weight: 700; font-size: 1.875rem;
-      color: #3b82f6; text-align: left; max-width: 700px; margin-left: auto; margin-right: auto; }
-
-    #about-heading { color: #3b82f6; font-size: 2.5rem; font-weight: 700;
-      margin-bottom: 1rem; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; }
-    #about p { color: #111111; max-width: 700px; margin: 0 auto; font-size: 1.125rem; line-height: 1.6; }
-
-    .timeline { border-left: 3px solid #3b82f6; margin-left: 1rem; padding-left: 0; max-width: 700px; margin-right: auto; list-style: none; }
-    .timeline-item { position: relative; margin-bottom: 2rem; }
-    .timeline-item::before { content: ''; position: absolute; left: -1.55rem; top: 0.4rem; width: 1rem; height: 1rem; background-color: #3b82f6; border-radius: 50%; border: 3px solid #fafafa; }
-    .timeline-item h3 { font-weight: 600; font-size: 1.25rem; color: #001F54; margin-bottom: 0.25rem; }
-    .timeline-item .job-title, .timeline-item .school-title { color: #065ac7; font-weight: 600; margin-bottom: 0.5rem; }
-    .timeline-item p { color: #111111; margin-bottom: 0.3rem; line-height: 1.4; }
-
-    #projects .project-text { color: #e2e8f0; }
-    #projects .project-year { color: #3b82f6; font-weight: 600; margin-bottom: 0.5rem; font-size: 1rem; }
-    #projects-heading { color: #3b82f6; }
-
-    .chart-container { position: relative; max-width: 700px; margin: 0 auto 3rem auto; height: 400px; }
-
-    #projects .project-card { background-color: #1e293b; border-radius: 0.5rem; padding: 1.5rem; box-shadow: 0 4px 6px rgb(0 0 0 / 0.1); transition: box-shadow 0.3s ease; }
-    #projects .project-card:hover { box-shadow: 6px 12px rgb(0 0 0 / 0.3); }
-
-    body.dark { background-color: #1e293b; color: #cbd5e1; }
-    body.dark header { background-color: rgba(15, 23, 42, 0.8); }
-    body.dark .nav-link { color: #cbd5e1; }
-    body.dark .nav-link:hover, body.dark .nav-link:focus { color: #60a5fa; }
-    body.dark #about-heading { color: #3b82f6; }
-    body.dark #about p { color: #e2e8f0; }
-    body.dark #experience-heading, body.dark #education-heading, body.dark #skills-heading { color: #3b82f6; }
-    body.dark .timeline-item .job-title, body.dark .timeline-item .school-title { color: #d1e5ff; }
-    body.dark .timeline-item h3 { color: #065ac7; }
-    body.dark .timeline-item p { color: #e2e8f0; }
-    body.dark #projects-heading { color: #3b82f6; }
-    body.dark #projects .project-year { color: #065ac7; }
-    body.dark #projects .project-text { color: #e2e8f0; }
-    body.dark #projects .project-card { background-color: #011024; box-shadow: 0 4px 6px rgb(0 0 0 / 0.3); }
-    body.dark .timeline-item::before { border-color: #1e293b; }
-  </style>
-</head>
-<body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  
-  <header role="banner">
-    <nav role="navigation" aria-label="Main navigation">
-      <div class="header-name" aria-label="Site title">Amanda Ramirez</div>
-      <div class="nav-links">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#experience" class="nav-link">Experience</a>
-        <a href="#education" class="nav-link">Education</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#projects" class="nav-link">Projects</a>
-      </div>
-      <button id="mode-toggle" aria-label="Toggle light and dark mode" title="Toggle light and dark mode">
-        <svg id="mode-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <!-- icon path dynamically set by JS -->
-        </svg>
-      </button>
-    </nav>
-  </header>
-
-  <main id="main-content" class="container mx-auto px-6 py-12" role="main">
-    <!-- About -->
-    <section id="about" aria-labelledby="about-heading" class="mb-24 text-center">
-      <h1 id="about-heading">UX Designer</h1>
-      <p>Human-centered UI/UX Designer with a Google UX Design Professional Certificate and 7+ years delivering complex, multi-phase projects for government and enterprise clients. Experienced in user research, wireframing, prototyping, usability testing, and accessibility (WCAG/508). Adept at synthesizing complex requirements into clear, intuitive designs that meet mission needs. Skilled in Agile environments, collaborating with cross-functional teams, and communicating effectively with both technical and non-technical stakeholders.</p>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience" aria-labelledby="experience-heading" class="mb-24 max-w-3xl mx-auto">
-      <h2 id="experience-heading" class="section-title">Strategic Career Journey</h2>
-      <ul class="timeline">
-        <li class="timeline-item">
-          <h3>Associate Client Manager</h3>
-          <p class="job-title">World Wide Technology (WWT) | Remote | 2021–Present</p>
-          <p>Lead multi-phase projects by collaborating with cross-functional teams to translate complex client requirements into actionable, user-centered solutions.</p>
-          <p>Apply design thinking principles to optimize workflows, communicate effectively with technical and non-technical stakeholders, and prioritize client needs to achieve business and user-focused outcomes.</p>
-        </li>
-        <li class="timeline-item">
-          <h3>Strategic Account Manager</h3>
-          <p class="job-title">Tech Data | Clearwater, FL | 2017–2021</p>
-          <p>Managed diverse SLED and Federal accounts, delivering tailored technology solutions aligned with mission-critical requirements.</p>
-          <p>Designed and proposed solutions incorporating usability and accessibility best practices.</p>
-          <p>Produced data-driven business reviews that informed strategic decisions for government and enterprise partners.</p>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Education -->
-    <section id="education" aria-labelledby="education-heading" class="mb-24 max-w-3xl mx-auto">
-      <h2 id="education-heading" class="section-title">Education</h2>
-      <ul class="timeline">
-        <li class="timeline-item">
-          <h3>Google UX Design Professional Certificate</h3>
-          <p class="school-title">Coursera | 2025</p>
-          <p>Completed a comprehensive curriculum covering the UX design process from end to end, including ideation, wireframing, prototyping, user research, and usability testing. This certification signifies a deep understanding of human-centered design principles.</p>
-        </li>
-        <li class="timeline-item">
-          <h3>Associate of Science, Emergency Medical Services</h3>
-          <p class="school-title">Pasco-Hernando State College (PHSC) | 2012</p>
-          <p>Developed strong skills in critical thinking, adaptability, and performance under pressure, demonstrating the ability to solve complex problems in high-stakes, time-sensitive environments.</p>
-        </li>
-        <li class="timeline-item">
-          <h3>Cisco Learning Network</h3>
-          <p class="school-title">2022-2024</p>
-          <p>Introduction to IoT</p>
-          <p>Introduction to Cybersecurity</p>
-          <p>Computer Hardware Basics</p>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Skills -->
-    <section id="skills" aria-labelledby="skills-heading" class="mb-24">
-      <h2 id="skills-heading" class="section-title">Core Competencies</h2>
-      <p class="text-center max-w-2xl mx-auto mb-8">This chart visualizes my proficiency in skills that align with strategic design and development. The blend of professional and technical abilities positions me to contribute effectively to innovative projects.</p>
-      <figure class="chart-container" role="img" aria-label="Horizontal bar chart showing proficiency in core competencies">
-        <canvas id="skillsChart"></canvas>
-        <figcaption class="sr-only">UX/UI Design 95%, Wireframing 90%, User Research 92%, Accessibility 95%, Info Architecture 88%, Collaboration 95%, Design Thinking 90%</figcaption>
-      </figure>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" aria-labelledby="projects-heading" class="mb-24 max-w-7xl mx-auto">
-      <h2 id="projects-heading" class="section-title">Selected UX & Design Projects</h2>
-      <p class="text-center max-w-2xl mx-auto mb-8">These projects showcase my application of UX principles and strategic thinking to enhance user experiences. Each was an opportunity to solve real-world problems.</p>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto" role="list">
-        <figure class="project-card" role="listitem">
-          <div class="project-year">2025</div>
-          <h3 class="project-text text-xl font-semibold mb-2">QueerSafeSpace</h3>
-          <p class="project-text">Designed a mobile app MVP for a community-sourced LGBTQ+ safe space map, leading UX research, wireframing, and interactive prototyping from conception to a working prototype.</p>
-        </figure>
-        <figure class="project-card" role="listitem">
-          <div class="project-year">2024</div>
-          <h3 class="project-text text-xl font-semibold mb-2">Pixelated Scorecade</h3>
-          <p class="project-text">Developed a retro-styled mobile app for arcade high-score tracking, integrating research insights and iterative design with a distinct visual style and React prototype.</p>
-        </figure>
-        <figure class="project-card" role="listitem">
-          <div class="project-year">2025</div>
-          <h3 class="project-text text-xl font-semibold mb-2">Send Me On My Way</h3>
-          <p class="project-text">Crafted a serene and approachable website for a death doula practice, focusing on accessible navigation and compassionate, nature-inspired design.</p>
-        </figure>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    // Chart.js
-    const ctx = document.getElementById('skillsChart').getContext('2d');
-    let skillsChart;
-    function updateChartColors(isDark) {
-      if (!skillsChart) return;
-      const xTickColor = isDark ? '#e2e8f0' : '#1e293b';
-      const xGridColor = isDark ? '#334E68' : '#cbd5e1';
-      const yTickColor = isDark ? '#60a5fa' : '#3b82f6';
-      skillsChart.options.scales.x.ticks.color = xTickColor;
-      skillsChart.options.scales.x.grid.color = xGridColor;
-      skillsChart.options.scales.y.ticks.color = yTickColor;
-      skillsChart.update();
-    }
-
-    window.onload = function() {
-      const barColors = ['#334E68','#1E3A8A','#0F3057','#1E40AF','#172554','#254E70','#1E40AB'];
-      skillsChart = new Chart(ctx,{
-        type:'bar',
-        data:{
-          labels:['UX/UI Design & Human-Centered Design','Wireframing, Prototyping & User Flows','User Research & Usability Testing','Accessibility (WCAG/508 Compliance)','Information Architecture & Data Visualization','Collaboration with Cross-Functional Teams','Design Thinking & Problem Solving'],
-          datasets:[{label:'Proficiency (%)',data:[95,90,92,95,88,95,90],backgroundColor:barColors,borderRadius:6}]
-        },
-        options:{
-          indexAxis:'y',
-          responsive:true,
-          scales:{
-            x:{beginAtZero:true,max:100,ticks:{stepSize:10,color:'#1e293b'},grid:{color:'#cbd5e1'}},
-            y:{ticks:{color:'#3b82f6',font:{size:13}},grid:{display:false}}
-          },
-          plugins:{legend:{display:false},tooltip:{enabled:true,backgroundColor:'#334E68',titleColor:'#e2e8f0',bodyColor:'#e2e8f0',callbacks:{label:context=>`Proficiency: ${context.raw}%`}}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amanda Ramirez - Resume</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define color variables for dark mode (default) */
+        :root {
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #333333;
+            --text-primary: #BBBBBB;
+            --text-contrast: #FFFFFF;
+            --border-default: #333333;
+            --glitch-red-shadow: #E74C3C;
+            --glitch-blue-shadow: #3498DB;
+            --glitch-yellow-main: #F1C40F;
+            --skill-bar-bg: #4B4B4B;
+            --skill-bar-fill: #3498DB;
         }
-      });
 
-      const savedThemeOnLoad = localStorage.getItem('theme');
-      if(savedThemeOnLoad==='dark'){
-        document.body.classList.add('dark');
-        updateChartColors(true);
-        setModeIcon(true); // Dark mode shows sun
-      } else {
-        setModeIcon(false); // Light mode shows moon
-      }
-    };
+        /* Define color variables for light mode */
+        body.light-mode {
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #E5E7EB;
+            --text-primary: #4B5563;
+            --text-contrast: #1F2937;
+            --border-default: #D1D5DB;
+            --glitch-red-shadow: #B91C1C;
+            --glitch-blue-shadow: #1D4ED8;
+            --glitch-yellow-main: #F59E0B;
+            --skill-bar-bg: #D1D5DB;
+            --skill-bar-fill: #1D4ED8;
+        }
 
-    // Dark Mode Toggle
-    const modeToggle = document.getElementById('mode-toggle');
-    const body = document.body;
-    const modeIcon = document.getElementById('mode-icon');
+        /* Font Family */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
 
-    function setModeIcon(isDark) {
-      modeIcon.innerHTML = isDark
-        ? '<path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42 M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />' // sun
-        : '<path d="M21 12.79A9 9 0 0112.21 3 7 7 0 0021 12.79z" />'; // moon
-    }
+        /* Glitch Effect Keyframes */
+        @keyframes glitch-skew {
+            0% { transform: skewX(0deg); }
+            2% { transform: skewX(-5deg); }
+            4% { transform: skewX(5deg); }
+            6% { transform: skewX(-5deg); }
+            8% { transform: skewX(5deg); }
+            10% { transform: skewX(0deg); }
+            100% { transform: skewX(0deg); }
+        }
 
-    modeToggle.addEventListener('click', () => {
-      const isDark = body.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      updateChartColors(isDark);
-      setModeIcon(isDark);
-    });
-  </script>
+        @keyframes glitch-translate {
+            0% { transform: translate(0, 0); }
+            2% { transform: translate(-2px, 2px); }
+            4% { transform: translate(2px, -2px); }
+            6% { transform: translate(-2px, 2px); }
+            8% { transform: translate(2px, -2px); }
+            10% { transform: translate(0, 0); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .glitch-text {
+            position: relative;
+            animation: glitch-skew 8s infinite linear alternate, glitch-translate 5s infinite linear alternate;
+            z-index: 20;
+            color: var(--glitch-yellow-main);
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--glitch-yellow-main);
+        }
+
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--glitch-red-shadow);
+            clip-path: inset(60% 0 0 0);
+            animation: glitch-translate 3s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--glitch-blue-shadow);
+            clip-path: inset(0 0 60% 0);
+            animation: glitch-translate 4s infinite linear alternate;
+        }
+
+        /* Subtle static noise for sections */
+        .static-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,0,0,0.1) 0px,
+                rgba(0,0,0,0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            opacity: 0.1;
+            pointer-events: none;
+            animation: static-noise 0.2s infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes static-noise {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        /* New Rainbow Glitch Overlay - applied to a dedicated div */
+        .rainbow-glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                #E74C3C 0%, #E74C3C 5%,
+                #F1C40F 5%, #F1C40F 10%,
+                #2ECC71 10%, #2ECC71 15%,
+                #3498DB 15%, #3498DB 20%,
+                #9B59B6 20%, #9B59B6 25%
+            );
+            background-size: 200% 100%;
+            opacity: 0.05;
+            pointer-events: none;
+            animation: rainbow-glitch 5s infinite linear alternate;
+            z-index: 10;
+        }
+
+        @keyframes rainbow-glitch {
+            0% { background-position: 0 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        /* Scroll to top button */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--glitch-yellow-main);
+            color: var(--bg-primary);
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: var(--glitch-red-shadow);
+            transform: translateY(-5px);
+        }
+
+        /* Skill bar animation */
+        .skill-bar-fill {
+            transition: width 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-[var(--bg-primary)] text-[var(--text-primary)]">
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only absolute top-0 left-0 bg-retro-yellow text-dark-black p-3 rounded-br-lg z-[1000]">Skip to main content</a>
+
+    <!-- New Rainbow Glitch Overlay Element -->
+    <div class="rainbow-glitch-overlay"></div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">▲</button>
+
+    <!-- Header -->
+    <header class="bg-[var(--bg-primary)] text-[var(--text-contrast)] py-6 shadow-lg fixed w-full z-50 rounded-b-xl">
+        <div class="container mx-auto flex justify-between items-center px-6 md:px-12">
+            <a href="index.html" class="text-3xl font-bold text-[var(--glitch-yellow-main)] glitch-text" data-text="UX Designer">
+            UX Designer Resume
+            </a>
+            <!-- Desktop Navigation and Theme Toggle -->
+            <div class="flex items-center space-x-6">
+                <nav class="hidden md:flex" role="navigation" aria-label="Main Navigation">
+                    <ul class="flex space-x-6">
+                        <li><a href="index.html#home" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Home</a></li>
+                        <li><a href="resumeindex.html#experience" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Experience</a></li>
+                        <li><a href="resumeindex.html#education" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Education</a></li>
+                        <li><a href="resumeindex.html#skills" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Skills</a></li>
+                        <li><a href="gallery.html#projects" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Projects</a></li>
+                    </ul>
+                </nav>
+                <!-- Theme Toggle Button (Desktop & Mobile) -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-[var(--bg-secondary)] transition-colors duration-300 focus:outline-none" aria-label="Toggle light and dark mode">
+                    <!-- Moon Icon (for dark mode) -->
+                    <svg id="moon-icon" class="w-6 h-6 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                    <!-- Sun Icon (for light mode, hidden by default) -->
+                    <svg id="sun-icon" class="w-6 h-6 text-[var(--text-primary)] hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                </button>
+                <!-- Hamburger Menu Icon for Mobile -->
+                <button id="mobile-menu-button" class="md:hidden text-[var(--text-primary)] focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open mobile navigation menu">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-[var(--bg-primary)]/90 pt-4 pb-2 mt-4 rounded-b-xl border-t border-[var(--border-default)]" role="navigation" aria-label="Mobile Navigation">
+            <ul class="flex flex-col items-center space-y-4">
+                <li><a href="index.html#home" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Home</a></li>
+                <li><a href="resumeindex.html#experience" target="_blank" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Experience</a></li>
+                <li><a href="resumeindex.html#education" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Education</a></li>
+                <li><a href="resumeindex.html#skills" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Skills</a></li>
+                <li><a href="gallery.html#projects" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Projects</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="pt-24">
+        <section id="resume" class="py-20 bg-[var(--bg-secondary)] static-section rounded-t-xl min-h-screen">
+            <div class="container mx-auto px-6 md:px-12">
+                
+                
+                <div class="bg-[var(--bg-primary)] rounded-xl shadow-xl p-8 md:p-12 border-2 border-[var(--border-default)] mb-10">
+                    <!-- Contact Info -->
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-[var(--text-contrast)]">Amanda Ramirez</h2>
+                        <p class="text-lg text-[var(--text-primary)]">Citrus Springs, FL| (727) 294-2225 | arramirez814@gmail.com</p>
+                    </div>
+
+                    <!-- Summary -->
+                    <h3 class="text-2xl font-bold text-[var(--text-contrast)] border-b-2 border-[var(--glitch-red-shadow)] pb-2 mb-4">Summary</h3>
+                    <p class="text-[var(--text-primary)] mb-8">
+                        Human-centered UI/UX Designer with a Google UX Design Professional Certificate and 7+ years delivering complex, multi-phase projects for government and enterprise clients. Experienced in user research, wireframing, prototyping, usability testing, and accessibility (WCAG/508). Adept at synthesizing complex requirements into clear, intuitive designs that meet mission needs. Skilled in Agile environments, collaborating with cross-functional teams, and communicating effectively with both technical and non-technical stakeholders.
+                    </p>
+
+                    <!-- Experience -->
+                    <h3 id="experience" class="text-2xl font-bold text-[var(--text-contrast)] border-b-2 border-[var(--glitch-red-shadow)] pb-2 mb-4">Experience</h3>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold text-[var(--text-contrast)]">Associate Client Manager</h4>
+                        <p class="text-[var(--text-primary)]">World Wide Technology (WWT) | Remote | 2021 – Present</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Selected for WWT's Next Generation Leaders program, recognizing high performance and leadership in complex project environments.</li>
+                            <li>Lead multi-phase projects by collaborating with cross-functional teams to translate complex client requirements into actionable, user-centered solutions.</li>
+                            <li>Apply design thinking principles to optimize workflows, communicate effectively with technical and non-technical stakeholders, and prioritize client needs to achieve business and user-focused outcomes.</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold text-[var(--text-contrast)]">Strategic Account Manager</h4>
+                        <p class="text-[var(--text-primary)]">Tech Data (now TDSynnex) | Clearwater, FL | 2017 – 2021</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Managed diverse SLED and Federal accounts, delivering tailored technology solutions aligned with mission-critical requirements.</li>
+                            <li>Designed and proposed solutions incorporating usability and accessibility best practices.</li>
+                            <li>Produced data-driven business reviews that informed strategic decisions for government and enterprise partners.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Education -->
+                    <h3 id="education" class="text-2xl font-bold text-[var(--text-contrast)] border-b-2 border-[var(--glitch-red-shadow)] pb-2 mb-4">Education</h3>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold text-[var(--text-contrast)]">Google UX Design</h4>
+                        <p class="text-[var(--text-primary)]">Professional Certificate | Coursea | 2025</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Completed a comprehensive curriculum covering the UX design process from end to end, including ideation, wireframing, prototyping, user research, and usability testing. This certification signifies a deep understanding of human-centered design principles.</li>
+                        </ul>
+                     </div>
+                     <div class="mb-6">
+                        <h4 class="text-xl font-semibold text-[var(--text-contrast)]">Emergency Medical Services</h4>
+                        <p class="text-[var(--text-primary)]">Associate of Science| Pasco-Hernando State College (PHSC)| 2012</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Developed strong skills in critical thinking, adaptability, and performance under pressure, demonstrating the ability to solve complex problems in high-stakes, time-sensitive environments.</li>
+                        </ul>
+                    </div>
+                     <div class="mb-6">
+                        <h4 class="text-xl font-semibold text-[var(--text-contrast)]">Cisco Certifications</h4>
+                        <p class="text-[var(--text-primary)]">Cisco Learning Network| 2023-2025</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Introduction to IoT, Introduction to Cybersecurity, & Computer Hardware Basics</li>
+                        </ul>
+                    </div>
+                    
+                     <!-- Skills -->
+                    <h3 id="skills" class="text-2xl font-bold text-[var(--text-contrast)] border-b-2 border-[var(--glitch-red-shadow)] pb-2 mb-4 mt-8">Skills</h3>
+                    <p class="text-[var(--text-primary)] mb-8">
+                        This chart visualizes my proficiency in skills that align with strategic design and development. The blend of professional and technical abilities positions me to contribute effectively to innovative projects.
+                    </p>
+                    <div class="space-y-6 mb-6">
+                        <!-- Skill Bar: Human-Centered UX & UI Design -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1 text-sm text-[var(--text-contrast)]">
+                                <span>Human-Centered UX & UI Design</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="w-full bg-[var(--skill-bar-bg)] rounded-full h-2">
+                                <div class="skill-bar-fill h-full rounded-full bg-[var(--skill-bar-fill)]" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <!-- Skill Bar: Wireframing, Prototyping & User Flows -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1 text-sm text-[var(--text-contrast)]">
+                                <span>Wireframing, Prototyping & User Flows</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="w-full bg-[var(--skill-bar-bg)] rounded-full h-2">
+                                <div class="skill-bar-fill h-full rounded-full bg-[var(--skill-bar-fill)]" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <!-- Skill Bar: User Research & Usability Testing -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1 text-sm text-[var(--text-contrast)]">
+                                <span>User Research & Usability Testing</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="w-full bg-[var(--skill-bar-bg)] rounded-full h-2">
+                                <div class="skill-bar-fill h-full rounded-full bg-[var(--skill-bar-fill)]" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                        <!-- Skill Bar: Accessibility & Inclusive Design (WCAG compliance) -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1 text-sm text-[var(--text-contrast)]">
+                                <span>Accessibility & Inclusive Design (WCAG compliance)</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="w-full bg-[var(--skill-bar-bg)] rounded-full h-2">
+                                <div class="skill-bar-fill h-full rounded-full bg-[var(--skill-bar-fill)]" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <!-- Skill Bar: Information Architecture & Interaction Design -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1 text-sm text-[var(--text-contrast)]">
+                                <span>Information Architecture & Interaction Design</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="w-full bg-[var(--skill-bar-bg)] rounded-full h-2">
+                                <div class="skill-bar-fill h-full rounded-full bg-[var(--skill-bar-fill)]" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        <!-- Skill Bar: Collaboration with Cross-Functional Teams -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1 text-sm text-[var(--text-contrast)]">
+                                <span>Collaboration with Cross-Functional Teams</span>
+                                <span>98%</span>
+                            </div>
+                            <div class="w-full bg-[var(--skill-bar-bg)] rounded-full h-2">
+                                <div class="skill-bar-fill h-full rounded-full bg-[var(--skill-bar-fill)]" style="width: 98%;"></div>
+                            </div>
+                        </div>
+                        <!-- Skill Bar: Design Thinking & Problem Solving -->
+                        <div>
+                            <div class="flex justify-between items-end mb-1 text-sm text-[var(--text-contrast)]">
+                                <span>Design Thinking & Problem Solving</span>
+                                <span>92%</span>
+                            </div>
+                            <div class="w-full bg-[var(--skill-bar-bg)] rounded-full h-2">
+                                <div class="skill-bar-fill h-full rounded-full bg-[var(--skill-bar-fill)]" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Volunteer Experience -->
+                    <h3 class="text-2xl font-bold text-[var(--text-contrast)] border-b-2 border-[var(--glitch-red-shadow)] pb-2 mb-4 mt-8">Volunteer Experience</h3>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold text-[var(--text-contrast)]">Firefighter</h4>
+                        <p class="text-[var(--text-primary)]">Hernando, FL | 2012 – 2016</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Demonstrated dedication, teamwork, and the ability to perform under pressure in high-stakes environments, responding to emergency situations.</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold text-[var(--text-contrast)]">Food Delivery/Feeding Needy</h4>
+                        <p class="text-[var(--text-primary)]">First Love Church</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Provided compassionate support and assistance to underserved communities through coordinated food delivery efforts.</li>
+                        </ul>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold text-[var(--text-contrast)]">Webpage Design & Development</h4>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>Contributed to website updates for a friend's HVAC business, focusing on improved navigation and content organization to enhance user findability, as well as, updating user accessibility.</li>
+                            <li>Collaborated on building a foundational webpage for a friend's private death doula business, establishing initial user flows and optimized content presentation based on client needs(See Projects).</li>
+                            <li>Assisted with ongoing website developments for First Love Church, actively applying principles of user accessibility and clear information display.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--bg-secondary)] text-[var(--text-primary)] py-8 text-center rounded-t-xl">
+        <div class="container mx-auto px-6 md:px-12">
+            <p>&copy; 2025 Amanda Ramirez. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="index.html#"], a[href^="resumeindex.html#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('href').split('#')[1];
+                const targetElement = document.getElementById(sectionId);
+                
+                // If the target element exists, scroll to it smoothly
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Toggle mobile menu visibility
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        scrollToTopBtn.addEventListener('click', function() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        });
+
+        // Theme toggle functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const moonIcon = document.getElementById('moon-icon');
+        const sunIcon = document.getElementById('sun-icon');
+        const body = document.body;
+
+        // Check for saved theme preference on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.add('light-mode');
+            moonIcon.classList.add('hidden');
+            sunIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                // Switch to dark mode
+                body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            } else {
+                // Switch to light mode
+                body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
