@@ -145,7 +145,8 @@
         <li class="timeline-item">
           <h3>Associate Client Manager</h3>
           <p class="job-title">World Wide Technology (WWT) | Remote | 2021–Present</p>
-          <p>Led design and implementation of a multi-phase cyber vault solution for a federal client, translating technical requirements into usable workflows and user interfaces.</p>
+          <p>Lead multi-phase projects by collaborating with cross-functional teams to translate complex client requirements into actionable, user-centered solutions.</p>
+          <p>Apply design thinking principles to optimize workflows, communicate effectively with technical and non-technical stakeholders, and prioritize client needs to achieve business and user-focused outcomes.</p>
         </li>
         <li class="timeline-item">
           <h3>Strategic Account Manager</h3>
@@ -171,6 +172,13 @@
           <p class="school-title">Pasco-Hernando State College (PHSC) | 2012</p>
           <p>Developed strong skills in critical thinking, adaptability, and performance under pressure, demonstrating the ability to solve complex problems in high-stakes, time-sensitive environments.</p>
         </li>
+        <li class="timeline-item">
+          <h3>Cisco Learning Network</h3>
+          <p class="school-title">2022-2024</p>
+          <p>Introduction to IoT</p>
+          <p>Introduction to Cybersecurity</p>
+          <p>Computer Hardware Basics</p>
+        </li>
       </ul>
     </section>
 
@@ -180,7 +188,7 @@
       <p class="text-center max-w-2xl mx-auto mb-8">This chart visualizes my proficiency in skills that align with strategic design and development. The blend of professional and technical abilities positions me to contribute effectively to innovative projects.</p>
       <figure class="chart-container" role="img" aria-label="Horizontal bar chart showing proficiency in core competencies">
         <canvas id="skillsChart"></canvas>
-        <figcaption class="sr-only">UX/UI Design 95%, Wireframing 90%, User Research 92%, Accessibility 95%, Info Architecture 88%, Agile 85%</figcaption>
+        <figcaption class="sr-only">UX/UI Design 95%, Wireframing 90%, User Research 92%, Accessibility 95%, Info Architecture 88%, Collaboration 95%, Design Thinking 90%</figcaption>
       </figure>
     </section>
 
@@ -224,12 +232,12 @@
     }
 
     window.onload = function() {
-      const barColors = ['#334E68','#1E3A8A','#0F3057','#1E40AF','#172554','#254E70'];
+      const barColors = ['#334E68','#1E3A8A','#0F3057','#1E40AF','#172554','#254E70','#1E40AB'];
       skillsChart = new Chart(ctx,{
         type:'bar',
         data:{
-          labels:['UX/UI Design & Human-Centered Design','Wireframing, Prototyping & User Flows','User Research & Usability Testing','Accessibility (WCAG/508 Compliance)','Information Architecture & Data Visualization','Agile / Scrum Methodologies'],
-          datasets:[{label:'Proficiency (%)',data:[95,90,92,95,88,85],backgroundColor:barColors,borderRadius:6}]
+          labels:['UX/UI Design & Human-Centered Design','Wireframing, Prototyping & User Flows','User Research & Usability Testing','Accessibility (WCAG/508 Compliance)','Information Architecture & Data Visualization','Collaboration with Cross-Functional Teams','Design Thinking & Problem Solving'],
+          datasets:[{label:'Proficiency (%)',data:[95,90,92,95,88,95,90],backgroundColor:barColors,borderRadius:6}]
         },
         options:{
           indexAxis:'y',
