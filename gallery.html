@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UX Designer Portfolio - Glitch Edition</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define color variables for dark mode (default) */
+        :root {
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #333333;
+            --text-primary: #BBBBBB;
+            --text-contrast: #FFFFFF;
+            --border-default: #333333;
+            --glitch-red-shadow: #E74C3C;
+            --glitch-blue-shadow: #3498DB;
+            --glitch-yellow-main: #F1C40F;
+        }
+
+        /* Define color variables for light mode */
+        body.light-mode {
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #E5E7EB;
+            --text-primary: #4B5563;
+            --text-contrast: #1F2937;
+            --border-default: #D1D5DB;
+            --glitch-red-shadow: #B91C1C;
+            --glitch-blue-shadow: #1D4ED8;
+            --glitch-yellow-main: #F59E0B;
+        }
+
+        /* Font Family */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* Glitch Effect Keyframes */
+        @keyframes glitch-skew {
+            0% { transform: skewX(0deg); }
+            2% { transform: skewX(-5deg); }
+            4% { transform: skewX(5deg); }
+            6% { transform: skewX(-5deg); }
+            8% { transform: skewX(5deg); }
+            10% { transform: skewX(0deg); }
+            100% { transform: skewX(0deg); }
+        }
+
+        @keyframes glitch-translate {
+            0% { transform: translate(0, 0); }
+            2% { transform: translate(-2px, 2px); }
+            4% { transform: translate(2px, -2px); }
+            6% { transform: translate(-2px, 2px); }
+            8% { transform: translate(2px, -2px); }
+            10% { transform: translate(0, 0); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .glitch-text {
+            position: relative;
+            animation: glitch-skew 8s infinite linear alternate, glitch-translate 5s infinite linear alternate;
+            z-index: 20;
+            color: var(--glitch-yellow-main); /* Changed to yellow for better readability in dark mode */
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--glitch-yellow-main);
+        }
+
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--glitch-red-shadow);
+            clip-path: inset(60% 0 0 0);
+            animation: glitch-translate 3s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--glitch-blue-shadow);
+            clip-path: inset(0 0 60% 0);
+            animation: glitch-translate 4s infinite linear alternate;
+        }
+
+        /* Subtle static noise for sections */
+        .static-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,0,0,0.1) 0px,
+                rgba(0,0,0,0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            opacity: 0.1;
+            pointer-events: none;
+            animation: static-noise 0.2s infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes static-noise {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        /* New Rainbow Glitch Overlay - applied to a dedicated div */
+        .rainbow-glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                #E74C3C 0%, #E74C3C 5%,
+                #F1C40F 5%, #F1C40F 10%,
+                #2ECC71 10%, #2ECC71 15%,
+                #3498DB 15%, #3498DB 20%,
+                #9B59B6 20%, #9B59B6 25%
+            );
+            background-size: 200% 100%;
+            opacity: 0.05;
+            pointer-events: none;
+            animation: rainbow-glitch 5s infinite linear alternate;
+            z-index: 10;
+        }
+
+        @keyframes rainbow-glitch {
+            0% { background-position: 0 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        /* Button Glitch Effect */
+        .glitch-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 20;
+        }
+
+        .glitch-button::before,
+        .glitch-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .glitch-button::before {
+            background-color: var(--glitch-red-shadow);
+            transform: translateX(-100%);
+        }
+
+        .glitch-button::after {
+            background-color: var(--glitch-blue-shadow);
+            transform: translateX(100%);
+        }
+
+        .glitch-button:hover::before {
+            transform: translateX(0);
+        }
+
+        .glitch-button:hover::after {
+            transform: translateX(0);
+        }
+
+        .glitch-button:hover {
+            color: var(--text-contrast);
+            box-shadow: 0 0 15px var(--glitch-yellow-main);
+        }
+
+        /* Scroll to top button */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--glitch-yellow-main);
+            color: var(--bg-primary);
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: var(--glitch-red-shadow);
+            transform: translateY(-5px);
+        }
+
+        /* Project Card Hover Effect */
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 20;
+            background-color: var(--bg-primary);
+            border-color: var(--border-default);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--glitch-blue-shadow);
+        }
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--bg-secondary);
+            margin: 5% auto;
+            padding: 40px;
+            border: 2px solid var(--glitch-yellow-main);
+            width: 80%;
+            max-width: 800px;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s ease-out;
+            color: var(--text-primary);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-button {
+            color: var(--text-primary);
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 35px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--glitch-red-shadow);
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-[var(--bg-primary)] text-[var(--text-primary)]">
+    <!-- Skip to Main Content Link -->
+    <a href="#main-content" class="sr-only focus:not-sr-only absolute top-0 left-0 bg-retro-yellow text-dark-black p-3 rounded-br-lg z-[1000]">Skip to main content</a>
+
+    <!-- New Rainbow Glitch Overlay Element -->
+    <div class="rainbow-glitch-overlay"></div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top">▲</button>
+
+    <!-- Header -->
+    <header class="bg-[var(--bg-primary)] text-[var(--text-contrast)] py-6 shadow-lg fixed w-full z-50 rounded-b-xl">
+        <div class="container mx-auto flex justify-between items-center px-6 md:px-12">
+            <a href="index.html" class="text-3xl font-bold text-[var(--glitch-yellow-main)] glitch-text" data-text="Amanda Ramirez">
+                Amanda Ramirez
+            </a>
+            <!-- Desktop Navigation and Theme Toggle -->
+            <div class="flex items-center space-x-6">
+                <nav class="hidden md:flex" role="navigation" aria-label="Main Navigation">
+                    <ul class="flex space-x-6">
+                        <li><a href="index.html#about" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">About</a></li>
+                        <li><a href="resumeindex.html" target="_blank" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Resume</a></li>
+                        <li><a href="gallery.html" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Projects</a></li>
+                        <li><a href="index.html#contact" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Contact</a></li>
+                    </ul>
+                </nav>
+                <!-- Theme Toggle Button (Desktop & Mobile) -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-[var(--bg-secondary)] transition-colors duration-300 focus:outline-none" aria-label="Toggle light and dark mode">
+                    <!-- Moon Icon (for dark mode) -->
+                    <svg id="moon-icon" class="w-6 h-6 text-[var(--text-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                    <!-- Sun Icon (for light mode, hidden by default) -->
+                    <svg id="sun-icon" class="w-6 h-6 text-[var(--text-primary)] hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                </button>
+                <!-- Hamburger Menu Icon for Mobile -->
+                <button id="mobile-menu-button" class="md:hidden text-[var(--text-primary)] focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open mobile navigation menu">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-[var(--bg-primary)]/90 pt-4 pb-2 mt-4 rounded-b-xl border-t border-[var(--border-default)]" role="navigation" aria-label="Mobile Navigation">
+            <ul class="flex flex-col items-center space-y-4">
+                <li><a href="index.html#about" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">About</a></li>
+                <li><a href="resumeindex.html" target="_blank" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Resume</a></li>
+                <li><a href="gallery.html" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Projects</a></li>
+                <li><a href="index.html#contact" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" class="pt-24">
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 bg-[var(--bg-secondary)] static-section rounded-t-xl min-h-screen">
+            <div class="container mx-auto px-6 md:px-12">
+                <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="Project Gallery">
+                    Project Gallery
+                </h2>
+                <!-- Semantic List for Projects - Displaying all -->
+                <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Project Card 1: Arcade High Score Tracking App -->
+                    <li class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project1')">
+                        <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/scorecade.png" alt="Screenshot of Scorecade app interface showing high score list" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-red-shadow)]">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">Arcade High Score Tracking App</h3>
+                            <p class="text-[var(--text-primary)] text-sm mb-4">UX Research, Credibility, Real-time Verification</p>
+                            <p class="text-[var(--text-primary)]">A case study on improving the user experience of tracking high scores across arcade games, focusing on credibility and real-time verification.</p>
+                        </div>
+                    </li>
+
+                    <!-- Project Card 2: QueerSafeSpace App -->
+                    <li class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project2')">
+                        <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="Screenshot of QueerSafeSpace app interface with map and location pins" class="w-full h-48 object-contain border-b-2 border-[var(--glitch-blue-shadow)]">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">QueerSafeSpace App</h3>
+                            <p class="text-[var(--text-primary)] text-sm mb-4">Safety, Community, Anonymous Updates</p>
+                            <p class="text-[var(--text-primary)]">An app developed to aid in the safety of the LGBTQ+ community by allowing anonymous updates to locations to mark with safety ratings, tags, and additional details.</p>
+                        </div>
+                    </li>
+
+                    <!-- Project Card 3: Death Doula Webpage -->
+                    <li class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project3')">
+                        <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/Snedmeonmyway.png" alt="Screenshot of Death Doula webpage homepage" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-yellow-main)]">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">Death Doula Webpage</h3>
+                            <p class="text-[var(--text-primary)] text-sm mb-4">Web Design, Business Services, Testimonials, Blog</p>
+                            <p class="text-[var(--text-primary)]">Full construct and design of a personal/private business for local Death Doula services. Requirements were for both desktop and mobile compatibility, ability to book consulting, read testimonies, view services, and add a feature "blog."</p>
+                        </div>
+                    </li>
+                    
+                    <!-- Project Card 4: WCAG 2.2 AA Audit Sheet -->
+                    <li class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project4')">
+                        <img src="https://placehold.co/600x300/F1C40F/1A1A1A?text=WCAG+Checklist" alt="Placeholder image for a WCAG checklist project" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-yellow-main)]">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">WCAG 2.2 AA Audit Sheet</h3>
+                            <p class="text-[var(--text-primary)] text-sm mb-4">Accessibility, Auditing, Compliance</p>
+                            <p class="text-[var(--text-primary)]">A comprehensive audit sheet created to help designers and developers check for WCAG 2.2 AA compliance.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--bg-secondary)] text-[var(--text-primary)] py-8 text-center rounded-t-xl">
+        <div class="container mx-auto px-6 md:px-12">
+            <p>&copy; 2025 Amanda Ramirez. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modals for Project Details -->
+    <div id="project1Modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="project1ModalTitle">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('project1')" aria-label="Close">&times;</span>
+            <h3 id="project1ModalTitle" class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">Arcade High Score Tracking App</h3>
+            <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/highscore.png" alt="Screenshot of Scorecade app interface showing high score list" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-red-shadow)]">
+            <p class="text-[var(--text-primary)] mb-4">
+                This project was instrumental in deepening my understanding of creating dynamic, user-friendly applications, and the challenges involved in ensuring a seamless and engaging user journey within a complex system.
+            </p>
+            <p class="text-[var(--text-primary)] mb-4">
+                <strong>My Role:</strong> UX Designer <br>
+                <strong>Methodologies:</strong> User Research, Credibility Assessment, Real-time Verification Flows, Wireframing, Prototyping.
+            </p>
+            <p class="text-[var(--text-primary)]">
+                <strong>Key Outcomes:</strong> This project was instrumental in deepening my understanding of creating dynamic, user-friendly applications, and the challenges involved in ensuring a seamless and engaging user journey within a complex system.
+            </p>
+            <a href="CaseStudy1.html" class="inline-block mt-6 bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
+                View Full Case Study
+            </a>
+        </div>
+    </div>
+
+    <div id="project2Modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="project2ModalTitle">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('project2')" aria-label="Close">&times;</span>
+            <h3 id="project2ModalTitle" class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">QueerSafeSpace App</h3>
+            <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="Screenshot of QueerSafeSpace app interface with map and location pins" class="w-full h-auto object-contain mb-6 rounded-lg border-2 border-[var(--glitch-blue-shadow)]">
+            <p class="text-[var(--text-primary)] mb-4">
+                The QueerSafeSpace App was developed to aid in the safety of the LGBTQ+ community. It allows users to anonymously update locations, marking them with safety ratings, tags, and additional details to foster a safer environment.
+            </p>
+            <p class="text-[var(--text-primary)] mb-4">
+                <strong>My Role:</strong> UX Designer, Concept Developer <br>
+                <strong>Methodologies:</strong> Inclusive Design Principles, User Research (Community-focused), Anonymous Reporting Systems, Location-based Services UX, Prototyping.
+            </p>
+            <p class="text-[var(--text-primary)]">
+                <strong>Key Outcomes:</strong> This project significantly enhanced my understanding of inclusive design principles, the importance of trust in community platforms, and the complexities of creating a truly safe and engaging digital environment.
+            </p>
+            <a href="CaseStudy2.html" class="inline-block mt-6 bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
+                View Full Case Study
+            </a>
+        </div>
+    </div>
+
+    <div id="project3Modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="project3ModalTitle">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('project3')" aria-label="Close">&times;</span>
+            <h3 id="project3ModalTitle" class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">Death Doula Webpage</h3>
+            <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/Snedmeonmyway.png" alt="Screenshot of Death Doula webpage homepage" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-yellow-main)]">
+            <p class="text-[var(--text-primary)] mb-4">
+                This project involved the full construct and design of a personal/private business website for local Death Doula services. Requirements were for both desktop and mobile compatibility, ability to book consulting, read testimonies, view services, and add a feature "blog."
+            </p>
+            <p class="text-[var(--text-primary)] mb-4">
+                <strong>My Role:</strong> Web Designer, UX Strategist <br>
+                <strong>Methodologies:</strong> Information Architecture, Content Strategy, Booking System Integration, Testimonial Display, Responsive Web Design, Blog Integration.
+            </p>
+            <p class="text-[var(--text-primary)]">
+                <strong>Key Outcomes:</strong> TBA
+            </p>
+            <a href="CaseStudy3.html" class="inline-block mt-6 bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
+                View Full Case Study
+            </a>
+        </div>
+    </div>
+    
+    <!-- Modal for Project 4 -->
+    <div id="project4Modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="project4ModalTitle">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('project4')" aria-label="Close">&times;</span>
+            <h3 id="project4ModalTitle" class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">WCAG 2.2 AA Audit Sheet</h3>
+            <img src="https://placehold.co/600x300/F1C40F/1A1A1A?text=WCAG+Checklist" alt="Placeholder image for a WCAG checklist project" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-yellow-main)]">
+            <p class="text-[var(--text-primary)] mb-4">
+                A comprehensive audit sheet created to help designers and developers ensure their products meet WCAG 2.2 Level AA compliance. This document breaks down the guidelines into an actionable checklist.
+            </p>
+            <p class="text-[var(--text-primary)] mb-4">
+                <strong>My Role:</strong> Author, Accessibility Advocate <br>
+                <strong>Methodologies:</strong> WCAG 2.2 Guidelines, Accessibility Auditing, Checklist Design.
+            </p>
+            <p class="text-[var(--text-primary)]">
+                <strong>Key Outcomes:</strong> This tool serves as a practical resource for teams to conduct self-audits and integrate accessibility into their design and development workflows from the start.
+            </p>
+            <a href="https://github.com/Aram814/Assets/blob/382a256f7f987104051c386a68004bc9b5a80a9a/WCAG_2.2_AA_Audit_Sheet.pdf" target="_blank" class="inline-block mt-6 bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
+                View Audit Sheet (PDF)
+            </a>
+        </div>
+    </div>
+
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="index.html#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Since this is the gallery page, internal anchor links should redirect to index.html and then scroll
+                e.preventDefault();
+                const sectionId = this.getAttribute('href').split('#')[1];
+                window.location.href = 'index.html#' + sectionId;
+            });
+        });
+
+        // Toggle mobile menu visibility
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        scrollToTopBtn.addEventListener('click', function() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        });
+
+        // Store reference to the element that opened the modal
+        let lastFocusedElement = null;
+
+        // Modal functionality
+        function openModal(projectId) {
+            const modal = document.getElementById(projectId + 'Modal');
+            lastFocusedElement = document.activeElement; // Save the currently focused element
+            modal.style.display = 'block';
+            // Focus the first focusable element inside the modal (e.g., the close button)
+            const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            const firstFocusableElement = focusableElements[0];
+            if (firstFocusableElement) {
+                firstFocusableElement.focus();
+            }
+
+            // Add event listener for keyboard trapping and Escape key
+            modal.addEventListener('keydown', trapTabKey);
+            modal.addEventListener('keydown', handleEscapeKey);
+        }
+
+        function closeModal(projectId) {
+            const modal = document.getElementById(projectId + 'Modal');
+            modal.style.display = 'none';
+            // Return focus to the element that opened the modal
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
+            // Remove event listeners for keyboard trapping and Escape key
+            modal.removeEventListener('keydown', trapTabKey);
+            modal.removeEventListener('keydown', handleEscapeKey);
+        }
+
+        // Close modal when clicking outside of the modal content
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target == modal) {
+                    closeModal(modal.id.replace('Modal', '')); // Extract projectId from modal ID
+                }
+            });
+        }
+
+        // Function to trap tab key within modal
+        function trapTabKey(e) {
+            if (e.key === 'Tab') {
+                const modal = e.currentTarget;
+                const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+                const firstFocusableElement = focusableElements[0];
+                const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+                if (e.shiftKey) { // Shift + Tab
+                    if (document.activeElement === firstFocusableElement) {
+                        lastFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                } else { // Tab
+                    if (document.activeElement === lastFocusableElement) {
+                        firstFocusableElement.focus();
+                        e.preventDefault();
+                    }
+                }
+            }
+        }
+
+        // Function to handle Escape key for modals
+        function handleEscapeKey(e) {
+            if (e.key === 'Escape') {
+                const modal = e.currentTarget;
+                closeModal(modal.id.replace('Modal', ''));
+            }
+        }
+
+
+        // Theme toggle functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const moonIcon = document.getElementById('moon-icon');
+        const sunIcon = document.getElementById('sun-icon');
+        const body = document.body;
+
+        // Check for saved theme preference on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            body.classList.add('light-mode');
+            moonIcon.classList.add('hidden');
+            sunIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                // Switch to dark mode
+                body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            } else {
+                // Switch to light mode
+                body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
