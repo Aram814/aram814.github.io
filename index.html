@@ -299,7 +299,7 @@
                     <ul class="flex space-x-6">
                         <li><a href="#about" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">About</a></li>
                         <li><a href="resumeindex.html" target="_blank" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Resume</a></li>
-                        <li><a href="#projects" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Projects</a></li>
+                        <li><a href="gallery.html" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Projects</a></li>
                         <li><a href="#contact" class="text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-lg">Contact</a></li>
                     </ul>
                 </nav>
@@ -327,7 +327,7 @@
             <ul class="flex flex-col items-center space-y-4">
                 <li><a href="#about" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">About</a></li>
                 <li><a href="resumeindex.html" target="_blank" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Resume</a></li>
-                <li><a href="#projects" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Projects</a></li>
+                <li><a href="gallery.html" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Projects</a></li>
                 <li><a href="#contact" class="block w-full text-center text-[var(--text-primary)] hover:text-[var(--glitch-blue-shadow)] transition duration-300 text-xl py-2">Contact</a></li>
             </ul>
         </nav>
@@ -343,7 +343,7 @@
                 <p class="text-xl md:text-2xl text-[var(--text-primary)] mb-8">
                     UX Designer passionate about intuitive interfaces and impactful user journeys.
                 </p>
-                <a href="#projects" class="inline-block bg-[var(--glitch-yellow-main)] text-[var(--bg-primary)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--glitch-yellow-main)] hover:border-[var(--glitch-red-shadow)]">
+                <a href="gallery.html" class="inline-block bg-[var(--glitch-yellow-main)] text-[var(--bg-primary)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--glitch-yellow-main)] hover:border-[var(--glitch-red-shadow)]">
                     View My Work
                 </a>
             </div>
@@ -383,13 +383,13 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
+        <!-- Projects Section (Limited View) -->
         <section id="projects" class="py-20 bg-[var(--bg-secondary)] static-section rounded-t-xl">
             <div class="container mx-auto px-6 md:px-12">
                 <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="My Projects">
                     My Projects
                 </h2>
-                <!-- Semantic List for Projects -->
+                <!-- Semantic List for Projects - Displaying first 3 -->
                 <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <!-- Project Card 1: Arcade High Score Tracking App -->
                     <li class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project1')">
@@ -420,9 +420,12 @@
                             <p class="text-[var(--text-primary)]">Full construct and design of a personal/private business for local Death Doula services. Requirements were for both desktop and mobile compatibility, ability to book consulting, read testimonies, view services, and add a feature "blog."</p>
                         </div>
                     </li>
-
-                    <!-- Add more project cards as needed -->
                 </ul>
+                <div class="text-center mt-12">
+                    <a href="gallery.html" class="inline-block bg-[var(--glitch-red-shadow)] text-[var(--text-contrast)] font-bold py-3 px-6 rounded-lg text-lg uppercase tracking-wider glitch-button border-2 border-[var(--glitch-red-shadow)] hover:border-[var(--glitch-yellow-main)]">
+                        View All Projects
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -518,6 +521,9 @@
             </a>
         </div>
     </div>
+    
+    <!-- Modals for Project 4 and other projects are now on the gallery page -->
+    
 
 
     <script>
