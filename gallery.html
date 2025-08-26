@@ -64,7 +64,7 @@
             position: relative;
             animation: glitch-skew 8s infinite linear alternate, glitch-translate 5s infinite linear alternate;
             z-index: 20;
-            color: var(--glitch-yellow-main); /* Changed to yellow for better readability in dark mode */
+            color: var(--glitch-yellow-main);
         }
 
         .glitch-text::before,
@@ -381,6 +381,27 @@
                             <p class="text-[var(--text-primary)]">A comprehensive audit sheet created to help designers and developers check for WCAG 2.2 AA compliance.</p>
                         </div>
                     </li>
+
+                    <!-- New Project Card 5 - Copy and customize this block for a new project -->
+                    <li class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project5')">
+                        <img src="https://placehold.co/600x300/3498DB/FFFFFF?text=Women's+Fellowship+Bulletin" alt="Placeholder image for a new project" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-blue-shadow)]">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">Women's Fellowship Bulletin</h3>
+                            <p class="text-[var(--text-primary)] text-sm mb-4">WCAG, Accesibility, User Research & Testing</p>
+                            <p class="text-[var(--text-primary)]">The women's group of a community church needed a website that was accesible both desktop or mobile and could act as a "bulletin board" for their group. </p>
+                        </div>
+                    </li>
+
+                    <!-- New Project Card 6 - Copy and customize this block for another project -->
+                    <li class="bg-[var(--bg-primary)] rounded-xl shadow-xl overflow-hidden border-2 border-[var(--border-default)] project-card cursor-pointer" onclick="openModal('project6')">
+                        <img src="https://placehold.co/600x300/E74C3C/FFFFFF?text=Project+6" alt="Placeholder image for another new project" class="w-full h-48 object-cover border-b-2 border-[var(--glitch-red-shadow)]">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">Another Awesome Project</h3>
+                            <p class="text-[var(--text-primary)] text-sm mb-4">More, Great, UX, Work</p>
+                            <p class="text-[var(--text-primary)]">This section should give a quick summary of what the project is about and what you learned or accomplished.</p>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
         </section>
@@ -479,6 +500,49 @@
         </div>
     </div>
 
+    <!-- New Modal for Project 5 -->
+    <div id="project5Modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="project5ModalTitle">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('project5')" aria-label="Close">&times;</span>
+            <h3 id="project5ModalTitle" class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">Women's Fellowship Bulletin</h3>
+            <img src="https://placehold.co/600x300/3498DB/FFFFFF?text=Project+5" alt="Placeholder image for a new project" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-blue-shadow)]">
+            <p class="text-[var(--text-primary)] mb-4">
+                The women's group of a community church needed a website that was accesible both desktop or mobile and could act as a "bulletin board" for their group. 
+            </p>
+            <p class="text-[var(--text-primary)] mb-4">
+                <strong>My Role:</strong> Designer & Developer<br>
+                <strong>Methodologies:</strong> User Research, WCAG Guidelines, Accesibility Auditing, User Testing & Feedback, Wireframing, & Prototyping.
+            </p>
+            <p class="text-[var(--text-primary)]">
+                <strong>Key Outcomes:</strong> [Summary of the project's impact and what you learned]
+            </p>
+            <a href="CaseStudy5.html" class="inline-block mt-6 bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
+                View Full Case Study
+            </a>
+        </div>
+    </div>
+
+    <!-- New Modal for Project 6 - Copy and customize this block for another project -->
+    <div id="project6Modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="project6ModalTitle">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('project6')" aria-label="Close">&times;</span>
+            <h3 id="project6ModalTitle" class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">Another Awesome Project</h3>
+            <img src="https://placehold.co/600x300/E74C3C/FFFFFF?text=Project+6" alt="Placeholder image for another new project" class="w-full h-auto object-cover mb-6 rounded-lg border-2 border-[var(--glitch-red-shadow)]">
+            <p class="text-[var(--text-primary)] mb-4">
+                Describe your project here. Remember to highlight your contributions and the skills you utilized.
+            </p>
+            <p class="text-[var(--text-primary)] mb-4">
+                <strong>My Role:</strong> [Your Role] <br>
+                <strong>Methodologies:</strong> [List of your methodologies]
+            </p>
+            <p class="text-[var(--text-primary)]">
+                <strong>Key Outcomes:</strong> [Summary of the project's impact and what you learned]
+            </p>
+            <a href="CaseStudy6.html" class="inline-block mt-6 bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-3 px-6 rounded-lg text-md uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
+                View Full Case Study
+            </a>
+        </div>
+    </div>
 
     <script>
         // Smooth scrolling for navigation links
@@ -603,22 +667,6 @@
             moonIcon.classList.add('hidden');
             sunIcon.classList.remove('hidden');
         }
-
-        themeToggleBtn.addEventListener('click', () => {
-            if (body.classList.contains('light-mode')) {
-                // Switch to dark mode
-                body.classList.remove('light-mode');
-                localStorage.setItem('theme', 'dark');
-                moonIcon.classList.remove('hidden');
-                sunIcon.classList.add('hidden');
-            } else {
-                // Switch to light mode
-                body.classList.add('light-mode');
-                localStorage.setItem('theme', 'light');
-                moonIcon.classList.add('hidden');
-                sunIcon.classList.remove('hidden');
-            }
-        });
     </script>
 </body>
 </html>
