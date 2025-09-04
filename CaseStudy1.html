@@ -1,332 +1,364 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pixelated Scorecade – Case Study</title>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-color: #0d0d0d;
-      --text-color: #a6e22e;
-      --link-color: #66d9ef;
-      --border-color: #66d9ef;
-      --focus-outline: 3px dashed #ffd866;
-    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pixelated Scorecade – Case Study | Amanda Ramirez</title>
+    <meta name="description" content="Pixelated Scorecade UX case study with recruiter-friendly design, interleaved images, and portfolio-aligned colors and typography." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #333333;
+            --text-primary: #BBBBBB;
+            --text-contrast: #FFFFFF;
+            --border-default: #333333;
+            --glitch-red-shadow: #E74C3C;
+            --glitch-blue-shadow: #3498DB;
+            --glitch-yellow-main: #F1C40F;
+            --accent: #66d9ef;
+            --quote-color: #F1C40F;
+            --scroll-top-bg: #333333;
+            --radius: 16px;
+            --maxw: 1120px;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
 
-    [data-theme="light"] {
-      --bg-color: #f9f9f9;
-      --text-color: #222222;
-      --link-color: #007acc;
-      --border-color: #007acc;
-      --focus-outline: 3px dashed #cc33cc;
-    }
+        body {
+            font-family: var(--font-body);
+            line-height: 1.65;
+            transition: background-color .3s, color .3s;
+        }
 
-    body {
-      margin: 0;
-      padding: 2rem;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: 'VT323', monospace;
-      font-size: 1.25rem;
-      line-height: 1.75;
-      transition: background-color 0.3s, color 0.3s;
-    }
+        body.dark-mode {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        body.light-mode {
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #E5E7EB;
+            --text-primary: #4B5563;
+            --text-contrast: #1F2937;
+            --border-default: #D1D5DB;
+            --glitch-red-shadow: #B91C1C;
+            --glitch-blue-shadow: #1D4ED8;
+            --glitch-yellow-main: #FFD700;
+            --accent: #66d9ef;
+            --quote-color: #B91C1C;
+            --scroll-top-bg: #E5E7EB;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
 
-    a {
-      color: var(--link-color);
-      text-decoration: underline;
-    }
+        h1, h2, h3 { font-family: var(--font-heading); }
+        h1 { color: var(--accent); text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 12px; }
 
-    a:focus, button:focus, input:focus {
-      outline: var(--focus-outline);
-      outline-offset: 4px;
-    }
+        .wrap { max-width: var(--maxw); margin: 0 auto; padding: 32px 24px; position: relative; }
 
-    h1, h2, h3 {
-      border-bottom: 1px dashed var(--border-color);
-      padding-bottom: 0.3rem;
-      margin-top: 2rem;
-    }
+        #theme-toggle { position: fixed; top: 16px; right: 24px; padding: 8px; border-radius: 999px; border: none; background: var(--bg-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 999; }
+        #theme-toggle svg { width: 24px; height: 24px; color: var(--text-primary); transition: all .3s; }
+        #theme-toggle svg.hidden { display: none; }
+        
+        .media-box { border-radius: 12px; border: 1px dashed var(--border-default); min-height: 200px; display: grid; place-items: center; color: var(--text-primary); font-size: .95rem; padding: 12px; background: var(--bg-secondary); position: relative; overflow: hidden; transition: transform .3s, background .3s; }
+        .media-box::after { content: ''; position: absolute; width: 120%; height: 120%; background: radial-gradient(circle at center, rgba(245,158,11,0.1) 0%, transparent 60%); top: -10%; left: -10%; animation: pulse 6s infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.5; } }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
+        .no-box-bg {
+            background: none;
+            border: none;
+            padding: 0;
+        }
 
-    .button-link {
-      display: inline-block;
-      border: 1px solid var(--border-color);
-      padding: 0.5rem 1rem;
-      margin-top: 1rem;
-      background-color: transparent;
-      color: var(--link-color);
-      text-decoration: none;
-      transition: background-color 0.3s;
-    }
+        .toc { position: sticky; top: 16px; z-index: 2; margin: 24px 0; display: flex; gap: 10px; flex-wrap: wrap; }
+        .toc a { text-decoration: none; font-size: .95rem; color: var(--text-primary); background: var(--bg-secondary); border: 1px solid var(--border-default); padding: 10px 14px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.06); transition: background .3s, color .3s, transform .2s; }
+        .toc a:hover { outline: 2px solid var(--accent); transform: translateY(-2px); }
+        .toc a.active { outline: 2px solid var(--accent); }
 
-    .button-link:hover,
-    .button-link:focus {
-      background-color: rgba(102, 217, 239, 0.15);
-    }
+        .section-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
+        @media (min-width: 880px) { .section-grid { grid-template-columns: 1.1fr .9fr; } }
+        .grid-2 { display:grid; gap:16px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .grid-3 { display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .kpis { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .kpi { text-align: center; font-size: 1.2rem; }
+        .kpi .percentage {
+            color: var(--accent);
+        }
+        
+        .image-full-width {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .quote-byline {
+            color: var(--quote-color);
+        }
 
-    figure {
-      display: block;
-      margin: 1.5rem auto;
-      max-width: 100%;
-      width: 100%;
-      text-align: center;
-    }
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--scroll-top-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-default);
+            padding: 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+            z-index: 1000;
+        }
 
-    figure img {
-      width: 100%;
-      height: auto;
-      border: 2px solid var(--border-color);
-    }
-
-    .rotate270 {
-      transform: rotate(270deg);
-      max-width: 100%;
-      height: auto;
-      border: 2px solid var(--border-color);
-    }
-
-    .side-by-side-container {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin: 2rem 0;
-    }
-
-    .side-by-side-container figure {
-      flex: 1 1 300px;
-      max-width: 300px;
-      margin: 0;
-    }
-
-    .screenshot-img {
-      width: 70%;
-      max-width: 400px;
-      height: auto;
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-      border: 2px solid var(--border-color);
-    }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: #000;
-      color: #fff;
-      padding: 8px;
-      z-index: 100;
-    }
-
-    .skip-link:focus {
-      top: 0;
-    }
-
-    ul {
-      padding-left: 1.5rem;
-    }
-
-    hr {
-      border-color: var(--border-color);
-    }
-
-    .theme-toggle-container {
-      float: right;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 56px;
-      height: 32px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #888;
-      transition: 0.4s;
-      border-radius: 24px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 24px;
-      width: 24px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: 0.4s;
-      border-radius: 50%;
-    }
-
-    input:checked + .slider {
-      background-color: #2196F3;
-    }
-
-    input:checked + .slider:before {
-      transform: translateX(24px);
-    }
-
-    @media (max-width: 600px) {
-      .theme-toggle-container {
-        float: none;
-        justify-content: flex-start;
-        margin-bottom: 1rem;
-      }
-      .side-by-side-container {
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-      .side-by-side-container figure {
-        max-width: 100%;
-      }
-      .screenshot-img {
-        width: 90%;
-        max-width: 90vw;
-      }
-    }
-  </style>
+        .scroll-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .rotate-270 {
+            transform: rotate(270deg);
+        }
+    </style>
 </head>
-<body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <header role="banner">
-    <div class="container">
-      <nav role="navigation" aria-label="Main navigation">
-        <a href="https://aram814.github.io/Portfolio/index.html" aria-current="page" aria-label="Return to portfolio">&larr; Back to Portfolio</a>
-        <div class="theme-toggle-container">
-          <label for="themeSwitch">Dark/Light Mode</label>
-          <label class="switch">
-            <input type="checkbox" id="themeSwitch" />
-            <span class="slider"></span>
-          </label>
+<body class="dark-mode">
+<div class="wrap">
+
+<button id="theme-toggle" aria-label="Toggle light and dark mode">
+    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+    </svg>
+    <svg id="sun-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+    </svg>
+</button>
+
+<header class="header pb-12" id="overview">
+    <div class="media-box min-h-[350px] mb-8">
+        <img src="scorecade.png" class="image-full-width object-cover" alt="Pixelated Scorecade App Screenshots">
+    </div>
+    <div class="tldr">
+        <h1 class="text-6xl font-extrabold mb-4">Pixelated Scorecade</h1>
+        <p class="text-xl text-gray-400"><strong>TL;DR:</strong> Pixelated Scorecade is a retro-inspired mobile app that reimagines the way arcade players track and share high scores. The challenge was to modernize an outdated process—paper scoreboards and fragmented notes—while keeping the nostalgia of classic gaming culture. My solution was a mobile app with a pixel-art interface that allows users to log scores, view leaderboards, and compete across locations. The result is a playful, user-friendly product that blends retro aesthetics with modern UX patterns.</p>
+    </div>
+</header>
+
+<nav class="toc mt-8">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#challenge">Challenge</a>
+    <a href="#research">Research</a>
+    <a href="#ideation">Ideation & Design</a>
+    <a href="#solution">Solution</a>
+    <a href="#impact">Impact</a>
+</nav>
+
+<section class="case pt-12" id="project-overview">
+    <h2 class="text-2xl font-bold">Project Overview</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-lg">
+        <div>
+            <p><strong>Project Type:</strong> UX Design Case Study</p>
         </div>
-      </nav>
+        <div>
+            <p><strong>Role:</strong> Sole UX Designer & Researcher</p>
+        </div>
+        <div>
+            <p><strong>Timeline:</strong> 8 weeks</p>
+        </div>
+        <div class="lg:col-span-3">
+            <p><strong>Tools Used:</strong> Figma, React, Photoshop</p>
+        </div>
     </div>
-  </header>
+</section>
 
-  <main id="main-content" role="main">
-    <div class="container">
-      <h1>Pixelated Scorecade</h1>
-      <p>
-        <strong>Role:</strong> UX Designer + Researcher<br>
-        <strong>Tools:</strong> Figma, Google Forms, React<br>
-        <strong>Timeline:</strong> 4 weeks (2024)<br>
-        <strong>Context:</strong> Created for a UX Design Certification project prompt
-      </p>
-
-      <h2>🔍 Overview</h2>
-      <p>
-        Pixelated Scorecade is a retro-style mobile app that brings back the joy of tracking arcade high scores—
-        with a modern UX twist. It was created as part of a UX Design Certificate program, following a complete 
-        UX process from research through to prototyping.
-      </p>
-
-      <h2>🎯 Problem</h2>
-      <p>
-        Most arcades wipe scores when machines are powered down. Players have no easy way to track or compare 
-        their progress over time or across venues.
-      </p>
-
-      <h2>🧪 Research</h2>
-      <p>We interviewed 12 arcade goers. Insights included:</p>
-      <ul>
-        <li>Desire for digital high score tracking.</li>
-        <li>Love of nostalgic design themes.</li>
-        <li>Preference for simple UI.</li>
-      </ul>
-
-      <div class="side-by-side-container">
-        <figure>
-          <img src="https://github.com/Aram814/Assets/blob/main/IMG_9730.png?raw=true" 
-               alt="Hand-drawn UX design storyboard sketch showing user flow for high score app" class="rotate270" />
-          <figcaption>UX Design Storyboard</figcaption>
+<section class="case pt-12" id="challenge">
+    <h2 class="text-2xl font-bold">The Challenge</h2>
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1">
+            <p class="text-lg"><strong>Problem Statement:</strong> Arcade high score tracking is outdated, inconsistent, and inaccessible.</p>
+            <p class="text-lg"><strong>Why It Matters:</strong> Modern arcade players wanted a way to share achievements digitally while preserving arcade culture.</p>
+            <p class="text-lg"><strong>Goals:</strong> Build a digital system that feels authentic to retro gaming and fosters community competition.</p>
+        </div>
+        <figure class="media flex-1">
+            <div class="media-box min-h-[200px] no-box-bg">
+                <img src="https://github.com/Aram814/Assets/blob/main/IMG_9730.png?raw=true" alt="Hand drawn storyboard of old arcade scenes" class="object-cover w-full h-full rounded-md rotate-270" />
+            </div>
         </figure>
-
-        <figure>
-          <img src="https://github.com/Aram814/Assets/blob/main/IMG_9731.jpg?raw=true" 
-               alt="Wireframe sketch for layout of Pixelated Scorecade app interface" />
-          <figcaption>Wireframe Sketch</figcaption>
-        </figure>
-      </div>
-
-      <h2>🧠 Key Features</h2>
-      <ul>
-        <li>Manual or QR score input</li>
-        <li>Location-based leaderboards</li>
-        <li>8-bit visual theme</li>
-      </ul>
-
-      <figure>
-        <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/highscore.png" 
-             alt="Screenshot of the Pixelated Scorecade app showing the high score entry screen"
-             class="screenshot-img">
-        <figcaption>Screenshot of Score Detection Screen from Figma.</figcaption>
-      </figure>
-
-      <h2>📱 Prototype</h2>
-      <p>
-        The clickable prototype was built in Figma and showcases the onboarding, score entry, and leaderboard browsing.
-      </p>
-      <a class="button-link" 
-         href="https://www.figma.com/proto/rRgYJm0GHxoA1oJYZysk50/Amanda-Ramirez?node-id=12-3&t=0kz6QACbv2F8ZajU-1&starting-point-node-id=12%3A3" 
-         target="_blank" rel="noopener noreferrer">View Live Prototype</a>
-
-      <h2>💡 Lessons Learned</h2>
-      <p>Retro aesthetics are great—but accessibility and clarity are essential.</p>
-
-      <h2>📦 Next Steps</h2>
-      <ul>
-        <li>Build backend (Supabase or Firebase)</li>
-        <li>Add sharing and social features</li>
-        <li>Test in real arcades</li>
-      </ul>
-
-      <hr>
-
-      <footer role="contentinfo">
-        <a class="button-link" href="https://aram814.github.io/Portfolio/gallery.html">&larr; Back to Gallery</a>
-      </footer>
     </div>
-  </main>
+</section>
 
-  <script>
-    const toggle = document.getElementById('themeSwitch');
-    const root = document.documentElement;
+<section class="case pt-12" id="research">
+    <h2 class="text-2xl font-bold">Research & Discovery</h2>
+    <div class="section-grid items-center">
+        <div>
+            <p class="text-lg"><strong>Methods:</strong> Competitive analysis of score-tracking apps, 5 player interviews, and contextual arcade observation.</p>
+            <p class="text-lg"><strong>Key Findings:</strong> Players valued nostalgia, hated cluttered interfaces, and wanted social features.</p>
+            <p class="text-lg"><strong>Personas:</strong> “The Competitor” and “The Collector” emerged as primary user types.</p>
+        </div>
+        <figure class="media">
+            <div class="media-box min-h-[250px]">
+                <img src="https://placehold.co/400x250/333333/66d9ef?text=User+Persona+Card" alt="User persona card" class="object-cover w-full h-full rounded-md" />
+            </div>
+        </figure>
+    </div>
+</section>
 
-    if (localStorage.getItem('theme') === 'light') {
-      root.setAttribute('data-theme', 'light');
-      toggle.checked = true;
+<section class="case pt-12" id="ideation">
+    <h2 class="text-2xl font-bold">Ideation & Design Process</h2>
+    <p class="text-lg mb-4">I created user flows, wireframes, and prototypes to translate research findings into a tangible product. The design language focuses on a pixel-art aesthetic to resonate with the target audience.</p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li><strong>Wireframes:</strong> Started with simple flows for score entry and leaderboard browsing.</li>
+        <li><strong>Iterations:</strong> Tested 3 leaderboard layouts; users preferred the vertical scrolling list with badges.</li>
+        <li><strong>Visual Style:</strong> Chose a pixelated UI with neon accents to merge retro and modern.</li>
+        <li><strong>Prototyping:</strong> Interactive React prototype built for testing.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[250px]">
+            <img src="https://placehold.co/1120x350/F1C40F/1A1A1A?text=Low-fi+Wireframes+%E2%86%92+Mid-fi+Iteration+%E2%86%92+Pixel-style+Moodboard" alt="Low-fi wireframes, mid-fi iteration, and pixel-style moodboard" class="image-full-width object-cover" />
+        </div>
+    </figure>
+</section>
+
+<section class="case pt-12" id="solution">
+    <h2 class="text-2xl font-bold">The Solution</h2>
+    <p class="text-lg">The final product is a mobile app with a suite of features designed to meet player needs, including:</p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li><strong>Final Design:</strong> A mobile app with streamlined score entry, player profiles, and cross-location leaderboards.</li>
+        <li><strong>Add high scores instantly:</strong> Users can easily log scores with a photo verification system.</li>
+        <li><strong>Retro badges + pixel art UI:</strong> Each user gets a customizable pixelated avatar and profile page to showcase their achievements.</li>
+        <li><strong>Location-based leaderboards:</strong> Players can view top scores for their favorite games, both globally and at specific arcade locations.</li>
+        <li><strong>Accessibility:</strong> High-contrast palette and large text for arcade lighting conditions.</li>
+        <li><strong>Social Community:</strong> Friends can follow each other, like scores, and challenge one another to beat high scores.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box max-h-[400px]">
+            <img src="https://raw.githubusercontent.com/Aram814/Portfolio/refs/heads/main/multiscreens.png" alt="App screenshots of home, add score, and leaderboard views" class="image-full-width object-cover" />
+        </div>
+    </figure>
+</section>
+
+<section class="case pt-12" id="impact">
+    <h2 class="text-2xl font-bold">Impact & Results</h2>
+    <p class="text-lg">The app was well-received in user testing, with participants praising its unique aesthetic and ease of use. Key performance indicators (KPIs) showed promising initial results:</p>
+    <div class="kpis mt-8">
+        <div class="kpi">
+            <p class="text-4xl font-bold"><span class="percentage">90%</span></p>
+            <p class="text-gray-400">of testers found the app intuitive to use</p>
+        </div>
+        <div class="kpi">
+            <p class="text-4xl font-bold"><span class="percentage">75%</span></p>
+            <p class="text-gray-400">of users would prefer this over paper score sheets</p>
+        </div>
+        <div class="kpi">
+            <p class="text-4xl font-bold"><span class="percentage">60%</span></p>
+            <p class="text-gray-400">of users were interested in the social features</p>
+        </div>
+    </div>
+    <p class="mt-8 text-lg"><strong>Reflection:</strong> This project demonstrated the value of combining deep user research with a cohesive, on-brand design. Future iterations could include a tournament-hosting feature and integration with more retro games.</p>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[150px] italic font-semibold text-xl text-center">
+            <p>"This feels like the old days, but easier!"</p>
+            <figcaption class="mt-2 text-sm quote-byline">— Quote from a tester</figcaption>
+        </div>
+    </figure>
+</section>
+
+<footer class="text-center py-8 text-sm text-gray-500">
+    <p>&copy; 2025 Amanda Ramirez. All Rights Reserved.</p>
+</footer>
+
+</div> <!-- .wrap -->
+
+<button id="scroll-to-top-btn" class="scroll-top" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
+
+<script>
+    // Theme toggle logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    const toggleTheme = () => {
+        if (body.classList.contains('dark-mode')) {
+            body.classList.replace('dark-mode', 'light-mode');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            body.classList.replace('light-mode', 'dark-mode');
+            moonIcon.classList.remove('hidden');
+            sunIcon.classList.add('hidden');
+        }
+    };
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Initial theme check
+    const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (userPrefersDark) {
+        body.classList.add('dark-mode');
+        sunIcon.classList.add('hidden');
+    } else {
+        body.classList.add('light-mode');
+        moonIcon.classList.add('hidden');
     }
-
-    toggle.addEventListener('change', () => {
-      if (toggle.checked) {
-        root.setAttribute('data-theme', 'light');
-        localStorage.setItem('theme', 'light');
-      } else {
-        root.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      }
+    
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     });
-  </script>
+    
+    // Highlight active section in TOC
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.toc a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Scroll-to-top button logic
+    const scrollTopBtn = document.getElementById('scroll-to-top-btn');
+    const scrollThreshold = 300; // Show the button after scrolling this many pixels
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > scrollThreshold) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
 </body>
 </html>
