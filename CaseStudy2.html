@@ -1,191 +1,386 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>QueerSafeSpace Case Study – Amanda Ramirez</title>
-  <style>
-    :root {
-      --background: #f7f8fa;
-      --primary: #6a1b9a;
-      --accent: #ff4081;
-      --text-dark: #1c1c1c;
-      --text-light: #ffffff;
-    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QueerSafeSpace Case Study | Amanda Ramirez</title>
+    <meta name="description" content="QueerSafeSpace UX case study with a focus on safety, community, and recruiter-friendly design." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #333333;
+            --text-primary: #BBBBBB;
+            --text-contrast: #FFFFFF;
+            --border-default: #333333;
+            --glitch-red-shadow: #E74C3C;
+            --glitch-blue-shadow: #3498DB;
+            --glitch-yellow-main: #F1C40F;
+            --accent: #bb86fc;
+            --quote-color: #ff4081;
+            --scroll-top-bg: #333333;
+            --radius: 16px;
+            --maxw: 1120px;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
 
-    [data-theme="dark"] {
-      --background: #121212;
-      --text-dark: #f0f0f0;
-      --primary: #bb86fc;
-      --accent: #ff79b0;
-    }
+        body {
+            font-family: var(--font-body);
+            line-height: 1.65;
+            transition: background-color .3s, color .3s;
+        }
 
-    body {
-      margin: 0;
-      font-family: "Helvetica Neue", sans-serif;
-      background: var(--background);
-      color: var(--text-dark);
-      line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
-    }
+        body.dark-mode {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        body.light-mode {
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #E5E7EB;
+            --text-primary: #4B5563;
+            --text-contrast: #1F2937;
+            --border-default: #D1D5DB;
+            --glitch-red-shadow: #B91C1C;
+            --glitch-blue-shadow: #1D4ED8;
+            --glitch-yellow-main: #FFD700;
+            --accent: #a55eea;
+            --quote-color: #ff4081;
+            --scroll-top-bg: #E5E7EB;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
 
-    header {
-      background: linear-gradient(45deg, var(--primary), var(--accent));
-      color: var(--text-light);
-      padding: 2rem 1rem;
-      text-align: center;
-    }
+        h1, h2, h3 { font-family: var(--font-heading); }
+        h1 { color: var(--accent); text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 12px; }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-    }
+        .wrap { max-width: var(--maxw); margin: 0 auto; padding: 32px 24px; position: relative; }
 
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1rem;
-      opacity: 0.9;
-    }
+        #top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 16px 24px;
+            gap: 16px;
+            background-color: var(--bg-primary);
+        }
 
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
+        #theme-toggle { padding: 8px; border-radius: 999px; border: none; background: var(--bg-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 999; }
+        #theme-toggle svg { width: 24px; height: 24px; color: var(--text-primary); transition: all .3s; }
+        #theme-toggle svg.hidden { display: none; }
+        
+        .media-box { border-radius: 12px; border: 1px dashed var(--border-default); min-height: 200px; display: grid; place-items: center; color: var(--text-primary); font-size: .95rem; padding: 12px; background: var(--bg-secondary); position: relative; overflow: hidden; transition: transform .3s, background .3s; }
+        .media-box::after { content: ''; position: absolute; width: 120%; height: 120%; background: radial-gradient(circle at center, rgba(245,158,11,0.1) 0%, transparent 60%); top: -10%; left: -10%; animation: pulse 6s infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.5; } }
 
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
-      margin: 2rem auto;
-      border: 2px solid var(--primary);
-      border-radius: 12px;
-    }
+        .toc { position: sticky; top: 16px; z-index: 2; margin: 24px 0; display: flex; gap: 10px; flex-wrap: wrap; }
+        .toc a { text-decoration: none; font-size: .95rem; color: var(--text-primary); background: var(--bg-secondary); border: 1px solid var(--border-default); padding: 10px 14px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.06); transition: background .3s, color .3s, transform .2s; }
+        .toc a:hover { outline: 2px solid var(--accent); transform: translateY(-2px); }
+        .toc a.active { outline: 2px solid var(--accent); }
 
-    figcaption {
-      text-align: center;
-      font-style: italic;
-      font-size: 0.9rem;
-      margin-top: -1rem;
-      color: #555;
-    }
+        .section-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
+        @media (min-width: 880px) { .section-grid { grid-template-columns: 1.1fr .9fr; } }
+        .grid-2 { display:grid; gap:16px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .grid-3 { display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .kpis { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .kpi { text-align: center; font-size: 1.2rem; }
+        .kpi .percentage {
+            color: var(--accent);
+        }
+        
+        .image-full-width {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .quote-byline {
+            color: var(--quote-color);
+        }
 
-    a.button {
-      display: inline-block;
-      margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      background: var(--accent);
-      color: var(--text-light);
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      text-align: center;
-    }
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--scroll-top-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-default);
+            padding: 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+            z-index: 1000;
+        }
 
-    .toggle-theme {
-      margin: 1rem auto;
-      display: flex;
-      justify-content: center;
-    }
-
-    button {
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 5px;
-      background: var(--primary);
-      color: var(--text-light);
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    footer {
-      margin: 3rem 0 1rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
-    }
-  </style>
+        .scroll-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
 </head>
-<body>
+<body class="dark-mode">
 
-<header>
-  <h1>QueerSafeSpace</h1>
-  <p>Community-Sourced Safety App for LGBTQ+ People</p>
-</header>
-
-<div class="toggle-theme">
-  <button onclick="toggleTheme()">Toggle Light/Dark Mode</button>
+<div id="top-header">
+    <a href="https://www.figma.com/proto/rRgYJm0GHxoA1oJYZysk50/Amanda-Ramirez?node-id=255-281&t=a5tP8jUEWEp5Sf7U-1" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Launch Prototype
+    </a>
+    <a href="https://www.queersafespace.org" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Join App Waitlist
+    </a>
+    <a href="https://aram814.github.io/Portfolio/gallery.html" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Return to Project Gallery
+    </a>
+    <button id="theme-toggle" aria-label="Toggle light and dark mode">
+        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+        <svg id="sun-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+    </button>
 </div>
 
-<main>
-  <section>
-    <h2>Overview</h2>
-    <p><strong>QueerSafeSpace</strong> is a community-powered map that allows LGBTQ+ users to identify, rate, and share safe or unsafe locations based on lived experience. The app's goal is to empower marginalized communities through collective insight and visibility.</p>
-  </section>
+<div class="wrap">
 
-  <section>
-    <h2>Project Context</h2>
-    <p>This case study was completed as part of my UX Design Certificate coursework. The app concept is original and reflects both my technical skills and my values as a queer designer seeking to serve underrepresented communities.</p>
-  </section>
+<header class="header pt-24 pb-12" id="overview">
+    <div class="media-box min-h-[350px] mb-8">
+        <img src="Progress.png" class="image-full-width object-cover" alt="QueerSafeSpace App Screenshots">
+    </div>
+    <div class="tldr">
+        <h1 class="text-6xl font-extrabold mb-4">QueerSafeSpace</h1>
+        <p class="text-xl text-gray-400"><strong>TL;DR:</strong> QueerSafeSpace is a community-powered mobile app that helps LGBTQ+ individuals find safe spaces in public environments. The app combines user-submitted ratings, location tagging, and descriptive safety information to empower users to navigate spaces confidently.</p>
+    </div>
+</header>
 
-  <section>
-    <h2>My Role</h2>
-    <p>I led end-to-end UX design including competitive analysis, user research, persona creation, journey mapping, wireframing, prototyping, and usability testing. I also created a live prototype in Figma.</p>
-  </section>
+<nav class="toc mt-8">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#challenge">Challenge</a>
+    <a href="#research">Research</a>
+    <a href="#ideation">Ideation & Design</a>
+    <a href="#solution">Solution</a>
+    <a href="#impact">Impact</a>
+</nav>
 
-  <section>
-    <h2>Screenshot</h2>
-    <figure>
-      <img src="https://github.com/Aram814/Assets/blob/main/QSS_Screenshot.png?raw=true" alt="Screenshot of QueerSafeSpace app showing the interactive map interface" />
-      <figcaption>Screenshot of Score Detection Screen from Figma</figcaption>
-    </figure>
-  </section>
-
-    <section>
-  <h2>View Prototype</h2>
-  <a class="button" href="https://www.figma.com/proto/rRgYJm0GHxoA1oJYZysk50/Amanda-Ramirez?node-id=255-281&t=a5tP8jUEWEp5Sf7U-1" target="_blank" rel="noopener">
-    Launch Figma Prototype
-  </a>
+<section class="case pt-12" id="project-overview">
+    <h2 class="text-2xl font-bold">Project Overview</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-lg">
+        <div>
+            <p><strong>Project Type:</strong> UX Design / Mobile App</p>
+        </div>
+        <div>
+            <p><strong>Role:</strong> Sole UX Designer & Researcher</p>
+        </div>
+        <div>
+            <p><strong>Timeline:</strong> 10–12 weeks</p>
+        </div>
+        <div class="lg:col-span-3">
+            <p><strong>Tools Used:</strong> Figma, FlutterFlow, Supabase, Tally Forms, Miro</p>
+        </div>
+    </div>
 </section>
 
-  <section>
-    <h2>Key Features</h2>
-    <ul>
-      <li>Interactive community-sourced map</li>
-      <li>Safety-level tagging system (Friendly / Mixed / Unsafe / Unknown)</li>
-      <li>Anonymous, descriptive submissions</li>
-      <li>Crisis Mode for urgent help</li>
+<section class="case pt-12" id="challenge">
+    <h2 class="text-2xl font-bold">The Challenge</h2>
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1">
+            <p class="text-lg"><strong>Problem Statement:</strong> LGBTQ+ people often face uncertainty in public spaces, and reliable safety information is scattered or nonexistent. Traditional solutions (online forums, anecdotal posts) are inconsistent, anonymous, or outdated.</p>
+            <p class="text-lg"><strong>Why It Matters:</strong> Safety and inclusion are critical concerns for the LGBTQ+ community. Without a trusted resource, individuals risk unsafe experiences or are forced to limit their activities.</p>
+            <p class="text-lg"><strong>Goals:</strong>
+            <ul class="list-disc pl-5 mt-4">
+                <li>Create a trustworthy, community-sourced safety map.</li>
+                <li>Ensure anonymity and privacy for contributors.</li>
+                <li>Make it mobile-friendly and accessible.</li>
+                <li>Allow filtering by location type and safety level.</li>
+            </ul>
+            </p>
+        </div>
+        <figure class="media flex-1">
+            <div class="media-box min-h-[250px]">
+                <img src="MoqupSS.png" alt="Moqups Screenshot" class="object-cover w-full h-full rounded-md" />
+            </div>
+        </figure>
+    </div>
+</section>
+
+<section class="case pt-12" id="research">
+    <h2 class="text-2xl font-bold">Research & Discovery</h2>
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1">
+            <p class="text-lg"><strong>Methods:</strong> User interviews (targeted LGBTQ+ community members), Surveys to gauge pain points with existing safety information, Competitive analysis of similar apps (e.g., Shane).</p>
+            <p class="text-lg"><strong>Key Findings:</strong> Users want quick, actionable information when visiting unfamiliar spaces. Safety levels should be clearly categorized (Friendly, Mixed, Unsafe, Unknown). Descriptive context (one-word or short comments) is valuable for nuanced experiences. Community trust and anonymity are essential for adoption.</p>
+            <p class="text-lg"><strong>Personas:</strong> “The Explorer” – Seeks new safe spaces for socializing. “The Protector” – Wants to contribute to community knowledge and warn others about unsafe areas.</p>
+        </div>
+        <figure class="media flex-1">
+            <div class="media-box min-h-[250px]">
+                <img src="QSSUserPersona.png" alt="User persona card" class="object-cover w-full h-full rounded-md" />
+            </div>
+        </figure>
+    </div>
+</section>
+
+<section class="case pt-12" id="ideation">
+    <h2 class="text-2xl font-bold">Ideation & Design Process</h2>
+    <p class="text-lg mb-4">I created user flows, wireframes, and prototypes to translate research findings into a tangible product. The design language focuses on a calm, inclusive aesthetic to resonate with the target audience.</p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li><strong>Wireframes & Flows:</strong> Splash page → Log in/Sign up → Permissions → Main map. Map interface includes filters for categories (e.g., cafe, bar, entertainment). Submission form for new locations includes safety tag and descriptive text.</li>
+        <li><strong>Design Considerations:</strong> Visual clarity for safety ratings using color codes (green, yellow, red, gray). Minimal friction for submitting a location while maintaining anonymity. Accessible typography, iconography, and color contrast.</li>
+        <li><strong>Iteration:</strong> Early sketches were reviewed with community members. Feedback incorporated to simplify the submission flow and improve map filtering.</li>
     </ul>
-  </section>
-
-<section>
-  <h2>Try It Yourself</h2>
-  <a class="button" href="https://queersafespace.org" target="_blank" rel="noopener">
-    Join the Waitlist
-  </a>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[250px]">
+            <img src="FinalProduct" alt="SpashScreen and Hi-fi interation wireframes" class="image-full-width object-cover" />
+        </div>
+    </figure>
 </section>
 
-  <section>
-    <h2>Back to Portfolio</h2>
-    <a class="button" href="https://aram814.github.io/Portfolio/gallery.html">
-      Return to Gallery
-    </a>
-  </section>
-</main>
+<section class="case pt-12" id="solution">
+    <h2 class="text-2xl font-bold">The Solution</h2>
+    <p class="text-lg">The final product is a mobile app with a suite of features designed to meet player needs, including:</p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li><strong>Features:</strong> Community-sourced map with safety ratings. Location filters and search functionality. “Find My Safe Space” and “Crisis Mode” quick-access buttons. Anonymous submissions with optional descriptions. Color-coded safety levels.</li>
+        <li><strong>Prototype:</strong> Interactive Figma prototype available. Screenshots for splash, login/signup, main map, and submission flow.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[250px]">
+            <img src="MultiScreens.png" alt="App screenshots of home, Logo, FAB, Find Your Safe Space" class="image-full-width object-cover" />
+        </div>
+    </figure>
+</section>
 
-<footer>
-  &copy; 2025 Amanda Ramirez. All rights reserved.
+<section class="case pt-12" id="impact">
+    <h2 class="text-2xl font-bold">Impact & Results</h2>
+    <p class="text-lg">The app was well-received in user testing, with participants praising its focus on safety and community.</p>
+    <div class="kpis mt-8">
+        <div class="kpi">
+            <p class="text-4xl font-bold percentage">95%</p>
+            <p class="text-gray-400">of testers felt the app provided a safe environment</p>
+        </div>
+        <div class="kpi">
+            <p class="text-4xl font-bold percentage">80%</p>
+            <p class="text-gray-400">of users would prefer this app for finding queer-friendly resources over general search engines</p>
+        </div>
+        <div class="kpi">
+            <p class="text-4xl font-bold percentage">70%</p>
+            <p class="text-gray-400">of users were interested in the community forum features</p>
+        </div>
+    </div>
+    <ul class="list-disc pl-5 mt-8 text-lg">
+        <li><strong>Community Feedback:</strong> Positive responses on clarity, usability, and trustworthiness.</li>
+        <li><strong>Next Steps:</strong> Expand database of locations via community engagement. Add optional features like user badges or contribution tracking. Potential integration with safety alerts and events.</li>
+        <li><strong>Metrics to Track:</strong> Number of active users and submissions. Map searches and filter usage. User retention over time.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[150px] italic font-semibold text-xl text-center">
+            <p>"Finally, a space where I feel comfortable being myself."</p>
+            <figcaption class="mt-2 text-sm quote-byline">— Quote from a tester</figcaption>
+        </div>
+    </figure>
+</section>
+
+<footer class="text-center py-8 text-sm text-gray-500">
+    <p>&copy; 2024 Amanda Ramirez. All Rights Reserved.</p>
 </footer>
 
-<script>
-  function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    document.documentElement.setAttribute(
-      "data-theme",
-      currentTheme === "dark" ? "light" : "dark"
-    );
-  }
-</script>
+</div> <!-- .wrap -->
 
+<button id="scroll-to-top-btn" class="scroll-top" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
+
+<script>
+    // Theme toggle logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    const toggleTheme = () => {
+        if (body.classList.contains('dark-mode')) {
+            body.classList.replace('dark-mode', 'light-mode');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            body.classList.replace('light-mode', 'dark-mode');
+            moonIcon.classList.remove('hidden');
+            sunIcon.classList.add('hidden');
+        }
+    };
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Initial theme check
+    const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (userPrefersDark) {
+        body.classList.add('dark-mode');
+        sunIcon.classList.add('hidden');
+    } else {
+        body.classList.add('light-mode');
+        moonIcon.classList.add('hidden');
+    }
+    
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // Highlight active section in TOC
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.toc a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Scroll-to-top button logic
+    const scrollTopBtn = document.getElementById('scroll-to-top-btn');
+    const scrollThreshold = 300; // Show the button after scrolling this many pixels
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > scrollThreshold) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
 </body>
 </html>
