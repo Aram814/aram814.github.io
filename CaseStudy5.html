@@ -1,142 +1,389 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Women’s Fellowship | Amanda Ramirez Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    :root {
-      --bg-color: #f5f2ed;
-      --card-bg-light: #e9e2d0;
-      --card-bg-dark: #3a2f2f;
-      --text-color: #2b2b2b;
-      --primary-color: #caa72d;
-      --secondary-color: #b83b3b;
-      --footer-color: #045f5f;
-      --button-bg: #b83b3b;
-      --button-hover: #922a2a;
-      --shadow: rgba(0,0,0,0.1);
-      --prayer-color: #fbc02d;
-      --provision-color: #d9c9b6;
-      --event-color: #e0a399;
-      --update-color: #045f5f;
-    }
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Women's Fellowship – Case Study | Amanda Ramirez</title>
+    <meta name="description" content="A live website built to replace a vandalized physical bulletin board. The digital bulletin was created to be accessible and easy-to-use for elderly women." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #333333;
+            --text-primary: #BBBBBB;
+            --text-contrast: #FFFFFF;
+            --border-default: #333333;
+            --glitch-red-shadow: #E74C3C;
+            --glitch-blue-shadow: #3498DB;
+            --glitch-yellow-main: #F1C40F;
+            --accent: #caa72d;
+            --quote-color: #caa72d;
+            --scroll-top-bg: #333333;
+            --radius: 16px;
+            --maxw: 1120px;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.65;
+            transition: background-color .3s, color .3s;
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        body.light-mode {
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #E5E7EB;
+            --text-primary: #4B5563;
+            --text-contrast: #1F2937;
+            --border-default: #D1D5DB;
+            --glitch-red-shadow: #B91C1C;
+            --glitch-blue-shadow: #1D4ED8;
+            --glitch-yellow-main: #FFD700;
+            --accent: #922a2a;
+            --quote-color: #922a2a;
+            --scroll-top-bg: #E5E7EB;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        h1, h2, h3 { font-family: var(--font-heading); }
+        h1 { color: var(--accent); text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 12px; }
+
+        .wrap { max-width: var(--maxw); margin: 0 auto; padding: 32px 24px; position: relative; }
+
+        #top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 16px 24px;
+            gap: 16px;
+            background-color: var(--bg-primary);
+        }
+
+        #theme-toggle { padding: 8px; border-radius: 999px; border: none; background: var(--bg-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 999; }
+        #theme-toggle svg { width: 24px; height: 24px; color: var(--text-primary); transition: all .3s; }
+        #theme-toggle svg.hidden { display: none; }
+        
+        .media-box { border-radius: 12px; border: 1px dashed var(--border-default); min-height: 200px; display: grid; place-items: center; color: var(--text-primary); font-size: .95rem; padding: 12px; background: var(--bg-secondary); position: relative; overflow: hidden; transition: transform .3s, background .3s; }
+        .media-box::after { content: ''; position: absolute; width: 120%; height: 120%; background: radial-gradient(circle at center, rgba(245,158,11,0.1) 0%, transparent 60%); top: -10%; left: -10%; animation: pulse 6s infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.5; } }
+
+        .no-box-bg {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .toc { position: sticky; top: 16px; z-index: 2; margin: 24px 0; display: flex; gap: 10px; flex-wrap: wrap; }
+        .toc a { text-decoration: none; font-size: .95rem; color: var(--text-primary); background: var(--bg-secondary); border: 1px solid var(--border-default); padding: 10px 14px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.06); transition: background .3s, color .3s, transform .2s; }
+        .toc a:hover { outline: 2px solid var(--accent); transform: translateY(-2px); }
+        .toc a.active { outline: 2px solid var(--accent); }
+
+        .section-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
+        @media (min-width: 880px) { .section-grid { grid-template-columns: 1.1fr .9fr; } }
+        .grid-2 { display:grid; gap:16px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .grid-3 { display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .kpis { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .kpi { text-align: center; font-size: 1.2rem; }
+        .kpi .percentage {
+            color: var(--accent);
+        }
+        
+        .image-full-width {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .quote-byline {
+            color: var(--quote-color);
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--scroll-top-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-default);
+            padding: 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .rotate-270 {
+            transform: rotate(270deg);
+        }
+    </style>
 </head>
-<body class="bg-[var(--bg-color)] text-[var(--text-color)] font-sans">
+<body class="dark-mode">
 
-  <!-- Hero Section -->
-  <section class="py-16 text-center">
-    <img src="https://raw.githubusercontent.com/Aram814/First_Love_Church/refs/heads/main/first-love-logo-2017.png" 
-         alt="First Love Church Logo" 
-         class="mx-auto w-32 mb-6">
-    <h1 class="text-4xl font-bold mb-4">Women’s Fellowship Digital Bulletin</h1>
-    <p class="max-w-2xl mx-auto text-lg">
-      Creating an accessible, real-time community hub for the Women’s Fellowship at First Love Church. 
-      Built following <strong>WCAG accessibility guidelines</strong> with a <strong>Chrome Lighthouse score of 95</strong>.
-    </p>
-    <a href="https://aram814.github.io/First_Love_Church/" target="_blank" 
-       class="mt-6 inline-block bg-[var(--button-bg)] hover:bg-[var(--button-hover)] text-white font-semibold py-3 px-6 rounded shadow">
-       View Live Site
+<div id="top-header">
+    <a href="https://aram814.github.io/First_Love_Church/" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Visit Site
     </a>
-  </section>
-
-  <!-- Overview -->
-  <section class="max-w-4xl mx-auto py-12 px-6">
-    <h2 class="text-2xl font-bold mb-4">Overview</h2>
-    <p>The Women’s Fellowship website is a digital bulletin and community hub designed for members, many of whom are elderly and not tech-savvy. The platform enables real-time posting, access to member contact information, and easy navigation, while maintaining administrative control for moderation. The design follows <strong>WCAG guidelines</strong> and scored <strong>95</strong> on Chrome Lighthouse for accessibility.</p>
-  </section>
-
-  <!-- Problem -->
-  <section class="bg-[var(--card-bg-light)] py-12">
-    <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-2xl font-bold mb-4">The Problem</h2>
-      <p>Previously, the group relied on in-person bulletins and word-of-mouth updates, which made staying informed and connected difficult. The old website could not host member posts, events, or contact information effectively. Key challenges included:</p>
-      <ul class="list-disc list-inside mt-4 space-y-2">
-        <li>Posts needed categorization (Prayer Requests, Provisions Needed, Events, Other Updates)</li>
-        <li>Many members were elderly and unfamiliar with digital tools</li>
-        <li>Secure access to member phone and email information was required</li>
-        <li>Admin moderation was necessary, with users able to edit only their own posts</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Goals -->
-  <section class="max-w-4xl mx-auto py-12 px-6">
-    <h2 class="text-2xl font-bold mb-4">Goals</h2>
-    <p>The platform aimed to:</p>
-    <ul class="list-disc list-inside mt-4 space-y-2">
-      <li>Allow members to post updates in real-time</li>
-      <li>Provide secure access to member contact info (phone/email)</li>
-      <li>Be intuitive and accessible for elderly users</li>
-      <li>Enable backend moderation for administrators</li>
-    </ul>
-  </section>
-
-  <!-- Process -->
-  <section class="bg-[var(--card-bg-light)] py-12">
-    <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-2xl font-bold mb-6">Process</h2>
-
-      <h3 class="text-xl font-semibold mb-2">1. Research & Discovery</h3>
-      <p>Informal interviews with members and leaders identified the need for a familiar bulletin board experience, simplicity, and accessibility, as well as secure display of member contact information.</p>
-
-      <h3 class="text-xl font-semibold mt-6 mb-2">2. Wireframing</h3>
-      <img src="https://raw.githubusercontent.com/Aram814/First_Love_Church/refs/heads/main/MainSiteWireframe.jpeg" 
-           alt="Wireframe Sketch" 
-           class="w-full max-w-md mx-auto rounded shadow mb-4">
-      <p>Low-fidelity wireframes outlined four bulletin categories and a member directory section, mimicking the traditional bulletin board layout while simplifying navigation.</p>
-
-      <h3 class="text-xl font-semibold mt-6 mb-2">3. Visual Design</h3>
-      <img src="https://raw.githubusercontent.com/Aram814/First_Love_Church/refs/heads/main/Post%20Submission_darkmode.png" 
-           alt="Post Submission Box" 
-           class="w-full max-w-md mx-auto rounded shadow mb-4">
-      <p>Design emphasized readability with large fonts, high contrast, persistent category navigation, and a minimal posting flow.</p>
-
-      <h3 class="text-xl font-semibold mt-6 mb-2">4. Accessibility Features</h3>
-      <img src="https://raw.githubusercontent.com/Aram814/First_Love_Church/refs/heads/main/Accessibility%20Features.png" 
-           alt="Accessibility Features Screenshot" 
-           class="w-full max-w-md mx-auto rounded shadow mb-4">
-      <p>Accessibility was a primary focus, including large buttons, high contrast, clear navigation, and mobile-friendly layouts. The site was built following <strong>WCAG guidelines</strong>, and a <strong>Chrome Lighthouse audit returned a score of 95</strong>, ensuring excellent accessibility for elderly and non-tech-savvy users.</p>
-    </div>
-  </section>
-
-  <!-- Solution -->
-  <section class="max-w-4xl mx-auto py-12 px-6">
-    <h2 class="text-2xl font-bold mb-6">Solution</h2>
-    <p>The final platform includes:</p>
-    <ul class="list-disc list-inside mt-4 space-y-2 mb-6">
-      <li>Real-time bulletin board with categorized posts</li>
-      <li>Member directory displaying phone and email information</li>
-      <li>Backend tools for administrator moderation</li>
-      <li>User post control: members can edit only their own submissions</li>
-      <li>Accessibility-first design: large fonts, clear buttons, mobile-friendly layouts</li>
-    </ul>
-    <a href="https://aram814.github.io/First_Love_Church/Members.html" target="_blank" 
-       class="inline-block bg-[var(--primary-color)] hover:bg-[var(--secondary-color)] text-white font-semibold py-3 px-6 rounded shadow">
-       View Members List
+    <a href="https://aram814.github.io/Portfolio/gallery.html" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Return to Project Gallery
     </a>
-  </section>
+    <button id="theme-toggle" aria-label="Toggle light and dark mode">
+        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+        <svg id="sun-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+    </button>
+</div>
 
-  <!-- Impact & Reflection -->
-  <section class="bg-[var(--card-bg-light)] py-12">
-    <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-2xl font-bold mb-4">Impact</h2>
-      <ul class="list-disc list-inside mt-2 space-y-2 mb-6">
-        <li>Members can stay connected digitally, even between gatherings</li>
-        <li>Elderly users can confidently post, edit, and access contact info</li>
-        <li>Group communication is faster, more organized, and easier to moderate</li>
-      </ul>
-      <h2 class="text-2xl font-bold mb-4">Reflection</h2>
-      <p>This project reinforced the importance of simplicity, familiarity, and accessibility in UX. Future improvements could include digest emails or notifications to keep members informed passively.</p>
+<div class="wrap">
+
+<header class="header pt-24 pb-12" id="overview">
+    <div class="media-box min-h-[350px] mb-8">
+        <img src="CS5SiteHeader.png" class="image-full-width object-cover" alt="Women's Fellowship Website Header">
     </div>
-  </section>
+    <div class="tldr">
+        <h1 class="text-6xl font-extrabold mb-4">Women's Fellowship</h1>
+        <p class="text-xl text-gray-400"><strong>Project Summary:</strong> The Women’s Fellowship Bulletin is a live website built to replace a vandalized physical bulletin board. The challenge was to create an accessible, easy-to-use digital bulletin for elderly women with minimal-to-average tech experience. My solution was a simple, React-based site hosted on GitHub with Supabase handling backend data. Information was collected in-person, digitized, and then published online. The result is a secure, accessible, and maintainable platform that improves communication and community engagement.</p>
+    </div>
+</header>
 
-  <!-- Footer -->
-  <footer class="bg-[var(--footer-color)] py-8 text-center text-white">
-    <p>&copy; 2025 Amanda Ramirez | Portfolio</p>
-  </footer>
+<nav class="toc mt-8">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#challenge">Challenge</a>
+    <a href="#research">Research</a>
+    <a href="#design">Design</a>
+    <a href="#solution">Solution</a>
+    <a href="#impact">Impact</a>
+</nav>
 
+<section class="case pt-12" id="project-overview">
+    <h2 class="text-2xl font-bold">Project Overview</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-lg">
+        <div>
+            <p><strong>Project Type:</strong> Live Website / UX Design</p>
+        </div>
+        <div>
+            <p><strong>Role:</strong> UX Designer & Developer</p>
+        </div>
+        <div>
+            <p><strong>Tools Used:</strong> React, Supabase, GitHub Pages</p>
+        </div>
+    </div>
+</section>
+
+<section class="case pt-12" id="challenge">
+    <h2 class="text-2xl font-bold">The Challenge</h2>
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1">
+            <p class="text-lg"><strong>Problem Statement:</strong> The original bulletin board was unreliable (prone to vandalism) and inaccessible to women who weren’t physically present.</p>
+            <p class="text-lg"><strong>Why It Matters:</strong> The bulletin was the group’s main communication tool. Without it, members missed important updates and events.</p>
+            <p class="text-lg"><strong>Constraints:</strong> Audience included elderly women with limited tech literacy, so design needed to prioritize simplicity and accessibility.</p>
+        </div>
+        <figure class="media flex-1">
+            <div class="media-box min-h-[200px] no-box-bg">
+                <img src="CS5UserPersonas.png" alt="User Personas" class="object-cover w-full h-full rounded-md" />
+            </div>
+        </figure>
+    </div>
+</section>
+
+<section class="case pt-12" id="research">
+    <h2 class="text-2xl font-bold">Research & Discovery</h2>
+    <div class="section-grid items-center">
+        <div>
+            <p class="text-lg"><strong>Data Gathering:</strong> Information was initially collected in person and on paper before being digitized.</p>
+            <p class="text-lg"><strong>Audience Needs:</strong></p>
+            <ul class="list-disc pl-5 mt-4 text-lg">
+                <li>Clear, readable typography</li>
+                <li>Minimal navigation steps</li>
+                <li>Accessible contrast and layout</li>
+                <li>Works across devices, especially basic laptops/phones</li>
+            </ul>
+            <p class="text-lg mt-4"><strong>Reference:</strong> The church’s main website provided context for tone and style but the bulletin was created independently to focus on the fellowship’s needs.</p>
+            <p class="text-lg mt-4"><strong>Key Insight:</strong> The community valued reliability and clarity over advanced design features.</p>
+        </div>
+        <figure class="media mx-auto">
+            <div class="media-box min-h-[250px]">
+                <img src="MainSiteWireframe.png" alt="Hand-drawn Wireframe" class="object-cover w-full h-full rounded-md" />
+            </div>
+        </figure>
+    </div>
+</section>
+
+<section class="case pt-12" id="design">
+    <h2 class="text-2xl font-bold">Design Process</h2>
+    <p class="text-lg mb-4"><strong>Approach:</strong></p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li>Started with hand sketches to define layout and flow.</li>
+        <li>Developed in React with hosting on GitHub Pages.</li>
+        <li>Integrated Supabase as a backend database for bulletin updates.</li>
+    </ul>
+    <p class="text-lg mt-4"><strong>Design Considerations:</strong></p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li>Accessibility: WCAG-guided choices — large fonts, strong contrast, simple menus.</li>
+        <li>Ease of Use: Minimal clicks to reach announcements, calendar, or resources.</li>
+        <li>Scalability: Designed so fellowship leaders could eventually manage updates themselves.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[250px]">
+            <img src="CS5Wireframes.png" alt="Multiple screenshots of production of Women's Fellowship website" class="image-full-width object-cover" />
+        </div>
+    </figure>
+</section>
+
+<section class="case pt-12" id="solution">
+    <h2 class="text-2xl font-bold">The Solution</h2>
+    <p class="text-lg">The final deliverable was a live website replacing the unreliable physical bulletin board.</p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li><strong>Core features:</strong> Event listings, announcements, scripture/devotional content, resources.</li>
+        <li><strong>Backend:</strong> Supabase database for storing and managing updates.</li>
+        <li><strong>Frontend:</strong> Clean React interface, responsive and accessible.</li>
+        <li><strong>Hosting:</strong> GitHub Pages for reliability and cost-effectiveness.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box max-h-[400px]">
+            <img src="CS5Final.png" alt="Screenshot of the Women's Fellowship website" class="image-full-width object-cover" />
+        </div>
+    </figure>
+</section>
+
+<section class="case pt-12" id="impact">
+    <h2 class="text-2xl font-bold">Impact & Results</h2>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li>Members now have consistent access to fellowship updates regardless of location.</li>
+        <li>Eliminated issues of vandalism and visibility tied to physical boards.</li>
+        <li>Elderly members report being able to navigate the site more easily than expected due to its simplicity.</li>
+    </ul>
+    <p class="text-lg mt-4"><strong>Next Steps:</strong></p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li>Gather additional feedback from group members.</li>
+        <li>Provide training sessions so leaders can confidently update content themselves.</li>
+        <li>Continue monitoring Supabase backend and GitHub hosting for maintenance.</li>
+        <li>Explore adding optional print-friendly exports for members who prefer paper.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[150px] italic font-semibold text-xl text-center">
+            <p>The Women’s Fellowship Bulletin transformed a vandalized, unreliable bulletin board into a sustainable, accessible, and community-driven website. It empowers members with consistent updates, strengthens connection, and makes communication inclusive for elderly women navigating digital tools.</p>
+        </div>
+    </figure>
+</section>
+
+<footer class="text-center py-8 text-sm text-gray-500">
+    <p>&copy; 2025 Amanda Ramirez. All Rights Reserved.</p>
+</footer>
+
+</div> <!-- .wrap -->
+
+<button id="scroll-to-top-btn" class="scroll-top" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
+
+<script>
+    // Theme toggle logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    const toggleTheme = () => {
+        if (body.classList.contains('dark-mode')) {
+            body.classList.replace('dark-mode', 'light-mode');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            body.classList.replace('light-mode', 'dark-mode');
+            moonIcon.classList.remove('hidden');
+            sunIcon.classList.add('hidden');
+        }
+    };
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Initial theme check
+    const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (userPrefersDark) {
+        body.classList.add('dark-mode');
+        sunIcon.classList.add('hidden');
+    } else {
+        body.classList.add('light-mode');
+        moonIcon.classList.add('hidden');
+    }
+    
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // Highlight active section in TOC
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.toc a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Scroll-to-top button logic
+    const scrollTopBtn = document.getElementById('scroll-to-top-btn');
+    const scrollThreshold = 300; // Show the button after scrolling this many pixels
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > scrollThreshold) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
 </body>
 </html>
