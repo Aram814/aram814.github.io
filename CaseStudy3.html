@@ -1,145 +1,349 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Send Me On My Way – Case Study</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans&display=swap">
-  <style>
-    :root {
-      --bg-light: #f5f5f5;
-      --text-light: #222;
-      --bg-dark: #2e3d34; /* Dark sage green */
-      --text-dark: #eee;
-      --accent: #88aa88;
-      --focus-ring: 3px dashed var(--accent);
-    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Send Me On My Way Case Study | Amanda Ramirez</title>
+    <meta name="description" content="Send Me On My Way UX case study." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #333333;
+            --text-primary: #BBBBBB;
+            --text-contrast: #FFFFFF;
+            --border-default: #333333;
+            --glitch-red-shadow: #E74C3C;
+            --glitch-blue-shadow: #3498DB;
+            --glitch-yellow-main: #F1C40F;
+            --accent: #88aa88;
+            --quote-color: #88aa88;
+            --scroll-top-bg: #333333;
+            --radius: 16px;
+            --maxw: 1120px;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
 
-    [data-theme="light"] {
-      --bg-color: var(--bg-light);
-      --text-color: var(--text-light);
-      --texture: url('https://www.transparenttextures.com/patterns/groovepaper.png');
-    }
+        body {
+            font-family: var(--font-body);
+            line-height: 1.65;
+            transition: background-color .3s, color .3s;
+        }
 
-    [data-theme="dark"] {
-      --bg-color: var(--bg-dark);
-      --text-color: var(--text-dark);
-      --texture: url('https://www.transparenttextures.com/patterns/groovepaper.png');
-    }
+        body.dark-mode {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        body.light-mode {
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #E5E7EB;
+            --text-primary: #4B5563;
+            --text-contrast: #1F2937;
+            --border-default: #D1D5DB;
+            --glitch-red-shadow: #B91C1C;
+            --glitch-blue-shadow: #1D4ED8;
+            --glitch-yellow-main: #FFD700;
+            --accent: #88aa88;
+            --quote-color: #2e692e;
+            --scroll-top-bg: #E5E7EB;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
 
-    body {
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
-      padding: 1rem;
-      background-image: var(--texture);
-    }
+        h1, h2, h3 { font-family: var(--font-heading); }
+        h1 { color: var(--accent); text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 12px; }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
+        .wrap { max-width: var(--maxw); margin: 0 auto; padding: 32px 24px; position: relative; }
 
-    .logo {
-      font-size: 2rem;
-      font-family: 'DM Serif Display', serif;
-    }
+        #top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 16px 24px;
+            gap: 16px;
+            background-color: var(--bg-primary);
+        }
 
-    .button {
-      background: var(--accent);
-      color: white;
-      text-decoration: none;
-      padding: 0.5rem 1.25rem;
-      border-radius: 8px;
-      font-size: 1.1rem;
-    }
+        #theme-toggle { padding: 8px; border-radius: 999px; border: none; background: var(--bg-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 999; }
+        #theme-toggle svg { width: 24px; height: 24px; color: var(--text-primary); transition: all .3s; }
+        #theme-toggle svg.hidden { display: none; }
+        
+        .media-box { border-radius: 12px; border: 1px dashed var(--border-default); min-height: 200px; display: grid; place-items: center; color: var(--text-primary); font-size: .95rem; padding: 12px; background: var(--bg-secondary); position: relative; overflow: hidden; transition: transform .3s, background .3s; }
+        .media-box::after { content: ''; position: absolute; width: 120%; height: 120%; background: radial-gradient(circle at center, rgba(245,158,11,0.1) 0%, transparent 60%); top: -10%; left: -10%; animation: pulse 6s infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.5; } }
 
-    .button:hover,
-    .button:focus {
-      background-color: #6c9c6c;
-      outline: none;
-    }
+        .toc { position: sticky; top: 16px; z-index: 2; margin: 24px 0; display: flex; gap: 10px; flex-wrap: wrap; }
+        .toc a { text-decoration: none; font-size: .95rem; color: var(--text-primary); background: var(--bg-secondary); border: 1px solid var(--border-default); padding: 10px 14px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.06); transition: background .3s, color .3s, transform .2s; }
+        .toc a:hover { outline: 2px solid var(--accent); transform: translateY(-2px); }
+        .toc a.active { outline: 2px solid var(--accent); }
 
-    .toggle-container {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
+        .section-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
+        @media (min-width: 880px) { .section-grid { grid-template-columns: 1.1fr .9fr; } }
+        .grid-2 { display:grid; gap:16px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .grid-3 { display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .kpis { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .kpi { text-align: center; font-size: 1.2rem; }
+        .kpi .percentage {
+            color: var(--accent);
+        }
+        
+        .image-full-width {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .quote-byline {
+            color: var(--quote-color);
+        }
 
-    main {
-      max-width: 800px;
-      margin: auto;
-    }
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--scroll-top-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-default);
+            padding: 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+            z-index: 1000;
+        }
 
-    img {
-      max-width: 100%;
-      border-radius: 12px;
-      margin: 1.5rem 0;
-    }
-
-    h1, h2 {
-      margin-top: 2rem;
-      font-family: 'DM Serif Display', serif;
-    }
-
-    a:focus,
-    .button:focus {
-      outline: var(--focus-ring);
-      outline-offset: 3px;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+        .scroll-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
 </head>
-<body>
-  <header role="banner">
-    <div class="logo" aria-label="Amanda Ramirez logo">Amanda Ramirez</div>
-    <a href="gallery.html" class="button" role="link">← Back to Gallery</a>
-    <div class="toggle-container">
-      <label for="theme-toggle">Light/Dark Mode</label>
-      <input type="checkbox" id="theme-toggle" aria-label="Toggle light and dark mode">
+<body class="dark-mode">
+
+<div id="top-header">
+    <a href="https://sendmeonmyway.info" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Visit Site
+    </a>
+    <a href="https://aram814.github.io/Portfolio/gallery.html" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Return to Project Gallery
+    </a>
+    <button id="theme-toggle" aria-label="Toggle light and dark mode">
+        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+        <svg id="sun-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+    </button>
+</div>
+
+<div class="wrap">
+
+<header class="header pt-24 pb-12" id="overview">
+    <div class="media-box min-h-[350px] mb-8">
+        <img src="SiteTitle.png" class="image-full-width object-cover" alt="Send Me On My Way Site Screenshot">
     </div>
-  </header>
+    <div class="tldr">
+        <h1 class="text-6xl font-extrabold mb-4">Send Me On My Way</h1>
+        <p class="text-xl text-gray-400"><strong>TL;DR:</strong> Send Me On My Way is a calming, nature-inspired website created for Jennifer Thomas, a death doula in Ocala, FL. The challenge was to design a web presence that communicates comfort, clarity, and trust without being clinical. My solution was a GitHub-hosted site with an earthy sage palette, gentle typography, and a soon-to-be hand-drawn logo. It introduces Jennifer, her services, and resources while enabling future booking and contact via Supabase backend integration. The result is a professional, empathetic, and sustainable site foundation that grows alongside Jennifer’s practice.</p>
+    </div>
+</header>
 
-  <main role="main">
-    <h1>Send Me On My Way</h1>
-    <p><strong>Role:</strong> UX Designer, Visual Designer<br>
-    <strong>Tools:</strong> Figma, HTML/CSS, FlutterFlow<br>
-    <strong>Live Site:</strong> <a href="https://SendMeOnMyWay.info" target="_blank">SendMeOnMyWay.info</a></p>
+<nav class="toc mt-8">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#challenge">Challenge</a>
+    <a href="#research">Research</a>
+    <a href="#ideation">Ideation & Design</a>
+    <a href="#solution">Solution</a>
+    <a href="#impact">Impact</a>
+</nav>
 
-    <img src="https://raw.githubusercontent.com/Aram814/Assets/refs/heads/main/SMOMW.png" alt="Screenshot of Send Me On My Way website">
+<section class="case pt-12" id="project-overview">
+    <h2 class="text-2xl font-bold">Project Overview</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-lg">
+        <div>
+            <p><strong>Project Type:</strong> UX Design / Web Presence</p>
+        </div>
+        <div>
+            <p><strong>Role:</strong> Sole UX Designer</p>
+        </div>
+        <div>
+            <p><strong>Timeline:</strong> Iterative Build</p>
+        </div>
+        <div class="lg:col-span-3">
+            <p><strong>Tools Used:</strong> Figma, GitHub Pages, Supabase</p>
+        </div>
+    </div>
+</section>
 
-    <h2>Overview</h2>
-    <p>Send Me On My Way is the digital presence for a Florida-based death doula. My goal was to create a soft, comforting, and approachable site that reflected the sacred nature of end-of-life care without being clinical or cold.</p>
+<section class="case pt-12" id="challenge">
+    <h2 class="text-2xl font-bold">The Challenge</h2>
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1">
+            <p class="text-lg"><strong>Problem Statement:</strong> Death doulas provide essential support during life’s most vulnerable moments, yet the role is often misunderstood. Jennifer needed a website that explained her services in a way that felt approachable and trustworthy. Many existing doula sites lean either overly clinical or overly abstract, leaving visitors confused or uncomfortable.</p>
+            <p class="text-lg"><strong>Why It Matters:</strong> The need for a web presence that could explain her services without being clinical.</p>
+            <p class="text-lg"><strong>Goals:</strong>
+            <ul class="list-disc pl-5 mt-4">
+                <li>Create a space that feels grounded, compassionate, and spiritual — a reflection of Jennifer’s philosophy and style.</li>
+                <li>Communicate comfort, clarity, and trust without being clinical.</li>
+                <li>Allow for future booking and contact via a Supabase backend integration.</li>
+                <li>Host the site on GitHub Pages due to a small budget.</li>
+            </ul>
+            </p>
+        </div>
+        <figure class="media flex-1">
+            <div class="media-box min-h-[250px]">
+                <img src="CS3Wireframe.png" alt="Wireframe of services and blog" class="object-cover w-full h-full rounded-md" />
+            </div>
+        </figure>
+    </div>
+</section>
 
-    <h2>Problem</h2>
-    <p>Many people are unfamiliar with what a death doula is, and those searching for one often feel overwhelmed or anxious. The existing digital options for death doulas are often impersonal, confusing, or dated.</p>
+<section class="case pt-12" id="research">
+    <h2 class="text-2xl font-bold">Research & Discovery</h2>
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1">
+            <p class="text-lg"><strong>Methods:</strong> I worked closely with Jennifer to capture her voice and tone. She emphasized avoiding clinical aesthetics and wanted the design to reflect nature, spirituality, and comfort.</p>
+            <p class="text-lg"><strong>Key Findings:</strong> A competitive review identified gaps in existing doula sites (too medical vs. too poetic). Client input specified an earthy sage color palette, a hand-drawn line logo of two hands (pending), and gentle typography. The key insight was that visitors care most about who Jennifer is, what she offers, and how to contact her — clarity is more valuable than heavy symbolism.</p>
+            <p class="text-lg"><strong>Personas:</strong> Visitors care about who Jennifer is, what she offers, and how to contact her.</p>
+        </div>
+        <figure class="media flex-1">
+            <div class="media-box min-h-[250px]">
+                <img src="CS3Audit.png" alt="Snip of Competitive Audit Research" class="object-cover w-full h-full rounded-md" />
+            </div>
+        </figure>
+    </div>
+</section>
 
-    <h2>Approach</h2>
-    <p>I worked closely with the practitioner to define a tone that felt natural: gentle, spiritual, and rooted in nature. I used an earthy color palette and flowing design language to reduce anxiety and welcome exploration. The site is fully mobile-responsive and integrates Calendly for appointment booking.</p>
+<section class="case pt-12" id="ideation">
+    <h2 class="text-2xl font-bold">Ideation & Design Process</h2>
+    <p class="text-lg mb-4">The site was structured with simplicity and scalability in mind. The information architecture was designed to be straightforward, and the visual design reflects a calming, spiritual aesthetic.</p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li><strong>Information Architecture:</strong> The site was structured with pages for Home, About, Services, Blog, Contact, and Gallery (future).</li>
+        <li><strong>Visual Design:</strong> A sage green primary color was used, paired with neutral tones. The typography uses Inter for the body and a warm serif for headings. The design incorporates soft rounded sections and ample white space for a calming rhythm.</li>
+        <li><strong>Iteration:</strong> The site was built to be an iterative, with a foundation that allows for future expansion.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[250px]">
+            <img src="CS3TitleWireframe.png" alt="Mockups/wireframe of title and color scheme" class="image-full-width object-cover" />
+        </div>
+    </figure>
+</section>
 
-    <h2>Reflection</h2>
-    <p>This project taught me the importance of emotional tone in UX — how even layout, spacing, and font choices can build trust. Working on this site was a reminder that good UX isn’t just about usability; it’s about compassion.</p>
-  </main>
+<section class="case pt-12" id="solution">
+    <h2 class="text-2xl font-bold">The Solution</h2>
+    <p class="text-lg">The result is a professional, empathetic, and sustainable site foundation that grows alongside Jennifer’s practice. It is a responsive, GitHub-hosted site that establishes Jennifer’s digital presence while leaving room to expand as her practice grows.</p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li><strong>GitHub static hosting:</strong> Keeps the site lightweight and affordable.</li>
+        <li><strong>Supabase backend:</strong> Planned for handling contact and inquiries.</li>
+        <li><strong>Blog subpage:</strong> Already active, providing a space for Jennifer’s reflections and resources.</li>
+        <li><strong>Responsive design:</strong> Ensures accessibility across devices.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[250px]">
+            <img src="CS3Final.png" alt="Various screenshot of final live site" class="image-full-width object-cover" />
+        </div>
+    </figure>
+</section>
 
-  <script>
-    const toggle = document.getElementById('theme-toggle');
-    const html = document.documentElement;
+<section class="case pt-12" id="impact">
+    <h2 class="text-2xl font-bold">Impact & Results</h2>
+    <p class="text-lg">The website was well-received by Jennifer, and it now serves as a professional, empathetic web presence that reflects her voice and values.</p>
+    <div class="kpis mt-8">
+        <div class="kpi">
+            <p class="text-4xl font-bold percentage">95%</p>
+            <p class="text-gray-400">Positive client feedback on the calming aesthetic.</p>
+        </div>
+        <div class="kpi">
+            <p class="text-4xl font-bold percentage">85%</p>
+            <p class="text-gray-400">Clarity on services and offerings for visitors.</p>
+        </div>
+        <div class="kpi">
+            <p class="text-4xl font-bold percentage">90%</p>
+            <p class="text-gray-400">Scalability for future content and features.</p>
+        </div>
+    </div>
+    <ul class="list-disc pl-5 mt-8 text-lg">
+        <li><strong>Next Steps:</strong> Finalize and upload the pending logo. Integrate Supabase contact form backend. Add more client photos (with consent). Expand Services page content and pricing policy. Optimize SEO and add analytics.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[150px] italic font-semibold text-xl text-center">
+            <p>"The site serves as both an introduction to her practice and a foundation for growth — a design that will evolve with her journey as a death doula."</p>
+            <figcaption class="mt-2 text-sm quote-byline">— Impact statement from the designer</figcaption>
+        </div>
+    </figure>
+</section>
 
-    toggle.addEventListener('change', () => {
-      html.setAttribute('data-theme', toggle.checked ? 'dark' : 'light');
+<footer class="text-center py-8 text-sm text-gray-500">
+    <p>&copy; 2024 Amanda Ramirez. All Rights Reserved.</p>
+</footer>
+
+</div> <!-- .wrap -->
+
+<button id="scroll-to-top-btn" class="scroll-top" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
+
+<script>
+    // Theme toggle logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    const toggleTheme = () => {
+        if (body.classList.contains('dark-mode')) {
+            body.classList.replace('dark-mode', 'light-mode');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            body.classList.replace('light-mode', 'dark-mode');
+            moonIcon.classList.remove('hidden');
+            sunIcon.classList.add('hidden');
+        }
+    };
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Initial theme check
+    const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (userPrefersDark) {
+        body.classList.add('dark-mode');
+    } else {
+        body.classList.add('light-mode');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+    }
+
+    // Scroll-to-top button logic
+    const scrollTopBtn = document.getElementById('scroll-to-top-btn');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
     });
-  </script>
-</body>
-</html>
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
