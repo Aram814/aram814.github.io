@@ -680,6 +680,28 @@
             sunIcon.classList.remove('hidden');
         }
 
+        // Add event listener to the toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            // Check if the body currently has light-mode class
+            if (body.classList.contains('light-mode')) {
+                // If it does, switch to dark mode
+                body.classList.remove('light-mode');
+                // Update local storage to remember the user's preference
+                localStorage.setItem('theme', 'dark');
+                // Show the moon icon and hide the sun icon
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            } else {
+                // If it doesn't, switch to light mode
+                body.classList.add('light-mode');
+                // Update local storage
+                localStorage.setItem('theme', 'light');
+                // Show the sun icon and hide the moon icon
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            }
+        });
+
         // Interactive Particle Effect
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
