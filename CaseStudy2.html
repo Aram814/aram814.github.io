@@ -128,9 +128,21 @@
             opacity: 1;
             pointer-events: auto;
         }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="dark-mode">
+
+<canvas id="particle-canvas"></canvas>
 
 <div id="top-header">
     <a href="https://www.figma.com/proto/rRgYJm0GHxoA1oJYZysk50/Amanda-Ramirez?node-id=255-281&t=a5tP8jUEWEp5Sf7U-1" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
@@ -381,6 +393,114 @@
             behavior: 'smooth'
         });
     });
+
+    // Particle effect logic
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: null, y: null };
+
+    function setCanvasSize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+        constructor(x, y, radius, directionX, directionY, color) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.directionX = directionX;
+            this.directionY = directionY;
+            this.color = color;
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+
+        update() {
+            if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                this.directionX = -this.directionX;
+            }
+            if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                this.directionY = -this.directionY;
+            }
+            this.x += this.directionX;
+            this.y += this.directionY;
+
+            // Mouse interaction
+            const dx = mouse.x - this.x;
+            const dy = mouse.y - this.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const maxDistance = 100;
+            const attractionForce = 0.5;
+
+            if (distance < maxDistance) {
+                const forceDirectionX = dx / distance;
+                const forceDirectionY = dy / distance;
+                this.x -= forceDirectionX * attractionForce;
+                this.y -= forceDirectionY * attractionForce;
+            }
+
+            this.draw();
+        }
+    }
+
+    function initParticles() {
+        particles = [];
+        const baseCount = (canvas.width * canvas.height) / 10000;
+        
+        // Create pink particles
+        const pinkColor = '#ff4081';
+        for (let i = 0; i < baseCount; i++) {
+            const radius = Math.random() * 2 + 1;
+            let x = Math.random() * (canvas.width - radius * 2) + radius;
+            let y = Math.random() * (canvas.height - radius * 2) + radius;
+            let directionX = (Math.random() - 0.5) * 1.5;
+            let directionY = (Math.random() - 0.5) * 1.5;
+            particles.push(new Particle(x, y, radius, directionX, directionY, pinkColor));
+        }
+
+        // Create green particles
+        const greenColor = '#8cff00';
+        for (let i = 0; i < baseCount * 1.5; i++) { // Add 50% more particles
+            const radius = Math.random() * 2 + 1;
+            let x = Math.random() * (canvas.width - radius * 2) + radius;
+            let y = Math.random() * (canvas.height - radius * 2) + radius;
+            let directionX = (Math.random() - 0.5) * 2; // Make them a bit faster
+            let directionY = (Math.random() - 0.5) * 2; // Make them a bit faster
+            particles.push(new Particle(x, y, radius, directionX, directionY, greenColor));
+        }
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+        }
+    }
+
+    window.addEventListener('resize', () => {
+        setCanvasSize();
+        initParticles();
+    });
+
+    window.addEventListener('mousemove', (event) => {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    });
+
+    window.onload = function () {
+        setCanvasSize();
+        initParticles();
+        animate();
+    };
+
 </script>
 </body>
 </html>
