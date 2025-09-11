@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CPR Ready</title>
+    <meta name="description" content="A mobile-first UX project designed to help adults learn, practice, and retain CPR skills through a clear, structured, and interactive experience." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #333333;
+            --text-primary: #BBBBBB;
+            --text-contrast: #FFFFFF;
+            --border-default: #333333;
+            --glitch-red-shadow: #E74C3C;
+            --glitch-blue-shadow: #3498DB;
+            --glitch-yellow-main: #F1C40F;
+            --accent: #e63946;
+            --quote-color: #e63946;
+            --scroll-top-bg: #333333;
+            --radius: 16px;
+            --maxw: 1120px;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.65;
+            transition: background-color .3s, color .3s;
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        body.light-mode {
+            --bg-primary: #F3F4F6;
+            --bg-secondary: #E5E7EB;
+            --text-primary: #4B5563;
+            --text-contrast: #1F2937;
+            --border-default: #D1D5DB;
+            --glitch-red-shadow: #B91C1C;
+            --glitch-blue-shadow: #1D4ED8;
+            --glitch-yellow-main: #FFD700;
+            --accent: #e63946;
+            --quote-color: #e63946;
+            --scroll-top-bg: #E5E7EB;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        h1, h2, h3 { font-family: var(--font-heading); }
+        h1 { color: var(--accent); text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin-bottom: 12px; }
+
+        .wrap { max-width: var(--maxw); margin: 0 auto; padding: 32px 24px; position: relative; }
+
+        #top-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 16px 24px;
+            gap: 16px;
+            background-color: var(--bg-primary);
+        }
+
+        #theme-toggle { padding: 8px; border-radius: 999px; border: none; background: var(--bg-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 999; }
+        #theme-toggle svg { width: 24px; height: 24px; color: var(--text-primary); transition: all .3s; }
+        #theme-toggle svg.hidden { display: none; }
+        
+        .media-box { border-radius: 12px; border: 1px dashed var(--border-default); min-height: 200px; display: grid; place-items: center; color: var(--text-primary); font-size: .95rem; padding: 12px; background: var(--bg-secondary); position: relative; overflow: hidden; transition: transform .3s, background .3s; }
+        .media-box::after { content: ''; position: absolute; width: 120%; height: 120%; background: radial-gradient(circle at center, rgba(245,158,11,0.1) 0%, transparent 60%); top: -10%; left: -10%; animation: pulse 6s infinite; }
+        @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.5; } }
+
+        .no-box-bg {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .toc { position: sticky; top: 16px; z-index: 2; margin: 24px 0; display: flex; gap: 10px; flex-wrap: wrap; }
+        .toc a { text-decoration: none; font-size: .95rem; color: var(--text-primary); background: var(--bg-secondary); border: 1px solid var(--border-default); padding: 10px 14px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.06); transition: background .3s, color .3s, transform .2s; }
+        .toc a:hover { outline: 2px solid var(--accent); transform: translateY(-2px); }
+        .toc a.active { outline: 2px solid var(--accent); }
+
+        .section-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
+        @media (min-width: 880px) { .section-grid { grid-template-columns: 1.1fr .9fr; } }
+        .grid-2 { display:grid; gap:16px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .grid-3 { display:grid; gap:16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .kpis { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .kpi { text-align: center; font-size: 1.2rem; }
+        .kpi .percentage {
+            color: var(--accent);
+        }
+        
+        .image-full-width {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+            margin: 24px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .quote-byline {
+            color: var(--quote-color);
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--scroll-top-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-default);
+            padding: 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .rotate-270 {
+            transform: rotate(270deg);
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+<canvas id="particle-canvas"></canvas>
+
+<div id="top-header">
+    <a href="https://www.figma.com/proto/aqreVbJvvgbsOiimkqVpNl/CPR-Ready%C2%A0%E2%80%93-UX-Case-Study?node-id=1-6&t=PoSstVqAVyAZVflz-1" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Launch Prototype
+    </a>
+    <a href="#" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Return to Project Gallery
+    </a>
+    <button id="theme-toggle" aria-label="Toggle light and dark mode">
+        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+        <svg id="sun-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+    </button>
+</div>
+
+<div class="wrap">
+
+<header class="header pt-24 pb-12" id="overview">
+    <div class="media-box min-h-[350px] mb-8">
+        <img src="CS5Title.png" class="image-full-width object-cover" alt="CPR Ready App Emergency Header Screenshot">
+    </div>
+    <div class="tldr">
+        <h1 class="text-6xl font-extrabold mb-4">CPR Ready</h1>
+        <p class="text-xl text-gray-400"><strong>TL;DR:</strong> CPR Ready is a mobile-first UX project designed to help adults learn, practice, and retain CPR skills through a clear, structured, and interactive experience. The app includes modules for Learning, Practicing, Tracking Progress, and Emergency Mode for real-time guidance. While no live user testing was conducted, AI-based simulations informed early usability feedback. The focus was on delivering accuracy, clarity, and preparedness to ensure confidence in life-saving situations.</p>
+    </div>
+</header>
+
+<nav class="toc mt-8">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#research">Research & Insights</a>
+    <a href="#design">Design Process</a>
+    <a href="#solution">The Solution</a>
+    <a href="#impact">Impact & Results</a>
+</nav>
+
+<section class="case pt-12" id="project-overview">
+    <h2 class="text-2xl font-bold">1. Project Overview</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-lg">
+        <div>
+            <p><strong>Goal:</strong> Create a mobile experience that makes learning and retaining CPR skills accessible, engaging, and effective.</p>
+        </div>
+        <div>
+            <p><strong>Challenge:</strong> CPR is high-stakes and time-sensitive; users need confidence in their ability to perform correctly in an emergency, even months after training. Traditional methods (in-person courses, static guides) often fail to reinforce long-term knowledge retention.</p>
+        </div>
+        <div>
+            <p><strong>Scope:</strong> Designed mobile-first in Figma. Focused on UI/UX flows for four key modules: Learn, Practice, Progress, and Emergency Mode. Created as a UX case study project, not a production-ready app.</p>
+        </div>
+    </div>
+</section>
+
+<section class="case pt-12" id="research">
+    <h2 class="text-2xl font-bold">2. Research & Insights</h2>
+    <div class="section-grid items-center">
+        <div>
+            <p class="text-lg"><strong>User Pain Points (assumed & AI-tested):</strong></p>
+            <ul class="list-disc pl-5 mt-4 text-lg">
+                <li>Forgetting CPR steps after initial training.</li>
+                <li>Lack of opportunities to practice outside of emergencies.</li>
+                <li>Overwhelming information in stressful moments.</li>
+            </ul>
+            <p class="text-lg mt-4"><strong>Constraints:</strong></p>
+            <ul class="list-disc pl-5 mt-4 text-lg">
+                <li>Extreme importance of accurate, medically sound details.</li>
+                <li>Needed balance between simplicity (for stressed users) and depth (for practice/learning).</li>
+            </ul>
+            <p class="text-lg mt-4"><strong>Testing Approach:</strong> No formal user testing. Relied on AI-based scenario testing to simulate interactions and evaluate usability.</p>
+        </div>
+        <figure class="media mx-auto">
+            <div class="media-box min-h-[250px]">
+                <img src="CS6UserPersonas.png" alt="User persona sketches and research notes" class="object-cover w-full h-full rounded-md" />
+            </div>
+        </figure>
+    </div>
+</section>
+
+<section class="case pt-12" id="design">
+    <h2 class="text-2xl font-bold">3. Design Process</h2>
+    <p class="text-lg mb-4"><strong>Ideation:</strong> Sketched wireframes for each mode (Learn, Practice, Progress, Emergency). Explored interaction flows that reduce friction during high-stress use cases.</p>
+    <p class="text-lg mt-4"><strong>Prototyping:</strong> Built in Figma with focus on clear hierarchy, bold visual cues, and simple navigation.</p>
+    <p class="text-lg mt-4"><strong>Key Decisions:</strong> Use of consistent icons and color coding across modes. Emergency Mode designed as a single-screen, step-by-step guide.</p>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[250px]">
+            <img src="CS6Wireframes.png" alt="App wireframes and design mockups for CPR Ready" class="image-full-width object-cover" />
+        </div>
+    </figure>
+</section>
+
+<section class="case pt-12" id="solution">
+    <h2 class="text-2xl font-bold">4. The Solution (Key Features)</h2>
+    <p class="text-lg">The final deliverable was a live prototype of a CPR guidance app with the following features:</p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li><strong>Learn Mode:</strong> Step-by-step lessons explaining CPR fundamentals. Simple visuals paired with concise text.</li>
+        <li><strong>Practice Mode (standout feature):</strong> Interactive exercises simulating CPR steps. Gives users a chance to rehearse and build muscle memory.</li>
+        <li><strong>Progress Mode:</strong> Tracks user learning milestones. Next steps: integrate goals, badges, and achievements to motivate retention.</li>
+        <li><strong>Emergency Mode:</strong> High-contrast, distraction-free interface. Real-time guidance in short actionable steps.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box max-h-[400px]">
+            <img src="CS6Final.png" alt="Screenshots of the CPR Ready app prototype" class="image-full-width object-cover" />
+        </div>
+    </figure>
+</section>
+
+<section class="case pt-12" id="impact">
+    <h2 class="text-2xl font-bold">5. Impact & Results</h2>
+    <p class="text-lg"><strong>Outcome:</strong> Delivered a polished Figma prototype demonstrating a mobile-first CPR training experience. Showcased how digital learning tools can reinforce life-saving skills beyond traditional training.</p>
+    <p class="text-lg mt-4"><strong>What Worked Well:</strong></p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li>Practice Mode created a unique “safe rehearsal” environment.</li>
+        <li>Emergency Mode interface reduced overwhelm with its simplicity.</li>
+    </ul>
+    <p class="text-lg mt-4"><strong>Next Steps:</strong></p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li>Explore gamification in Progress Mode (badges, streaks, achievements).</li>
+        <li>Conduct real user testing to validate usability in stress conditions.</li>
+        <li>Partner with CPR-certified organizations for medical content validation.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[150px] italic font-semibold text-xl text-center">
+            <p>“CPR Ready” proves that a simple, focused design can be the most effective tool in a crisis. By prioritizing clarity and ease of use, the app empowers people to act confidently and potentially save a life when it matters most.</p>
+        </div>
+    </figure>
+</section>
+
+<footer class="text-center py-8 text-sm text-gray-500">
+    <p>&copy; 2025 CPR Ready. All Rights Reserved.</p>
+</footer>
+
+</div> <!-- .wrap -->
+
+<button id="scroll-to-top-btn" class="scroll-top" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
+
+<script>
+    // Theme toggle logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    const toggleTheme = () => {
+        if (body.classList.contains('dark-mode')) {
+            body.classList.replace('dark-mode', 'light-mode');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            body.classList.replace('light-mode', 'dark-mode');
+            moonIcon.classList.remove('hidden');
+            sunIcon.classList.add('hidden');
+        }
+    };
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Initial theme check
+    const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (userPrefersDark) {
+        body.classList.add('dark-mode');
+        sunIcon.classList.add('hidden');
+    } else {
+        body.classList.add('light-mode');
+        moonIcon.classList.add('hidden');
+    }
+    
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // Highlight active section in TOC
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.toc a');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Scroll-to-top button logic
+    const scrollTopBtn = document.getElementById('scroll-to-top-btn');
+    const scrollThreshold = 300; // Show the button after scrolling this many pixels
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > scrollThreshold) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Particle effect logic
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: null, y: null };
+
+    function setCanvasSize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+        constructor(x, y, radius, directionX, directionY, color) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.directionX = directionX;
+            this.directionY = directionY;
+            this.color = color;
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+
+        update() {
+            if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                this.directionX = -this.directionX;
+            }
+            if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                this.directionY = -this.directionY;
+            }
+            this.x += this.directionX;
+            this.y += this.directionY;
+
+            const dx = mouse.x - this.x;
+            const dy = mouse.y - this.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const maxDistance = 100;
+            const attractionForce = 0.5;
+
+            if (distance < maxDistance) {
+                const forceDirectionX = dx / distance;
+                const forceDirectionY = dy / distance;
+                this.x -= forceDirectionX * attractionForce;
+                this.y -= forceDirectionY * attractionForce;
+            }
+
+            this.draw();
+        }
+    }
+
+    function initParticles() {
+        particles = [];
+        const baseCount = (canvas.width * canvas.height) / 15000;
+        
+        // Create first set of particles
+        const color1 = '#FC3434';
+        for (let i = 0; i < baseCount; i++) {
+            const radius = Math.random() * 2 + 1;
+            let x = Math.random() * (canvas.width - radius * 2) + radius;
+            let y = Math.random() * (canvas.height - radius * 2) + radius;
+            let directionX = (Math.random() - 0.5) * 1.5;
+            let directionY = (Math.random() - 0.5) * 1.5;
+            particles.push(new Particle(x, y, radius, directionX, directionY, color1));
+        }
+
+        // Create second set of particles
+        const color2 = '#41ECFF';
+        for (let i = 0; i < baseCount * 1.5; i++) {
+            const radius = Math.random() * 2 + 1;
+            let x = Math.random() * (canvas.width - radius * 2) + radius;
+            let y = Math.random() * (canvas.height - radius * 2) + radius;
+            let directionX = (Math.random() - 0.5) * 2;
+            let directionY = (Math.random() - 0.5) * 2;
+            particles.push(new Particle(x, y, radius, directionX, directionY, color2));
+        }
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+        }
+    }
+
+    window.addEventListener('resize', () => {
+        setCanvasSize();
+        initParticles();
+    });
+
+    window.addEventListener('mousemove', (event) => {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    });
+
+    window.onload = function () {
+        setCanvasSize();
+        initParticles();
+        animate();
+    };
+</script>
+</body>
+</html>
