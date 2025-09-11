@@ -7,6 +7,8 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         /* Define color variables for dark mode (default) */
         :root {
@@ -18,6 +20,8 @@
             --glitch-red-shadow: #E74C3C;
             --glitch-blue-shadow: #3498DB;
             --glitch-yellow-main: #F1C40F;
+            --particle-color: #B91C1C;
+            --line-color: #3498DB;
         }
 
         /* Define color variables for light mode */
@@ -30,6 +34,8 @@
             --glitch-red-shadow: #B91C1C;
             --glitch-blue-shadow: #1D4ED8;
             --glitch-yellow-main: #F59E0B;
+            --particle-color: #E74C3C;
+            --line-color: #6B7280;
         }
 
         /* Font Family */
@@ -64,7 +70,7 @@
             position: relative;
             animation: glitch-skew 8s infinite linear alternate, glitch-translate 5s infinite linear alternate;
             z-index: 20;
-            color: var(--glitch-yellow-main); /* Changed to yellow for better readability in dark mode */
+            color: var(--glitch-yellow-main);
         }
 
         .glitch-text::before,
@@ -275,6 +281,30 @@
             text-decoration: none;
             cursor: pointer;
         }
+        
+        /* New Styles for Scroll Animations */
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-animate {
+            opacity: 0;
+            transition: all 1s ease-out;
+        }
+
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: fade-in-up 1s ease-out forwards;
+        }
+        
     </style>
 </head>
 <body class="bg-[var(--bg-primary)] text-[var(--text-primary)]">
@@ -336,9 +366,13 @@
     </header>
 
     <main id="main-content">
-        <!-- Hero Section -->
-        <section id="home" class="h-screen flex items-center justify-center text-center bg-[var(--bg-secondary)] static-section pt-24">
-            <div class="container mx-auto px-6 md:px-12">
+        <!-- Hero Section with 3D Canvas -->
+        <section id="home" class="h-screen flex items-center justify-center text-center bg-[var(--bg-secondary)] static-section pt-24 relative overflow-hidden">
+            <!-- 3D Canvas -->
+            <canvas id="hero-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+            
+            <!-- Hero Content on top of the canvas -->
+            <div class="container mx-auto px-6 md:px-12 relative z-10">
                 <h1 class="text-5xl md:text-7xl font-extrabold text-[var(--text-contrast)] mb-4 leading-tight glitch-text" data-text="Crafting Digital Experiences">
                     Crafting Digital Experiences
                 </h1>
@@ -352,7 +386,7 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20 bg-[var(--bg-primary)] static-section rounded-t-xl">
+        <section id="about" class="py-20 bg-[var(--bg-primary)] static-section rounded-t-xl scroll-animate">
             <div class="container mx-auto px-6 md:px-12">
                 <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="About Me">
                     About Me
@@ -381,7 +415,7 @@
         </section>
 
         <!-- NEW Skills Section with updated categories -->
-        <section id="skills" class="py-20 bg-[var(--bg-secondary)] static-section rounded-t-xl">
+        <section id="skills" class="py-20 bg-[var(--bg-secondary)] static-section rounded-t-xl scroll-animate">
             <div class="container mx-auto px-6 md:px-12">
                 <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="My Skills">
                     My Skills
@@ -437,7 +471,7 @@
         </section>
 
         <!-- Projects Section (Limited View) -->
-        <section id="projects" class="py-20 bg-[var(--bg-primary)] static-section rounded-t-xl">
+        <section id="projects" class="py-20 bg-[var(--bg-primary)] static-section rounded-t-xl scroll-animate">
             <div class="container mx-auto px-6 md:px-12">
                 <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 text-center glitch-text" data-text="My Projects">
                     My Projects
@@ -483,7 +517,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-20 bg-[var(--bg-secondary)] static-section rounded-t-xl">
+        <section id="contact" class="py-20 bg-[var(--bg-secondary)] static-section rounded-t-xl scroll-animate">
             <div class="container mx-auto px-6 md:px-12 text-center">
                 <h2 class="text-4xl font-bold text-[var(--glitch-yellow-main)] mb-12 glitch-text" data-text="Get In Touch">
                     Get In Touch
@@ -491,15 +525,9 @@
                 <p class="text-xl text-[var(--text-primary)] mb-8 max-w-2xl mx-auto">
                     Have a project in mind or just want to chat about UX? Feel free to reach out!
                 </p>
-                <div class="flex flex-col items-center space-y-6">
-                    <a href="mailto:amandarita0814@gmail.com" class="inline-block bg-[var(--glitch-blue-shadow)] text-[var(--bg-primary)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--glitch-blue-shadow)] hover:border-[var(--glitch-yellow-main)]">
-                        Email Me
-                    </a>
-                    <a href="https://www.linkedin.com/in/amanda-r-ramirez" target="_blank" class="inline-block bg-[var(--bg-secondary)] text-[var(--text-contrast)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--border-default)] hover:border-[var(--glitch-red-shadow)]">
-                        Connect on LinkedIn
-                    </a>
-                    <!-- Add more social links if desired -->
-                </div>
+                <a href="mailto:arramirez814@gmail.com?subject=Inquiry%20from%20your%20portfolio%20website" class="inline-block bg-[var(--glitch-yellow-main)] text-[var(--bg-primary)] font-bold py-4 px-8 rounded-lg text-xl uppercase tracking-wider glitch-button border-2 border-[var(--glitch-yellow-main)] hover:border-[var(--glitch-red-shadow)]">
+                    Send Me an Email
+                </a>
             </div>
         </section>
     </main>
@@ -538,9 +566,11 @@
             <span class="close-button" onclick="closeModal('project2')" aria-label="Close">&times;</span>
             <h3 id="project2ModalTitle" class="text-3xl font-bold text-[var(--glitch-yellow-main)] mb-4">QueerSafeSpace App</h3>
             <img src="https://raw.githubusercontent.com/Aram814/QueerSafeSpace/refs/heads/main/6956decd-f27f-446d-9fd2-f06042b9fac5.png" alt="Screenshot of QueerSafeSpace app interface with map and location pins" class="w-full h-auto object-contain mb-6 rounded-lg border-2 border-[var(--glitch-blue-shadow)]">
-            <p class="text-[var(--text-primary)] mb-4">
-                A community-powered app that helps LGBTQ+ people find and share safe spaces. Currently in MVP development with FlutterFlow and Supabase, featuring a crowdsourced safety map, anonymous submissions, and crisis mode.
-            </p>
+            <div class="p-6">
+                <h3 class="text-2xl font-semibold text-[var(--text-contrast)] mb-2">QueerSafeSpace App</h3>
+                <p class="text-[var(--text-primary)] text-sm mb-4">Safety, Community, Anonymous Updates</p>
+                <p class="text-[var(--text-primary)]">A community-powered app that helps LGBTQ+ people find and share safe spaces. Currently in MVP development with FlutterFlow and Supabase, featuring a crowdsourced safety map, anonymous submissions, and crisis mode.</p>
+            </div>
             <p class="text-[var(--text-primary)] mb-4">
                 <strong>My Role:</strong> UX Designer, Concept Developer <br>
                 <strong>Methodologies:</strong> Inclusive Design Principles, User Research (Community-focused), Anonymous Reporting Systems, Location-based Services UX, Prototyping.
@@ -701,6 +731,22 @@
         const moonIcon = document.getElementById('moon-icon');
         const sunIcon = document.getElementById('sun-icon');
         const body = document.body;
+        
+        // 3D Scene and Materials (will be initialized on window load)
+        let particleMaterial;
+        let lineMaterial;
+        
+        // Function to update the 3D scene colors
+        function update3DColors() {
+            const isLightMode = body.classList.contains('light-mode');
+            if (isLightMode) {
+                particleMaterial.color.setHex(0xE74C3C);
+                lineMaterial.color.setHex(0x6B7280);
+            } else {
+                particleMaterial.color.setHex(0xB91C1C);
+                lineMaterial.color.setHex(0x3498DB);
+            }
+        }
 
         // Check for saved theme preference on page load
         const savedTheme = localStorage.getItem('theme');
@@ -724,6 +770,202 @@
                 moonIcon.classList.add('hidden');
                 sunIcon.classList.remove('hidden');
             }
+            update3DColors();
+        });
+        
+        // 3D Hero Section Logic
+        window.onload = function() {
+            const canvas = document.getElementById('hero-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            // Create a network of particles
+            const particleCount = 150;
+            const particles = new THREE.BufferGeometry();
+            const particlePositions = new Float32Array(particleCount * 3);
+            const particleVelocities = new Float32Array(particleCount * 3).fill(0); // Start with zero velocity
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                // Randomly place particles within a cube-like area
+                particlePositions[i] = (Math.random() - 0.5) * 10;
+                particlePositions[i + 1] = (Math.random() - 0.5) * 10;
+                particlePositions[i + 2] = (Math.random() - 0.5) * 10;
+            }
+
+            particles.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+            
+            // Initialize materials with current theme colors
+            const particleColor = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--particle-color'));
+            const lineColor = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--line-color'));
+
+            particleMaterial = new THREE.PointsMaterial({
+                color: particleColor,
+                size: 0.15,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending,
+                sizeAttenuation: true
+            });
+            
+            const particleSystem = new THREE.Points(particles, particleMaterial);
+            scene.add(particleSystem);
+
+            // Create lines to connect the particles
+            const lineGeometry = new THREE.BufferGeometry();
+            // Pre-allocate space for a large number of lines
+            const linePositions = new Float32Array(particleCount * particleCount * 3); 
+            lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3).setUsage(THREE.DynamicDrawUsage));
+            
+            lineMaterial = new THREE.LineBasicMaterial({
+                color: lineColor,
+                transparent: true,
+                opacity: 0.3,
+                blending: THREE.AdditiveBlending
+            });
+            
+            const lineMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+            scene.add(lineMesh);
+
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0x404040, 5);
+            scene.add(ambientLight);
+            const directionalLight1 = new THREE.DirectionalLight(0xE74C3C, 5);
+            directionalLight1.position.set(5, 5, 5);
+            scene.add(directionalLight1);
+            const directionalLight2 = new THREE.DirectionalLight(0x3498DB, 5);
+            directionalLight2.position.set(-5, -5, -5);
+            scene.add(directionalLight2);
+            
+            camera.position.z = 8;
+
+            let mouse = new THREE.Vector3();
+            const mouseRepulsionRadius = 3; 
+            const mouseRepulsionPower = 0.05; // Adjusted repulsion power
+
+            // Mouse interaction
+            document.addEventListener('mousemove', (event) => {
+                // Convert mouse position to normalized device coordinates (-1 to +1)
+                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+            
+            // Animation Loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Project mouse coordinates into 3D space
+                const mouse3D = new THREE.Vector3(mouse.x, mouse.y, 0.5).unproject(camera);
+                const raycaster = new THREE.Raycaster(camera.position, mouse3D.sub(camera.position).normalize());
+                const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0); // An imaginary plane at z=0
+                const targetPoint = new THREE.Vector3();
+                raycaster.ray.intersectPlane(plane, targetPoint);
+                
+                let p = particles.attributes.position.array;
+                let v = particleVelocities;
+                
+                // Calculate repulsion force and update velocities
+                for (let i = 0; i < p.length; i += 3) {
+                    const particlePos = new THREE.Vector3(p[i], p[i+1], p[i+2]);
+                    const distance = particlePos.distanceTo(targetPoint);
+
+                    if (distance < mouseRepulsionRadius) {
+                        // Calculate repulsion force
+                        const repulsionVector = particlePos.clone().sub(targetPoint).normalize();
+                        
+                        // Apply force to velocity, weighted by distance
+                        const forceFactor = (mouseRepulsionRadius - distance) / mouseRepulsionRadius;
+                        v[i] += repulsionVector.x * forceFactor * mouseRepulsionPower;
+                        v[i+1] += repulsionVector.y * forceFactor * mouseRepulsionPower;
+                        v[i+2] += repulsionVector.z * forceFactor * mouseRepulsionPower;
+                    }
+                }
+                
+                // Update particle positions based on their velocity and apply damping
+                for (let i = 0; i < p.length; i += 3) {
+                    // Update position
+                    p[i] += v[i];
+                    p[i + 1] += v[i + 1];
+                    p[i + 2] += v[i + 2];
+                    
+                    // Apply a damping factor to slow down the particles
+                    v[i] *= 0.95;
+                    v[i+1] *= 0.95;
+                    v[i+2] *= 0.95;
+                    
+                    // Bounce off imaginary box walls
+                    if (Math.abs(p[i]) > 5) v[i] *= -1;
+                    if (Math.abs(p[i+1]) > 5) v[i+1] *= -1;
+                    if (Math.abs(p[i+2]) > 5) v[i+2] *= -1;
+                }
+                
+                // Update line connections
+                let lineIndex = 0;
+                const maxDistance = 2.5;
+                for (let i = 0; i < particleCount; i++) {
+                    for (let j = i + 1; j < particleCount; j++) {
+                        // Calculate distance between particles
+                        const dist = Math.sqrt(
+                            Math.pow(p[i * 3] - p[j * 3], 2) +
+                            Math.pow(p[i * 3 + 1] - p[j * 3 + 1], 2) +
+                            Math.pow(p[i * 3 + 2] - p[j * 3 + 2], 2)
+                        );
+
+                        // Only draw a line if particles are close
+                        if (dist < maxDistance) {
+                            const opacity = (1 - dist / maxDistance) * 0.5;
+                            lineMesh.material.opacity = opacity;
+
+                            linePositions[lineIndex++] = p[i * 3];
+                            linePositions[lineIndex++] = p[i * 3 + 1];
+                            linePositions[lineIndex++] = p[i * 3 + 2];
+
+                            linePositions[lineIndex++] = p[j * 3];
+                            linePositions[lineIndex++] = p[j * 3 + 1];
+                            linePositions[lineIndex++] = p[j * 3 + 2];
+                        }
+                    }
+                }
+                
+                // Set the draw range to only render the connected lines
+                lineGeometry.setDrawRange(0, lineIndex);
+                
+                // Update the geometry
+                particles.attributes.position.needsUpdate = true;
+                lineGeometry.attributes.position.needsUpdate = true;
+                
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Handle window resizing
+            window.addEventListener('resize', () => {
+                const newWidth = window.innerWidth;
+                const newHeight = window.innerHeight;
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, newHeight);
+            });
+        };
+
+        // Scroll animation logic with Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Stop observing once it's visible to save resources
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, {
+            threshold: 0.1, // Trigger when 10% of the element is visible
+        });
+
+        // Select all sections with the scroll-animate class
+        const sections = document.querySelectorAll('.scroll-animate');
+        sections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
