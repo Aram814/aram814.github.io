@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Women's Fellowship – Case Study | Amanda Ramirez</title>
-    <meta name="description" content="A live website built to replace a physical bulletin board. The digital bulletin was created to be accessible and easy-to-use for elderly women." />
+    <title>CPR Ready</title>
+    <meta name="description" content="A mobile-first UX project designed to help adults learn, practice, and retain CPR skills through a clear, structured, and interactive experience." />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -17,8 +17,8 @@
             --glitch-red-shadow: #E74C3C;
             --glitch-blue-shadow: #3498DB;
             --glitch-yellow-main: #F1C40F;
-            --accent: #caa72d;
-            --quote-color: #caa72d;
+            --accent: #e63946;
+            --quote-color: #e63946;
             --scroll-top-bg: #333333;
             --radius: 16px;
             --maxw: 1120px;
@@ -46,8 +46,8 @@
             --glitch-red-shadow: #B91C1C;
             --glitch-blue-shadow: #1D4ED8;
             --glitch-yellow-main: #FFD700;
-            --accent: #922a2a;
-            --quote-color: #922a2a;
+            --accent: #e63946;
+            --quote-color: #e63946;
             --scroll-top-bg: #E5E7EB;
             background-color: var(--bg-primary);
             color: var(--text-primary);
@@ -155,10 +155,10 @@
 <canvas id="particle-canvas"></canvas>
 
 <div id="top-header">
-    <a href="https://aram814.github.io/First_Love_Church/" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
-        Visit Site
+    <a href="https://www.figma.com/proto/aqreVbJvvgbsOiimkqVpNl/CPR-Ready%C2%A0%E2%80%93-UX-Case-Study?node-id=1-6&t=PoSstVqAVyAZVflz-1" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Launch Prototype
     </a>
-    <a href="https://aram814.github.io/gallery.html" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+    <a href="../gallery.html" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
         Return to Project Gallery
     </a>
     <button id="theme-toggle" aria-label="Toggle light and dark mode">
@@ -175,138 +175,113 @@
 
 <header class="header pt-24 pb-12" id="overview">
     <div class="media-box min-h-[350px] mb-8">
-        <img src="CS5SiteHeader.png" class="image-full-width object-cover" alt="Women's Fellowship Website Header">
+        <img src="../../assets/images/CS6Title.png" class="image-full-width object-cover" alt="CPR Ready App Emergency Header Screenshot">
     </div>
     <div class="tldr">
-        <h1 class="text-6xl font-extrabold mb-4">Women's Fellowship</h1>
-        <p class="text-xl text-gray-400"><strong>Project Summary:</strong> The Women’s Fellowship Bulletin is a live website built to replace a vandalized physical bulletin board. The challenge was to create an accessible, easy-to-use digital bulletin for elderly women with minimal-to-average tech experience. My solution was a simple, React-based site hosted on GitHub with Supabase handling backend data. Information was collected in-person, digitized, and then published online. The result is a secure, accessible, and maintainable platform that improves communication and community engagement.</p>
+        <h1 class="text-6xl font-extrabold mb-4">CPR Ready</h1>
+        <p class="text-xl text-gray-400"><strong>TL;DR:</strong> CPR Ready is a mobile-first UX project designed to help adults learn, practice, and retain CPR skills through a clear, structured, and interactive experience. The app includes modules for Learning, Practicing, Tracking Progress, and Emergency Mode for real-time guidance. While no live user testing was conducted, AI-based simulations informed early usability feedback. The focus was on delivering accuracy, clarity, and preparedness to ensure confidence in life-saving situations.</p>
     </div>
 </header>
 
 <nav class="toc mt-8">
     <a href="#overview" class="active">Overview</a>
-    <a href="#challenge">Challenge</a>
-    <a href="#research">Research</a>
-    <a href="#design">Design</a>
-    <a href="#solution">Solution</a>
-    <a href="#impact">Impact</a>
+    <a href="#research">Research & Insights</a>
+    <a href="#design">Design Process</a>
+    <a href="#solution">The Solution</a>
+    <a href="#impact">Impact & Results</a>
 </nav>
 
 <section class="case pt-12" id="project-overview">
-    <h2 class="text-2xl font-bold">Project Overview</h2>
+    <h2 class="text-2xl font-bold">1. Project Overview</h2>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-lg">
         <div>
-            <p><strong>Project Type:</strong> Live Website / UX Design</p>
+            <p><strong>Goal:</strong> Create a mobile experience that makes learning and retaining CPR skills accessible, engaging, and effective.</p>
         </div>
         <div>
-            <p><strong>Role:</strong> UX Designer & Developer</p>
+            <p><strong>Challenge:</strong> CPR is high-stakes and time-sensitive; users need confidence in their ability to perform correctly in an emergency, even months after training. Traditional methods (in-person courses, static guides) often fail to reinforce long-term knowledge retention.</p>
         </div>
         <div>
-            <p><strong>Tools Used:</strong> React, Supabase, GitHub Pages</p>
+            <p><strong>Scope:</strong> Designed mobile-first in Figma. Focused on UI/UX flows for four key modules: Learn, Practice, Progress, and Emergency Mode. Created as a UX case study project, not a production-ready app.</p>
         </div>
-    </div>
-</section>
-
-<section class="case pt-12" id="challenge">
-    <h2 class="text-2xl font-bold">The Challenge</h2>
-    <div class="flex flex-col md:flex-row gap-6 items-center">
-        <div class="flex-1">
-            <p class="text-lg"><strong>Problem Statement:</strong> The original bulletin board was unreliable (prone to vandalism) and inaccessible to women who weren’t physically present.</p>
-            <p class="text-lg"><strong>Why It Matters:</strong> The bulletin was the group’s main communication tool. Without it, members missed important updates and events.</p>
-            <p class="text-lg"><strong>Constraints:</strong> Audience included elderly women with limited tech literacy, so design needed to prioritize simplicity and accessibility.</p>
-        </div>
-        <figure class="media flex-1">
-            <div class="media-box min-h-[200px] no-box-bg">
-                <img src="CS5UserPersonas.png" alt="User Personas" class="object-cover w-full h-full rounded-md" />
-            </div>
-        </figure>
     </div>
 </section>
 
 <section class="case pt-12" id="research">
-    <h2 class="text-2xl font-bold">Research & Discovery</h2>
+    <h2 class="text-2xl font-bold">2. Research & Insights</h2>
     <div class="section-grid items-center">
         <div>
-            <p class="text-lg"><strong>Data Gathering:</strong> Information was initially collected in person and on paper before being digitized.</p>
-            <p class="text-lg"><strong>Audience Needs:</strong></p>
+            <p class="text-lg"><strong>User Pain Points (assumed & AI-tested):</strong></p>
             <ul class="list-disc pl-5 mt-4 text-lg">
-                <li>Clear, readable typography</li>
-                <li>Minimal navigation steps</li>
-                <li>Accessible contrast and layout</li>
-                <li>Works across devices, especially basic laptops/phones</li>
+                <li>Forgetting CPR steps after initial training.</li>
+                <li>Lack of opportunities to practice outside of emergencies.</li>
+                <li>Overwhelming information in stressful moments.</li>
             </ul>
-            <p class="text-lg mt-4"><strong>Reference:</strong> The church’s main website provided context for tone and style but the bulletin was created independently to focus on the fellowship’s needs.</p>
-            <p class="text-lg mt-4"><strong>Key Insight:</strong> The community valued reliability and clarity over advanced design features.</p>
+            <p class="text-lg mt-4"><strong>Constraints:</strong></p>
+            <ul class="list-disc pl-5 mt-4 text-lg">
+                <li>Extreme importance of accurate, medically sound details.</li>
+                <li>Needed balance between simplicity (for stressed users) and depth (for practice/learning).</li>
+            </ul>
+            <p class="text-lg mt-4"><strong>Testing Approach:</strong> No formal user testing. Relied on AI-based scenario testing to simulate interactions and evaluate usability.</p>
         </div>
         <figure class="media mx-auto">
             <div class="media-box min-h-[250px]">
-                <img src="MeetingWireframe.png" alt="Hand-drawn Wireframe" class="object-cover w-full h-full rounded-md" />
+                <img src="../../assets/images/CS6UserPersonas.png" alt="User persona sketches and research notes" class="object-cover w-full h-full rounded-md" />
             </div>
         </figure>
     </div>
 </section>
 
 <section class="case pt-12" id="design">
-    <h2 class="text-2xl font-bold">Design Process</h2>
-    <p class="text-lg mb-4"><strong>Approach:</strong></p>
-    <ul class="list-disc pl-5 mt-4 text-lg">
-        <li>Started with hand sketches to define layout and flow.</li>
-        <li>Developed in React with hosting on GitHub Pages.</li>
-        <li>Integrated Supabase as a backend database for bulletin updates.</li>
-    </ul>
-    <p class="text-lg mt-4"><strong>Design Considerations:</strong></p>
-    <ul class="list-disc pl-5 mt-4 text-lg">
-        <li>Accessibility: WCAG-guided choices — large fonts, strong contrast, simple menus.</li>
-        <li>Ease of Use: Minimal clicks to reach announcements, calendar, or resources.</li>
-        <li>Scalability: Designed so fellowship leaders could eventually manage updates themselves.</li>
-    </ul>
+    <h2 class="text-2xl font-bold">3. Design Process</h2>
+    <p class="text-lg mb-4"><strong>Ideation:</strong> Sketched wireframes for each mode (Learn, Practice, Progress, Emergency). Explored interaction flows that reduce friction during high-stress use cases.</p>
+    <p class="text-lg mt-4"><strong>Prototyping:</strong> Built in Figma with focus on clear hierarchy, bold visual cues, and simple navigation.</p>
+    <p class="text-lg mt-4"><strong>Key Decisions:</strong> Use of consistent icons and color coding across modes. Emergency Mode designed as a single-screen, step-by-step guide.</p>
     <figure class="media mt-8">
         <div class="media-box min-h-[250px]">
-            <img src="CS5Wireframes.png" alt="Multiple screenshots of production of Women's Fellowship website" class="image-full-width object-cover" />
+            <img src="../../assets/images/CS6Wireframes.png" alt="App wireframes and design mockups for CPR Ready" class="image-full-width object-cover" />
         </div>
     </figure>
 </section>
 
 <section class="case pt-12" id="solution">
-    <h2 class="text-2xl font-bold">The Solution</h2>
-    <p class="text-lg">The final deliverable was a live website replacing the unreliable physical bulletin board.</p>
+    <h2 class="text-2xl font-bold">4. The Solution (Key Features)</h2>
+    <p class="text-lg">The final deliverable was a live prototype of a CPR guidance app with the following features:</p>
     <ul class="list-disc pl-5 mt-4 text-lg">
-        <li><strong>Core features:</strong> Event listings, announcements, scripture/devotional content, resources.</li>
-        <li><strong>Backend:</strong> Supabase database for storing and managing updates.</li>
-        <li><strong>Frontend:</strong> Clean React interface, responsive and accessible.</li>
-        <li><strong>Hosting:</strong> GitHub Pages for reliability and cost-effectiveness.</li>
+        <li><strong>Learn Mode:</strong> Step-by-step lessons explaining CPR fundamentals. Simple visuals paired with concise text.</li>
+        <li><strong>Practice Mode (standout feature):</strong> Interactive exercises simulating CPR steps. Gives users a chance to rehearse and build muscle memory.</li>
+        <li><strong>Progress Mode:</strong> Tracks user learning milestones. Next steps: integrate goals, badges, and achievements to motivate retention.</li>
+        <li><strong>Emergency Mode:</strong> High-contrast, distraction-free interface. Real-time guidance in short actionable steps.</li>
     </ul>
     <figure class="media mt-8">
         <div class="media-box max-h-[400px]">
-            <img src="CS5Final.png" alt="Screenshot of the Women's Fellowship website" class="image-full-width object-cover" />
+            <img src="../../assets/images/CS6Final.png" alt="Screenshots of the CPR Ready app prototype" class="image-full-width object-cover" />
         </div>
     </figure>
 </section>
 
 <section class="case pt-12" id="impact">
-    <h2 class="text-2xl font-bold">Impact & Results</h2>
+    <h2 class="text-2xl font-bold">5. Impact & Results</h2>
+    <p class="text-lg"><strong>Outcome:</strong> Delivered a polished Figma prototype demonstrating a mobile-first CPR training experience. Showcased how digital learning tools can reinforce life-saving skills beyond traditional training.</p>
+    <p class="text-lg mt-4"><strong>What Worked Well:</strong></p>
     <ul class="list-disc pl-5 mt-4 text-lg">
-        <p><li>The Women’s Fellowship Bulletin transformed a vandalized, unreliable bulletin board into a sustainable, accessible, and community-driven website. </li>
-        <li>Members now have consistent access to fellowship updates regardless of location.</li></p>
-        <p><li>It empowers members with consistent updates, strengthens connection, and makes communication inclusive for elderly women navigating digital tools.</li>
-        <li>Elderly members report being able to navigate the site more easily than expected due to its simplicity.</li></p>
+        <li>Practice Mode created a unique “safe rehearsal” environment.</li>
+        <li>Emergency Mode interface reduced overwhelm with its simplicity.</li>
     </ul>
     <p class="text-lg mt-4"><strong>Next Steps:</strong></p>
     <ul class="list-disc pl-5 mt-4 text-lg">
-        <li>Gather additional feedback from group members.</li>
-        <li>Provide training sessions so leaders can confidently update content themselves.</li>
-        <li>Continue monitoring Supabase backend and GitHub hosting for maintenance.</li>
-        <li>Explore adding optional print-friendly exports for members who prefer paper.</li>
+        <li>Explore gamification in Progress Mode (badges, streaks, achievements).</li>
+        <li>Conduct real user testing to validate usability in stress conditions.</li>
+        <li>Partner with CPR-certified organizations for medical content validation.</li>
     </ul>
     <figure class="media mt-8">
         <div class="media-box min-h-[150px] italic font-semibold text-xl text-center">
-            <p>"Thank you, Amanda! This is a great way for us to start building our community!" - Church Member</p>
+            <p>“CPR Ready” proves that a simple, focused design can be the most effective tool in a crisis. By prioritizing clarity and ease of use, the app empowers people to act confidently and potentially save a life when it matters most.</p>
         </div>
     </figure>
 </section>
 
 <footer class="text-center py-8 text-sm text-gray-500">
-    <p>&copy; 2025 Amanda Ramirez. All Rights Reserved.</p>
+    <p>&copy; 2025 CPR Ready. All Rights Reserved.</p>
 </footer>
 
 </div> <!-- .wrap -->
@@ -458,7 +433,7 @@
         const baseCount = (canvas.width * canvas.height) / 15000;
         
         // Create first set of particles
-        const color1 = '#922a2a';
+        const color1 = '#FC3434';
         for (let i = 0; i < baseCount; i++) {
             const radius = Math.random() * 2 + 1;
             let x = Math.random() * (canvas.width - radius * 2) + radius;
@@ -469,7 +444,7 @@
         }
 
         // Create second set of particles
-        const color2 = '#caa72d';
+        const color2 = '#41ECFF';
         for (let i = 0; i < baseCount * 1.5; i++) {
             const radius = Math.random() * 2 + 1;
             let x = Math.random() * (canvas.width - radius * 2) + radius;
