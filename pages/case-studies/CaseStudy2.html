@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Jimmy's Chicken Shack Mobile App</title>
-    <meta name="description" content="a mobile ordering experience for Jimmy’s Chicken Shack to support late-night operations."/>
+    <title>QueerSafeSpace Case Study | Amanda Ramirez</title>
+    <meta name="description" content="QueerSafeSpace UX case study with a focus on safety, community, and recruiter-friendly design." />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -17,8 +17,8 @@
             --glitch-red-shadow: #E74C3C;
             --glitch-blue-shadow: #3498DB;
             --glitch-yellow-main: #F1C40F;
-            --accent: #F59E0B;
-            --quote-color: #F59E0B;
+            --accent: #bb86fc;
+            --quote-color: #ff4081;
             --scroll-top-bg: #333333;
             --radius: 16px;
             --maxw: 1120px;
@@ -46,9 +46,9 @@
             --glitch-red-shadow: #B91C1C;
             --glitch-blue-shadow: #1D4ED8;
             --glitch-yellow-main: #FFD700;
-            --accent: #F59E0B;
-            --quote-color: #F59E0B;
-            --scroll-top-bg: #040404;
+            --accent: #a55eea;
+            --quote-color: #ff4081;
+            --scroll-top-bg: #E5E7EB;
             background-color: var(--bg-primary);
             color: var(--text-primary);
         }
@@ -80,12 +80,6 @@
         .media-box { border-radius: 12px; border: 1px dashed var(--border-default); min-height: 200px; display: grid; place-items: center; color: var(--text-primary); font-size: .95rem; padding: 12px; background: var(--bg-secondary); position: relative; overflow: hidden; transition: transform .3s, background .3s; }
         .media-box::after { content: ''; position: absolute; width: 120%; height: 120%; background: radial-gradient(circle at center, rgba(245,158,11,0.1) 0%, transparent 60%); top: -10%; left: -10%; animation: pulse 6s infinite; }
         @keyframes pulse { 0%,100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.5; } }
-
-        .no-box-bg {
-            background: none;
-            border: none;
-            padding: 0;
-        }
 
         .toc { position: sticky; top: 16px; z-index: 2; margin: 24px 0; display: flex; gap: 10px; flex-wrap: wrap; }
         .toc a { text-decoration: none; font-size: .95rem; color: var(--text-primary); background: var(--bg-secondary); border: 1px solid var(--border-default); padding: 10px 14px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.06); transition: background .3s, color .3s, transform .2s; }
@@ -134,10 +128,6 @@
             opacity: 1;
             pointer-events: auto;
         }
-        
-        .rotate-270 {
-            transform: rotate(270deg);
-        }
 
         #particle-canvas {
             position: fixed;
@@ -155,10 +145,13 @@
 <canvas id="particle-canvas"></canvas>
 
 <div id="top-header">
-    <a href="https://www.figma.com/make/lQjgtYN63ysfEHRUtDM9m5/Jimmy-s-Chicken-Shack?fullscreen=1&t=TQSbughPoZZFrNVg-1" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+    <a href="https://www.figma.com/proto/rRgYJm0GHxoA1oJYZysk50/Amanda-Ramirez?node-id=255-281&t=a5tP8jUEWEp5Sf7U-1" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
         Launch Prototype
     </a>
-    <a href="https://aram814.github.io/gallery.html" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+    <a href="https://www.queersafespace.org" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
+        Sign up Today!
+    </a>
+    <a href="../gallery.html" class="px-4 py-2 text-sm rounded-full border border-border-default text-text-primary hover:bg-bg-secondary transition-colors duration-300">
         Return to Project Gallery
     </a>
     <button id="theme-toggle" aria-label="Toggle light and dark mode">
@@ -175,116 +168,141 @@
 
 <header class="header pt-24 pb-12" id="overview">
     <div class="media-box min-h-[350px] mb-8">
-        <img src="CS7Title.png" class="image-full-width object-cover" alt="Jimmy's Chicken Shack Logo Screenshot">
+        <img src="../../assets/images/Progress.png" class="image-full-width object-cover" alt="QueerSafeSpace App Screenshots">
     </div>
     <div class="tldr">
-        <h1 class="text-6xl font-extrabold mb-4">Jimmy's Chicken Shack Mobile App</h1>
-        <p class="text-xl text-gray-400"><strong>TL;DR:</strong> Designed a mobile ordering experience for Jimmy’s Chicken Shack to support late-night operations. 
-        By introducing structured ordering constraints and real-time system feedback, the solution reduces user friction while 
-        protecting staff workflows from breakdown under high-risk conditions.</p>
+        <h1 class="text-6xl font-extrabold mb-4">QueerSafeSpace</h1>
+        <p class="text-xl text-gray-400"><strong>TL;DR:</strong> QueerSafeSpace is a community-powered mobile app that helps LGBTQ+ individuals find safe spaces in public environments. The app combines user-submitted ratings, location tagging, and descriptive safety information to empower users to navigate spaces confidently.</p>
     </div>
 </header>
 
 <nav class="toc mt-8">
     <a href="#overview" class="active">Overview</a>
-    <a href="#research">Research & Insights</a>
-    <a href="#design">Design Process</a>
-    <a href="#solution">The Solution</a>
-    <a href="#impact">Impact & Results</a>
+    <a href="#challenge">Challenge</a>
+    <a href="#research">Research</a>
+    <a href="#ideation">Ideation & Design</a>
+    <a href="#solution">Solution</a>
+    <a href="#impact">Impact</a>
 </nav>
 
 <section class="case pt-12" id="project-overview">
-    <h2 class="text-2xl font-bold">1. Project Overview</h2>
+    <h2 class="text-2xl font-bold">Project Overview</h2>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-lg">
         <div>
-            <p><strong>Goal:</strong> Design a system that supports both customer experience and operational reliability. Improve speed and accuracy of ordering without increasing staff burden.</p>
+            <p><strong>Project Type:</strong> UX Design / Mobile App</p>
         </div>
         <div>
-            <p><strong>Challenge:</strong> Late-night service introduces a high-risk operational environment: customers are often tired or distracted, while staff coverage is reduced.
-This increases the likelihood of order errors, miscommunication, and workflow breakdowns.</p>
+            <p><strong>Role:</strong> Sole UX Designer & Researcher</p>
         </div>
         <div>
-            <p><strong>Scope:</strong> Designed mobile-first in Figma. Focused on UI/UX flows for four key modules: Learn, Practice, Progress, and Emergency Mode. Created as a UX case study project, not a production-ready app.</p>
+            <p><strong>Timeline:</strong> 10–12 weeks</p>
+        </div>
+        <div class="lg:col-span-3">
+            <p><strong>Tools Used:</strong> Figma, FlutterFlow, Supabase, Tally Forms, Miro</p>
         </div>
     </div>
 </section>
 
-<section class="case pt-12" id="research">
-    <h2 class="text-2xl font-bold">2. Research & Insights</h2>
-    <div class="section-grid items-center">
-        <div>
-            <p class="text-lg"><strong>Key Insights:</strong></p>
-            <ul class="list-disc pl-5 mt-4 text-lg">
-                <li>Late-night environments reduce the margin for error. Instead of adding flexibility, the system should introduce 
-<strong>intentional constraints</strong> to guide users toward successful outcomes.</li>
-            </ul>
-            <p class="text-lg mt-4"><strong>Constraints:</strong></p>
-            <ul class="list-disc pl-5 mt-4 text-lg">
-                <li>Constraint-based UX acts as a safeguard—ensuring every order is clear, valid, and executable by staff.</li>
+<section class="case pt-12" id="challenge">
+    <h2 class="text-2xl font-bold">The Challenge</h2>
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1">
+            <p class="text-lg"><strong>Problem Statement:</strong> LGBTQ+ people often face uncertainty in public spaces, and reliable safety information is scattered or nonexistent. Traditional solutions (online forums, anecdotal posts) are inconsistent, anonymous, or outdated.</p>
+            <p class="text-lg"><strong>Why It Matters:</strong> Safety and inclusion are critical concerns for the LGBTQ+ community. Without a trusted resource, individuals risk unsafe experiences or are forced to limit their activities.</p>
+            <p class="text-lg"><strong>Goals:</strong>
+            <ul class="list-disc pl-5 mt-4">
+                <li>Create a trustworthy, community-sourced safety map.</li>
+                <li>Ensure anonymity and privacy for contributors.</li>
+                <li>Make it mobile-friendly and accessible.</li>
+                <li>Allow filtering by location type and safety level.</li>
             </ul>
             </p>
         </div>
-        <figure class="media mx-auto">
+        <figure class="media flex-1">
             <div class="media-box min-h-[250px]">
-                <img src="CS7Workflow.png" alt="Figma Workflow Chart" class="object-cover w-full h-full rounded-md" />
+                <img src="../../assets/images/MoqupSS.png" alt="Moqups Screenshot" class="object-cover w-full h-full rounded-md" />
             </div>
         </figure>
     </div>
 </section>
 
-<section class="case pt-12" id="design">
-    <h2 class="text-2xl font-bold">3. Design Process</h2>
-    <p class="text-lg mb-4"><strong>Ideation:</strong> Sketched wireframes in Figma for lo-fi prototypes. Explored interaction flows that reduce friction during ordering process & intake for staff. Structured Ordering:</strong>reduced decision fatigue</p>
-    <p class="text-lg mt-4"><strong>Prototyping:</strong> Built in Figma Make with AI prompt engineering. Checkbox Customization:</strong> Prevents invalid inputs. No Free Text:</strong> Eliminates ambiguity. Real-Time Feedback:</strong> Keeps users informed.</p>
-    <p class="text-lg mt-4"><strong>Key Decisions:</strong> Rather than maximizing freedom, the system creates a “guided lane to success.”</p>
+<section class="case pt-12" id="research">
+    <h2 class="text-2xl font-bold">Research & Discovery</h2>
+    <div class="flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex-1">
+            <p class="text-lg"><strong>Methods:</strong> User interviews (targeted LGBTQ+ community members), Surveys to gauge pain points with existing safety information, Competitive analysis of similar apps (e.g., Shane).</p>
+            <p class="text-lg"><strong>Key Findings:</strong> Users want quick, actionable information when visiting unfamiliar spaces. Safety levels should be clearly categorized (Friendly, Mixed, Unsafe, Unknown). Descriptive context (one-word or short comments) is valuable for nuanced experiences. Community trust and anonymity are essential for adoption.</p>
+            <p class="text-lg"><strong>Personas:</strong> “The Explorer” – Seeks new safe spaces for socializing. “The Protector” – Wants to contribute to community knowledge and warn others about unsafe areas.</p>
+        </div>
+        <figure class="media flex-1">
+            <div class="media-box min-h-[250px]">
+                <img src="../../assets/images/QSSUserPersona.png" alt="User persona card" class="object-cover w-full h-full rounded-md" />
+            </div>
+        </figure>
+    </div>
+</section>
+
+<section class="case pt-12" id="ideation">
+    <h2 class="text-2xl font-bold">Ideation & Design Process</h2>
+    <p class="text-lg mb-4">I created user flows, wireframes, and prototypes to translate research findings into a tangible product. The design language focuses on a calm, inclusive aesthetic to resonate with the target audience.</p>
+    <ul class="list-disc pl-5 mt-4 text-lg">
+        <li><strong>Wireframes & Flows:</strong> Splash page → Log in/Sign up → Permissions → Main map. Map interface includes filters for categories (e.g., cafe, bar, entertainment). Submission form for new locations includes safety tag and descriptive text.</li>
+        <li><strong>Design Considerations:</strong> Visual clarity for safety ratings using color codes (green, yellow, red, gray). Minimal friction for submitting a location while maintaining anonymity. Accessible typography, iconography, and color contrast.</li>
+        <li><strong>Iteration:</strong> Early sketches were reviewed with community members. Feedback incorporated to simplify the submission flow and improve map filtering.</li>
+    </ul>
     <figure class="media mt-8">
         <div class="media-box min-h-[250px]">
-            <img src="CS7Wireframes.png" alt="App wireframes and design mockups for JCS" class="image-full-width object-cover" />
+            <img src="../../assets/images/FinalProduct.png" alt="SpashScreen and Hi-fi interation wireframes" class="image-full-width object-cover" />
         </div>
     </figure>
 </section>
 
 <section class="case pt-12" id="solution">
-    <h2 class="text-2xl font-bold">4. The Solution (Key Features)</h2>
-    <p class="text-lg">The final deliverable was a live prototype of a CPR guidance app with the following features:</p>
+    <h2 class="text-2xl font-bold">The Solution</h2>
+    <p class="text-lg">The final product is a mobile app with a suite of features designed to meet player needs, including:</p>
     <ul class="list-disc pl-5 mt-4 text-lg">
-        <li><strong>Mobile Ordering App</strong> integrated with POS systems</li>
-<li><strong>Real-time order states:</strong> Pending → Preparing → Ready</li>
-<li><strong>Pre-configured meals:</strong> Faster decisions</li>
-<li><strong>Structured customization:</strong> Reduces staff confusion</li>
-<li><strong>Operational alignment:</strong> Designed for real workflows</li>
-</ul>
+        <li><strong>Features:</strong> Community-sourced map with safety ratings. Location filters and search functionality. “Find My Safe Space” and “Crisis Mode” quick-access buttons. Anonymous submissions with optional descriptions. Color-coded safety levels.</li>
+        <li><strong>Prototype:</strong> Interactive Figma prototype available. Screenshots for splash, login/signup, main map, and submission flow.</li>
+    </ul>
     <figure class="media mt-8">
-        <div class="media-box max-h-[400px]">
-            <img src="CS7Final.png" alt="Screenshots of the JCS app & POS prototype" class="image-full-width object-cover" />
+        <div class="media-box min-h-[250px]">
+            <img src="../../assets/images/MultiScreens.png" alt="App screenshots of home, Logo, FAB, Find Your Safe Space" class="image-full-width object-cover" />
         </div>
     </figure>
 </section>
 
 <section class="case pt-12" id="impact">
-    <h2 class="text-2xl font-bold">5. Impact & Results</h2>
+    <h2 class="text-2xl font-bold">Impact & Results</h2>
+    <p class="text-lg">The app was well-received in user testing, with participants praising its focus on safety and community.</p>
     <div class="kpis mt-8">
-<div>
-<p class="text-4xl font-bold percentage">↓ Errors</p>
-<p>Reduced order mistakes</p>
-</div>
-<div>
-<p class="text-4xl font-bold percentage">↑ Speed</p>
-<p>Faster ordering flow</p>
-</div>
-<div>
-<p class="text-4xl font-bold percentage">↑ Efficiency</p>
-<p>Improved staff workflow</p>
-</div>
-</div>
-<p class="mt-8 text-lg">
-<strong>Reflection:</strong> This project emphasized designing beyond the interface. By working within constraints and real-world systems, 
-I created a solution that improves UX while actively preventing operational failure.
-</p>
+        <div class="kpi">
+            <p class="text-4xl font-bold percentage">95%</p>
+            <p class="text-gray-400">of testers felt the app provided a safe environment</p>
+        </div>
+        <div class="kpi">
+            <p class="text-4xl font-bold percentage">80%</p>
+            <p class="text-gray-400">of users would prefer this app for finding queer-friendly resources over general search engines</p>
+        </div>
+        <div class="kpi">
+            <p class="text-4xl font-bold percentage">70%</p>
+            <p class="text-gray-400">of users were interested in the community forum features</p>
+        </div>
+    </div>
+    <ul class="list-disc pl-5 mt-8 text-lg">
+        <li><strong>Community Feedback:</strong> Positive responses on clarity, usability, and trustworthiness.</li>
+        <li><strong>Next Steps:</strong> Expand database of locations via community engagement. Add optional features like user badges or contribution tracking. Potential integration with safety alerts and events.</li>
+        <li><strong>Metrics to Track:</strong> Number of active users and submissions. Map searches and filter usage. User retention over time.</li>
+    </ul>
+    <figure class="media mt-8">
+        <div class="media-box min-h-[150px] italic font-semibold text-xl text-center">
+            <p>"Finally, a space where I feel comfortable being myself."</p>
+            <figcaption class="mt-2 text-sm quote-byline">— Quote from a tester</figcaption>
+        </div>
+    </figure>
 </section>
 
 <footer class="text-center py-8 text-sm text-gray-500">
-    <p>&copy; 2026 Jimmy's Chicken Shack App. All Rights Reserved.</p>
+    <p>&copy; 2024 Amanda Ramirez. All Rights Reserved.</p>
 </footer>
 
 </div> <!-- .wrap -->
@@ -414,6 +432,7 @@ I created a solution that improves UX while actively preventing operational fail
             this.x += this.directionX;
             this.y += this.directionY;
 
+            // Mouse interaction
             const dx = mouse.x - this.x;
             const dy = mouse.y - this.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
@@ -433,28 +452,28 @@ I created a solution that improves UX while actively preventing operational fail
 
     function initParticles() {
         particles = [];
-        const baseCount = (canvas.width * canvas.height) / 15000;
+        const baseCount = (canvas.width * canvas.height) / 10000;
         
-        // Create first set of particles
-        const color1 = '#FC3434';
+        // Create pink particles
+        const pinkColor = '#ff4081';
         for (let i = 0; i < baseCount; i++) {
             const radius = Math.random() * 2 + 1;
             let x = Math.random() * (canvas.width - radius * 2) + radius;
             let y = Math.random() * (canvas.height - radius * 2) + radius;
             let directionX = (Math.random() - 0.5) * 1.5;
             let directionY = (Math.random() - 0.5) * 1.5;
-            particles.push(new Particle(x, y, radius, directionX, directionY, color1));
+            particles.push(new Particle(x, y, radius, directionX, directionY, pinkColor));
         }
 
-        // Create second set of particles
-        const color2 = '#F97316';
-        for (let i = 0; i < baseCount * 1.5; i++) {
+        // Create green particles
+        const greenColor = '#8cff00';
+        for (let i = 0; i < baseCount * 1.5; i++) { // Add 50% more particles
             const radius = Math.random() * 2 + 1;
             let x = Math.random() * (canvas.width - radius * 2) + radius;
             let y = Math.random() * (canvas.height - radius * 2) + radius;
-            let directionX = (Math.random() - 0.5) * 2;
-            let directionY = (Math.random() - 0.5) * 2;
-            particles.push(new Particle(x, y, radius, directionX, directionY, color2));
+            let directionX = (Math.random() - 0.5) * 2; // Make them a bit faster
+            let directionY = (Math.random() - 0.5) * 2; // Make them a bit faster
+            particles.push(new Particle(x, y, radius, directionX, directionY, greenColor));
         }
     }
 
@@ -481,6 +500,7 @@ I created a solution that improves UX while actively preventing operational fail
         initParticles();
         animate();
     };
+
 </script>
 </body>
 </html>
